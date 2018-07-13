@@ -5,7 +5,7 @@ import styled from '../theme';
 const StyledHeader = styled.header`
   height: 40px;
   width: 100%;
-  background-color: ${props => props.theme.green};
+  background-color: ${props => props.theme.primary};
   color: ${props => props.theme.white};
 `;
 

@@ -12,20 +12,34 @@ const {
 
 export interface IThemeInterface {
   white: string;
-  greyLight: string;
-  grey: string;
-  greyDark: string;
-  green: string;
+  grey: {
+    lightest: string;
+    light: string;
+    default: string;
+    dark: string;
+  };
   black: string;
+  primary: string;
+  secondary: string;
+  success: string;
+  error: string;
+  info: string;
 }
 
 export const theme: IThemeInterface = {
   white: Colors.White,
-  greyLight: Colors.GreyLight,
-  grey: Colors.Grey,
-  greyDark: Colors.GreyDark,
-  green: Colors.Green,
+  grey: {
+    lightest: Colors.GreyLightest,
+    light: Colors.GreyLight,
+    default: Colors.Grey,
+    dark: Colors.GreyDark,
+  },
   black: Colors.Black,
+  primary: Colors.Primary,
+  secondary: Colors.Secondary,
+  success: Colors.Success,
+  info: Colors.Info,
+  error: Colors.Error,
 };
 
 export default styled;

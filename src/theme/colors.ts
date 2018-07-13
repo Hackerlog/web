@@ -1,10 +1,15 @@
 enum Colors {
   White = '#ffffff',
-  GreyLight = '#a0aeba',
-  Grey = '#75828f',
-  GreyDark = '#45596b',
-  Green = '#45c64c',
-  Black = '#17313c',
+  GreyLightest = '#F9FAFC',
+  GreyLight = '#DADDF2',
+  Grey = '#9EA0B0',
+  GreyDark = '#465468',
+  Black = '#202E41',
+  Primary = '#4651AF',
+  Secondary = '#BFC6F1',
+  Success = '#42A852',
+  Info = '#4281A8',
+  Error = '#ED5447',
 }
 
 export default Colors;

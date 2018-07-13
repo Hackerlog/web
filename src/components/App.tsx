@@ -1,8 +1,14 @@
 import * as React from 'react';
 import * as Loadable from 'react-loadable';
+import { Provider } from 'mobx-react';
+import DevTools from 'mobx-react-devtools';
 
-import styled, { injectGlobal, ThemeProvider, theme } from '../theme';
+import styled, { ThemeProvider, theme } from '../theme';
 import Loading from './Loading';
+import globalStyles from '../theme/global';
+import RootStore from '../RootStore';
+
+globalStyles();
 
 const AppWrapper = styled.div``;
 
@@ -12,64 +18,34 @@ const LoadingHeader = Loadable({
 });
 
 const App = () => (
-  <ThemeProvider theme={theme}>
-    <AppWrapper>
-      <LoadingHeader />
-      <div>This is the app you were looking for.</div>
-    </AppWrapper>
-  </ThemeProvider>
+  <React.Fragment>
+    <Provider store={new RootStore()}>
+      <ThemeProvider theme={theme}>
+        <AppWrapper>
+          <LoadingHeader />
+          <div>This is the app you were looking for.</div>
+          <h1>Lorem ipsum dolor sit amet consectetur adipiscing</h1>
+          <h2>Lorem ipsum dolor sit amet consectetur adipiscing</h2>
+          <h3>Lorem ipsum dolor sit amet consectetur adipiscing</h3>
+          <h4>Lorem ipsum dolor sit amet consectetur adipiscing</h4>
+          <h5>Lorem ipsum dolor sit amet consectetur adipiscing</h5>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipiscing elit facilisis, risus hac id orci per
+            cursus quisque, facilisi varius nulla senectus condimentum convallis netus. Mauris ante
+            ut euismod ultricies tellus dapibus cum cursus pharetra eu, montes semper quis lacus
+            nibh commodo per platea enim felis urna, facilisi conubia faucibus cubilia tristique
+            himenaeos sed massa tempus. Non ad condimentum sagittis viverra quam eu ullamcorper
+            mauris sit ipsum conubia diam, orci magna nibh platea aliquam pharetra felis porttitor
+            mi convallis arcu. Interdum quam placerat ut vulputate vivamus semper tempor eleifend
+            phasellus morbi curabitur, viverra ac lorem lectus adipiscing tristique primis per
+            lacus. Euismod accumsan hac turpis sagittis laoreet aptent habitasse leo, viverra non mi
+            venenatis dapibus
+          </p>
+        </AppWrapper>
+      </ThemeProvider>
+    </Provider>
+    <DevTools position={{ bottom: 12, right: 12 }} />
+  </React.Fragment>
 );
 
 export default App;
-
-// tslint:disable-next-line no-unused-expression
-injectGlobal`
-	/* http://meyerweb.com/eric/tools/css/reset/ 
-		v2.0 | 20110126
-		License: none (public domain)
-	*/
-
-	html, body, div, span, applet, object, iframe,
-	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-	a, abbr, acronym, address, big, cite, code,
-	del, dfn, em, img, ins, kbd, q, s, samp,
-	small, strike, strong, sub, sup, tt, var,
-	b, u, i, center,
-	dl, dt, dd, ol, ul, li,
-	fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td,
-	article, aside, canvas, details, embed, 
-	figure, figcaption, footer, header, hgroup, 
-	menu, nav, output, ruby, section, summary,
-	time, mark, audio, video {
-		margin: 0;
-		padding: 0;
-		border: 0;
-		font-size: 100%;
-		font: inherit;
-		vertical-align: baseline;
-	}
-	/* HTML5 display-role reset for older browsers */
-	article, aside, details, figcaption, figure, 
-	footer, header, hgroup, menu, nav, section {
-		display: block;
-	}
-	body {
-		line-height: 1;
-	}
-	ol, ul {
-		list-style: none;
-	}
-	blockquote, q {
-		quotes: none;
-	}
-	blockquote:before, blockquote:after,
-	q:before, q:after {
-		content: '';
-		content: none;
-	}
-	table {
-		border-collapse: collapse;
-		border-spacing: 0;
-	}
-`;
