@@ -4,14 +4,21 @@ import styled from '../theme';
 import logo from '../assets/img/logo.svg';
 
 const StyledHeader = styled.header`
-  height: 40px;
+  height: 60px;
   width: 100%;
-  background-color: ${props => props.theme.primary};
+  background-color: ${props => props.theme.white};
   color: ${props => props.theme.white};
 `;
 
 const Logo = styled.div`
   color: #555;
+  text-align: left;
+  padding: 2px;
+
+  img {
+    height: 56px;
+    width: 230px;
+  }
 `;
 
 const Header = () => (
