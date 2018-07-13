@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import styled from '../theme';
+import logo from '../assets/img/logo.svg';
 
 const StyledHeader = styled.header`
   height: 40px;
@@ -15,7 +16,9 @@ const Logo = styled.div`
 
 const Header = () => (
   <StyledHeader>
-    <Logo>Logo here</Logo>
+    <Logo>
+      <img src={logo} />
+    </Logo>
   </StyledHeader>
 );
 
