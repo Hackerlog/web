@@ -24,6 +24,14 @@ export interface IThemeInterface {
   success: string;
   error: string;
   info: string;
+  gradients: {
+    darkToPrimary: string;
+  };
+  sizes: {
+    desktop: number;
+    tablet: number;
+    mobile: number;
+  };
 }
 
 export const theme: IThemeInterface = {
@@ -40,6 +48,14 @@ export const theme: IThemeInterface = {
   success: Colors.Success,
   info: Colors.Info,
   error: Colors.Error,
+  gradients: {
+    darkToPrimary: Colors.DarkToPrimaryGradient,
+  },
+  sizes: {
+    desktop: 992,
+    tablet: 768,
+    mobile: 576,
+  },
 };
 
 export default styled;

@@ -3,4 +3,15 @@ import { render } from 'react-dom';
 
 import App from './components/App';
 
-render(<App />, document.getElementById('root'));
+const renderApp = () => {
+  render(<App />, document.getElementById('root') as HTMLElement);
+};
+
+renderApp();
+
+declare const module: { hot: any };
+if (module.hot) {
+  module.hot.accept(['./components/App'], () => {
+    renderApp();
+  });
+}

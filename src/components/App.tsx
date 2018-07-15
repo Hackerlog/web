@@ -1,47 +1,40 @@
 import * as React from 'react';
-import * as Loadable from 'react-loadable';
 import { Provider } from 'mobx-react';
+import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
+import { Router, Switch, Route } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 import DevTools from 'mobx-react-devtools';
+import { GoogleFont, TypographyStyle } from 'react-typography';
 
-import styled, { ThemeProvider, theme } from '../theme';
-import Loading from './Loading';
+import { ThemeProvider, theme } from '../theme';
 import globalStyles from '../theme/global';
+import typography from '../assets/typography';
 import RootStore from '../RootStore';
+import Home from '../pages/Home';
 
 globalStyles();
 
-const AppWrapper = styled.div``;
+const browserHistory = createBrowserHistory();
+const routingStore: RouterStore = new RouterStore();
 
-const LoadingHeader = Loadable({
-  loader: () => import(/* webpackChunkName: "header" */ './Header'),
-  loading: Loading,
-});
+const stores = {
+  routing: routingStore,
+  root: new RootStore(),
+};
+
+const history = syncHistoryWithStore(browserHistory, routingStore);
 
 const App = () => (
   <React.Fragment>
-    <Provider store={new RootStore()}>
+    <TypographyStyle typography={typography} />
+    <GoogleFont typography={typography} />
+    <Provider {...stores}>
       <ThemeProvider theme={theme}>
-        <AppWrapper>
-          <LoadingHeader />
-          <div>This is the app you were looking for.</div>
-          <h1>Lorem ipsum dolor sit amet consectetur adipiscing</h1>
-          <h2>Lorem ipsum dolor sit amet consectetur adipiscing</h2>
-          <h3>Lorem ipsum dolor sit amet consectetur adipiscing</h3>
-          <h4>Lorem ipsum dolor sit amet consectetur adipiscing</h4>
-          <h5>Lorem ipsum dolor sit amet consectetur adipiscing</h5>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit facilisis, risus hac id orci per
-            cursus quisque, facilisi varius nulla senectus condimentum convallis netus. Mauris ante
-            ut euismod ultricies tellus dapibus cum cursus pharetra eu, montes semper quis lacus
-            nibh commodo per platea enim felis urna, facilisi conubia faucibus cubilia tristique
-            himenaeos sed massa tempus. Non ad condimentum sagittis viverra quam eu ullamcorper
-            mauris sit ipsum conubia diam, orci magna nibh platea aliquam pharetra felis porttitor
-            mi convallis arcu. Interdum quam placerat ut vulputate vivamus semper tempor eleifend
-            phasellus morbi curabitur, viverra ac lorem lectus adipiscing tristique primis per
-            lacus. Euismod accumsan hac turpis sagittis laoreet aptent habitasse leo, viverra non mi
-            venenatis dapibus
-          </p>
-        </AppWrapper>
+        <Router history={history}>
+          <Switch>
+            <Route path="/" component={Home} />
+          </Switch>
+        </Router>
       </ThemeProvider>
     </Provider>
     <DevTools position={{ bottom: 12, right: 12 }} />
