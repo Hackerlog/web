@@ -4,3 +4,4 @@ declare module '*.jpg';
 
 declare module 'typography';
 declare module 'react-typography';
+declare module 'mobx-react-form';

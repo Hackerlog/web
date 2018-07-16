@@ -77,6 +77,10 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/validatorjs@^3.7.1":
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/@types/validatorjs/-/validatorjs-3.7.1.tgz#29fb99bffa8514d5c6f2acda99d35c0512faf7c6"
+
 "@types/webpack@*":
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.4.5.tgz#d45596fb67aeb724495ef5e7c78771bfc35f2955"
@@ -7719,6 +7723,10 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+validatorjs@^3.14.2:
+  version "3.14.2"
+  resolved "https://registry.yarnpkg.com/validatorjs/-/validatorjs-3.14.2.tgz#b5407743fac0196528277c7ab0bd18e0fabcc3fb"
 
 value-equal@^0.4.0:
   version "0.4.0"

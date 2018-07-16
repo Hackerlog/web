@@ -23,7 +23,8 @@
     "react-scripts-ts": "2.16.0",
     "react-typography": "^0.16.13",
     "styled-components": "^3.3.3",
-    "typography": "^0.16.17"
+    "typography": "^0.16.17",
+    "validatorjs": "^3.14.2"
   },
   "devDependencies": {
     "@types/jest": "^23.1.5",
@@ -33,6 +34,7 @@
     "@types/react-dom": "^16.0.6",
     "@types/react-loadable": "^5.4.0",
     "@types/react-router-dom": "^4.2.7",
+    "@types/validatorjs": "^3.7.1",
     "jest": "^23.4.0",
     "jest-dom": "^1.8.1",
     "mobx-react-devtools": "^5.0.1",
