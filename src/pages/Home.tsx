@@ -7,12 +7,19 @@ import {
   TextWrapper,
   Strong,
   SolutionSection,
+  FeatureSection,
+  FeatureSectionTitle,
+  FeatureDetailGrid,
+  FeatureDetail,
+  FeatureDetailLeft,
+  FeatureDetailRight,
 } from '../modules/home/styles';
 
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 
 import logo from '../assets/img/logo.svg';
+import liveResults from '../assets/img/live-results.svg';
 
 const Home = () => (
   <HomeWrapper>
@@ -45,6 +52,59 @@ const Home = () => (
         </p>
       </TextWrapper>
     </SolutionSection>
+    <FeatureSection>
+      <FeatureSectionTitle>How do we solve this problem?</FeatureSectionTitle>
+      <FeatureDetailGrid>
+        <FeatureDetail>
+          <FeatureDetailLeft>
+            <img src={liveResults} alt="Live Results" />
+          </FeatureDetailLeft>
+          <FeatureDetailRight>
+            <h3>Live Results</h3>
+            <p>
+              Prove your skills with real metrics like daily coding activity with specific
+              languages.
+            </p>
+          </FeatureDetailRight>
+        </FeatureDetail>
+        <FeatureDetail>
+          <FeatureDetailLeft>
+            <img src={liveResults} alt="Live Results" />
+          </FeatureDetailLeft>
+          <FeatureDetailRight>
+            <h3>Live Results</h3>
+            <p>
+              Prove your skills with real metrics like daily coding activity with specific
+              languages.
+            </p>
+          </FeatureDetailRight>
+        </FeatureDetail>
+        <FeatureDetail>
+          <FeatureDetailLeft>
+            <img src={liveResults} alt="Live Results" />
+          </FeatureDetailLeft>
+          <FeatureDetailRight>
+            <h3>Live Results</h3>
+            <p>
+              Prove your skills with real metrics like daily coding activity with specific
+              languages.
+            </p>
+          </FeatureDetailRight>
+        </FeatureDetail>
+        <FeatureDetail>
+          <FeatureDetailLeft>
+            <img src={liveResults} alt="Live Results" />
+          </FeatureDetailLeft>
+          <FeatureDetailRight>
+            <h3>Live Results</h3>
+            <p>
+              Prove your skills with real metrics like daily coding activity with specific
+              languages.
+            </p>
+          </FeatureDetailRight>
+        </FeatureDetail>
+      </FeatureDetailGrid>
+    </FeatureSection>
   </HomeWrapper>
 );
 

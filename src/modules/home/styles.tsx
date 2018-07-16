@@ -22,16 +22,13 @@ export const Logo = styled.img`
 
 export const Intro = styled.header`
   padding: 60px 12px;
-  height: calc(100vh - 88px);
   background-image: url(${headerImage});
   background-repeat: no-repeat;
-  background-position: 90% 70%;
-  background-size: calc(413px * 0.7) calc(320px * 0.7);
-  margin-bottom: 24px;
+  background-position: 90% 100%;
+  background-size: 100%;
 
   @media (min-width: ${props => props.theme.sizes.desktop}px) {
     padding: 60px 120px;
-    background-size: 413px 320px;
   }
 `;
 
@@ -51,31 +48,75 @@ export const SolutionSection = styled.section`
   margin: 0 auto;
   position: relative;
 
-  &:before {
-    background: inherit;
-    top: 0;
-    content: '';
-    display: block;
-    height: 60px;
-    left: 0;
-    position: absolute;
-    right: 0;
-    transform: skewY(3.5deg);
-    transform-origin: 100%;
-    z-index: 0;
-  }
-
   &:after {
     background: inherit;
     bottom: 0;
     content: '';
     display: block;
-    height: 60px;
+    height: 72px;
     left: 0;
     position: absolute;
     right: 0;
     transform: skewY(-3.5deg);
     transform-origin: 100%;
     z-index: 0;
+  }
+`;
+
+export const FeatureSection = styled.section`
+  background: ${props => props.theme.gradients.darkToPrimary};
+  padding-top: 84px;
+  margin: 0 auto;
+`;
+
+export const FeatureDetailGrid = styled.div`
+  display: grid;
+  grid-template-columns: 45% 45%;
+  grid-gap: 18px;
+  grid-template-areas: 'feature feature';
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: ${props => props.theme.sizes.tablet}px) {
+    grid-template-columns: 95%;
+    grid-template-areas: 'feature';
+  }
+`;
+
+export const FeatureSectionTitle = styled.h2`
+  color: ${props => props.theme.white};
+  text-align: center;
+  margin-bottom: 60px;
+`;
+
+export const FeatureDetail = styled.div`
+  grid-area: 'feature';
+  display: flex;
+`;
+
+export const FeatureDetailLeft = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 120px;
+  }
+`;
+
+export const FeatureDetailRight = styled.div`
+  display: flex;
+  flex: 5;
+  flex-direction: column;
+  padding-left: 12px;
+
+  h3 {
+    color: ${props => props.theme.white};
+    font-weight: 500;
+  }
+
+  p {
+    color: ${props => props.theme.secondary};
   }
 `;

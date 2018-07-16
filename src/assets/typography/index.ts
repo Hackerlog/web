@@ -15,7 +15,7 @@ const typography = new Typography({
   googleFonts: [
     {
       name: 'Source Sans Pro',
-      styles: ['300', '300i', '400', '600', '700', '900'],
+      styles: ['300', '300i', '600', '700', '900'],
     },
   ],
   includeNormalize: true,
@@ -34,7 +34,7 @@ const typography = new Typography({
       fontWeight: 600,
     },
     h2: {
-      fontWeight: 400,
+      fontWeight: 300,
     },
     h3: {
       fontWeight: 900,
