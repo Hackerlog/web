@@ -68,6 +68,56 @@ export class RequiredError extends Error {
 /**
  * 
  * @export
+ * @interface MainAuth
+ */
+export interface MainAuth {
+    /**
+     * 
+     * @type {string}
+     * @memberof MainAuth
+     */
+    createdAt?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof MainAuth
+     */
+    expiresAt?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof MainAuth
+     */
+    id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MainAuth
+     */
+    token?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MainAuth
+     */
+    updatedAt?: string;
+    /**
+     * 
+     * @type {MainUser}
+     * @memberof MainAuth
+     */
+    user?: MainUser;
+    /**
+     * 
+     * @type {number}
+     * @memberof MainAuth
+     */
+    userId?: number;
+}
+
+/**
+ * 
+ * @export
  * @interface MainGenericResponse
  */
 export interface MainGenericResponse {
@@ -168,6 +218,56 @@ export interface MainUnit {
 /**
  * 
  * @export
+ * @interface MainUser
+ */
+export interface MainUser {
+    /**
+     * 
+     * @type {string}
+     * @memberof MainUser
+     */
+    createdAt?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MainUser
+     */
+    editorToken?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MainUser
+     */
+    email: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof MainUser
+     */
+    id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MainUser
+     */
+    name: string;
+    /**
+     * 
+     * @type {Array<MainUnit>}
+     * @memberof MainUser
+     */
+    units?: Array<MainUnit>;
+    /**
+     * 
+     * @type {string}
+     * @memberof MainUser
+     */
+    updatedAt?: string;
+}
+
+/**
+ * 
+ * @export
  * @interface MainVersionResponse
  */
 export interface MainVersionResponse {
@@ -185,6 +285,103 @@ export interface MainVersionResponse {
     latest?: boolean;
 }
 
+
+/**
+ * AuthApi - fetch parameter creator
+ * @export
+ */
+export const AuthApiFetchParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Authenticates a user and returns a JWT on successful login
+         * @summary Authenticates a user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersLoginPost(options: any = {}): FetchArgs {
+            const localVarPath = `/users/login`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AuthApi - functional programming interface
+ * @export
+ */
+export const AuthApiFp = function(configuration?: Configuration) {
+    return {
+        /**
+         * Authenticates a user and returns a JWT on successful login
+         * @summary Authenticates a user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersLoginPost(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainAuth> {
+            const localVarFetchArgs = AuthApiFetchParamCreator(configuration).usersLoginPost(options);
+            return (fetch: FetchAPI = window.fetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+    }
+};
+
+/**
+ * AuthApi - factory interface
+ * @export
+ */
+export const AuthApiFactory = function (configuration?: Configuration, fetch?: FetchAPI, basePath?: string) {
+    return {
+        /**
+         * Authenticates a user and returns a JWT on successful login
+         * @summary Authenticates a user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersLoginPost(options?: any) {
+            return AuthApiFp(configuration).usersLoginPost(options)(fetch, basePath);
+        },
+    };
+};
+
+/**
+ * AuthApi - object-oriented interface
+ * @export
+ * @class AuthApi
+ * @extends {BaseAPI}
+ */
+export class AuthApi extends BaseAPI {
+    /**
+     * Authenticates a user and returns a JWT on successful login
+     * @summary Authenticates a user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public usersLoginPost(options?: any) {
+        return AuthApiFp(this.configuration).usersLoginPost(options)(this.fetch, this.basePath);
+    }
+
+}
 
 /**
  * CoreApi - fetch parameter creator

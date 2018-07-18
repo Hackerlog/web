@@ -28,6 +28,13 @@ class Logger {
     this.level = level;
   }
 
+  public setUserContext(id: number, email: string): void {
+    Raven.setUserContext({
+      id,
+      email,
+    });
+  }
+
   public log(level: string, msg: string): void {
     if (this.levelAmount[level] >= this.levelAmount[this.level]) {
       msg = '[Hackerlog] [' + level.toUpperCase() + '] ' + msg;

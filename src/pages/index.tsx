@@ -10,11 +10,17 @@ const AsyncHome = loadable({
   loading: Loading,
 });
 
+const AsyncMe = loadable({
+  loader: () => import(/* webpackChunkName: "home" */ './Me'),
+  loading: Loading,
+});
+
 const Pages = () => (
   <React.Fragment>
     <Route path="/" component={Tracking} />
     <Switch>
       <Route exact={true} path="/" component={AsyncHome} />
+      <Route exact={true} path="/me" component={AsyncMe} />
     </Switch>
   </React.Fragment>
 );
