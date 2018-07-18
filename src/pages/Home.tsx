@@ -2,6 +2,7 @@ import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { noop } from 'lodash';
 import * as ReactModal from 'react-modal';
+import * as ReactGA from 'react-ga';
 
 import logo from '../assets/img/logo.svg';
 import liveResults from '../assets/img/live-results.svg';
@@ -28,15 +29,16 @@ import {
 import { theme } from '../theme';
 import { MailingListApi } from '../services/api';
 import { DefaultOutlineButton } from '../components/Button';
+import Logger from '../services/logger';
 
 const initialState = {
   email: '',
-  showModal: true,
+  showModal: false,
 };
 
 type State = Readonly<typeof initialState>;
 
-class Home extends React.Component {
+export class Home extends React.Component {
   public state: State = initialState;
 
   private twitterMessage =
@@ -45,10 +47,14 @@ class Home extends React.Component {
   private handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
+    ReactGA.event({
+      category: 'Home',
+      action: 'Signup',
+    });
+
     const send = new MailingListApi();
     send
       .listPost({
-        mode: 'no-cors',
         body: JSON.stringify({ email: this.state.email }),
       })
       .then(() => {
@@ -56,9 +62,7 @@ class Home extends React.Component {
       })
       .catch(err => {
         this.setState({ showModal: true, email: '' });
-
-        // tslint:disable-next-line:no-console
-        console.error(err);
+        Logger.error('Adding email to mailing list failed: ', err);
       });
   };
 
@@ -67,7 +71,18 @@ class Home extends React.Component {
   };
 
   private handleModalClose = (): void => {
+    ReactGA.event({
+      category: 'ShareModal',
+      action: 'Did not share',
+    });
     this.setState({ showModal: false });
+  };
+
+  private handleShareClick = () => {
+    ReactGA.event({
+      category: 'ShareModal',
+      action: 'Did share',
+    });
   };
 
   public render() {
@@ -166,20 +181,26 @@ class Home extends React.Component {
             we will never share your email address with anyone.
           </SignUp.Wrapper>
           <SignUp.Wrapper>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} data-testid="home-form-newsletter">
               <InputWithButton
                 type="email"
                 onChange={this.handleOnChange}
                 placeholder="jon@hire-me.please"
                 onClick={noop}
                 value={this.state.email}
+                inputTestId="home-input-email"
+                buttonTestId="home-button-submit"
               >
                 Send
               </InputWithButton>
             </form>
           </SignUp.Wrapper>
         </SignUp.Section>
-        <ReactModal isOpen={this.state.showModal} contentLabel="Share the news!">
+        <ReactModal
+          isOpen={this.state.showModal}
+          contentLabel="Share the news!"
+          ariaHideApp={false}
+        >
           <Modal.Wrapper>
             <Modal.Top>
               <h1>You did it! Now, want to help others?</h1>
@@ -193,7 +214,11 @@ class Home extends React.Component {
                   you say?
                 </p>
                 <Modal.Actions>
-                  <TwitterButton href={this.twitterMessage} target="_blank">
+                  <TwitterButton
+                    href={this.twitterMessage}
+                    target="_blank"
+                    onClick={this.handleShareClick}
+                  >
                     <img src={twitterLogo} alt="Spread the word!" />
                     I'll help!
                   </TwitterButton>
@@ -212,4 +237,5 @@ class Home extends React.Component {
     );
   }
 }
+
 export default inject('routing')(observer(Home));

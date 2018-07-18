@@ -69,8 +69,7 @@ class Logger {
 
   private initSentry(): void {
     if (!this.isDebugging) {
-      // FIXME: This needs to be set up
-      Raven.config('https://35ceb0094c50473fb66afb2124c438d6@sentry.io/1244956', {
+      Raven.config(process.env.REACT_APP_SENTRY_DSN, {
         release: this.getVersion(),
       }).install();
     }

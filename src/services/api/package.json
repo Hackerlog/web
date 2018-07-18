@@ -16,6 +16,9 @@
     "build": "tsc --outDir dist/",
     "prepublishOnly": "npm run build"
   },
+  "dependencies": {
+    "portable-fetch": "^3.0.0"
+  },
   "devDependencies": {
     "@types/node": "^8.0.9",
     "typescript": "^2.0"

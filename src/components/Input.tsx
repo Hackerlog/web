@@ -38,6 +38,8 @@ interface IProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   value: string;
   type: InputType;
+  inputTestId: string;
+  buttonTestId: string;
 }
 
 export const InputWithButton = ({
@@ -47,9 +49,19 @@ export const InputWithButton = ({
   onClick,
   value,
   type,
+  inputTestId,
+  buttonTestId,
 }: IProps) => (
   <InputGroup>
-    <Input placeholder={placeholder} onChange={onChange} value={value} type={type} />
-    <PrimaryButton onClick={onClick}>{children}</PrimaryButton>
+    <Input
+      placeholder={placeholder}
+      onChange={onChange}
+      value={value}
+      type={type}
+      data-testid={inputTestId}
+    />
+    <PrimaryButton onClick={onClick} data-testid={buttonTestId}>
+      {children}
+    </PrimaryButton>
   </InputGroup>
 );
