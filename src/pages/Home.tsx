@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { noop } from 'lodash';
+import * as ReactModal from 'react-modal';
 
 import logo from '../assets/img/logo.svg';
 import liveResults from '../assets/img/live-results.svg';
 import gitMetrics from '../assets/img/git-metrics.svg';
 import resume from '../assets/img/resume.svg';
 import experience from '../assets/img/experience.svg';
+import twitterLogo from '../assets/img/twitter-logo.svg';
+import modalImage from '../assets/img/modal-image.svg';
 import { InputWithButton } from '../components/Input';
 import {
   HomeWrapper,
@@ -19,11 +22,16 @@ import {
   Feature,
   SectionTitleWhite,
   SignUp,
+  TwitterButton,
+  Modal,
 } from '../modules/home/styles';
 import { theme } from '../theme';
+import { MailingListApi } from '../services/api';
+import { DefaultOutlineButton } from '../components/Button';
 
 const initialState = {
   email: '',
+  showModal: true,
 };
 
 type State = Readonly<typeof initialState>;
@@ -31,12 +39,35 @@ type State = Readonly<typeof initialState>;
 class Home extends React.Component {
   public state: State = initialState;
 
+  private twitterMessage =
+    'http://twitter.com/home?status=Check out @hackerlogapp! They are transforming how developers showcase their skills.';
+
   private handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    // TODO: implement logic to add email to newsletter
+    e.preventDefault();
+
+    const send = new MailingListApi();
+    send
+      .listPost({
+        mode: 'no-cors',
+        body: JSON.stringify({ email: this.state.email }),
+      })
+      .then(() => {
+        this.setState({ showModal: true, email: '' });
+      })
+      .catch(err => {
+        this.setState({ showModal: true, email: '' });
+
+        // tslint:disable-next-line:no-console
+        console.error(err);
+      });
   };
 
   private handleOnChange = (e: React.FormEvent<HTMLInputElement>): void => {
     this.setState({ email: e.currentTarget.value });
+  };
+
+  private handleModalClose = (): void => {
+    this.setState({ showModal: false });
   };
 
   public render() {
@@ -148,6 +179,35 @@ class Home extends React.Component {
             </form>
           </SignUp.Wrapper>
         </SignUp.Section>
+        <ReactModal isOpen={this.state.showModal} contentLabel="Share the news!">
+          <Modal.Wrapper>
+            <Modal.Top>
+              <h1>You did it! Now, want to help others?</h1>
+            </Modal.Top>
+            <Modal.Bottom>
+              <Modal.Left>
+                <p>
+                  We truly think Hackerlog is going to transform the way developers display their
+                  talent and we want everyone to know about it. Would you help us spread the word? A
+                  simple tweet would help tremendously and we would really appreciate it. What do
+                  you say?
+                </p>
+                <Modal.Actions>
+                  <TwitterButton href={this.twitterMessage} target="_blank">
+                    <img src={twitterLogo} alt="Spread the word!" />
+                    I'll help!
+                  </TwitterButton>
+                  <DefaultOutlineButton onClick={this.handleModalClose}>
+                    No thanks
+                  </DefaultOutlineButton>
+                </Modal.Actions>
+              </Modal.Left>
+              <Modal.Right>
+                <Modal.Image src={modalImage} alt="Help us out!" />
+              </Modal.Right>
+            </Modal.Bottom>
+          </Modal.Wrapper>
+        </ReactModal>
       </HomeWrapper>
     );
   }

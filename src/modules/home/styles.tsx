@@ -143,3 +143,109 @@ export const SignUp = {
     margin: 48px auto;
   `,
 };
+
+export const Modal = {
+  Wrapper: styled.div`
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    margin: auto;
+    position: relative;
+
+    p {
+      padding-right: 120px;
+
+      @media (max-width: ${props => props.theme.sizes.tablet}px) {
+        padding-right: 0;
+      }
+    }
+  `,
+  Image: styled.img`
+    position: absolute;
+    max-width: 300px;
+    right: -100px;
+    top: 60%;
+    transform: translateY(-50%);
+    z-index: 0;
+
+    @media (max-width: ${props => props.theme.sizes.tablet}px) {
+      max-width: 120px;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  `,
+  Actions: styled.div`
+    display: flex;
+
+    @media (max-width: ${props => props.theme.sizes.tablet}px) {
+      flex-direction: column;
+    }
+
+    button {
+      margin: 12px;
+
+      @media (max-width: ${props => props.theme.sizes.tablet}px) {
+        margin: 0;
+      }
+    }
+
+    a {
+      margin: 12px 12px 12px 0;
+
+      @media (max-width: ${props => props.theme.sizes.tablet}px) {
+        margin-bottom: 12px;
+      }
+    }
+  `,
+  Top: styled.div`
+    display: flex;
+  `,
+  Bottom: styled.div`
+    display: flex;
+
+    @media (max-width: ${props => props.theme.sizes.tablet}px) {
+      flex-direction: column;
+    }
+  `,
+  Left: styled.div`
+    display: flex;
+    flex: 5;
+    flex-direction: column;
+
+    @media (max-width: ${props => props.theme.sizes.tablet}px) {
+      flex: 1;
+    }
+  `,
+  Right: styled.div`
+    display: flex;
+    flex: 1;
+  `,
+};
+
+export const TwitterButton = styled.a`
+  background: #1fa0f3;
+  border: 2px solid #1fa0f3;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: ${props => props.theme.white};
+  border-radius: 48px;
+  padding: 0 60px;
+  text-decoration: none;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  img {
+    height: 24px;
+    margin: 0 12px 0 0;
+    position: relative;
+  }
+`;
