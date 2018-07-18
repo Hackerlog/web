@@ -52,6 +52,22 @@ const StyledLoader = styled.div`
   }
 `;
 
-const Loading = () => <StyledLoader />;
+interface ILoadingProps {
+  error: boolean;
+  timedOut: boolean;
+  pastDelay: boolean;
+}
+
+const Loading = ({ error, timedOut, pastDelay }: ILoadingProps) => {
+  switch (true) {
+    case error:
+    case timedOut:
+      return null;
+    case pastDelay:
+      return <StyledLoader />;
+    default:
+      return null;
+  }
+};
 
 export default Loading;

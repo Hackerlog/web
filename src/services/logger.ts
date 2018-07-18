@@ -69,7 +69,8 @@ class Logger {
 
   private initSentry(): void {
     if (!this.isDebugging) {
-      Raven.config(process.env.REACT_APP_SENTRY_DSN, {
+      const dsn = process.env.REACT_APP_SENTRY_DSN || '';
+      Raven.config(dsn, {
         release: this.getVersion(),
       }).install();
     }

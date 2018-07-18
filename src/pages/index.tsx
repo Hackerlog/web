@@ -1,18 +1,22 @@
 import * as React from 'react';
-import * as Loadable from 'react-loadable';
+import * as loadable from 'react-loadable';
 import { Switch, Route } from 'react-router';
 
 import Loading from '../components/Loading';
+import Tracking from '../components/Tracking';
 
-const AsyncHome = Loadable({
+const AsyncHome = loadable({
   loader: () => import(/* webpackChunkName: "home" */ './Home'),
   loading: Loading,
 });
 
 const Pages = () => (
-  <Switch>
-    <Route exact={true} path="/" component={AsyncHome} />
-  </Switch>
+  <React.Fragment>
+    <Route path="/" component={Tracking} />
+    <Switch>
+      <Route exact={true} path="/" component={AsyncHome} />
+    </Switch>
+  </React.Fragment>
 );
 
 export default Pages;
