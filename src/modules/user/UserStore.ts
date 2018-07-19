@@ -36,16 +36,20 @@ export default class UserStore {
     try {
       const req = new AuthApi();
       const { token, user } = await req.usersLoginPost({ email, password });
-
-      this.create({
-        firstName: user.first_name,
-        lastName: user.last_name,
-        email: user.email,
-        token: token || '',
-      });
-
+      if (user) {
+        this.create({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          token: token || '',
+        });
+        return {
+          success: true,
+        };
+      }
       return {
-        success: true,
+        success: false,
+        error: 'There was no user returned from the response',
       };
     } catch (error) {
       logger.error('There was an error logging in: ', error);

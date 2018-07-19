@@ -241,6 +241,12 @@ export interface MainUser {
     email: string;
     /**
      * 
+     * @type {string}
+     * @memberof MainUser
+     */
+    firstName: string;
+    /**
+     * 
      * @type {number}
      * @memberof MainUser
      */
@@ -250,7 +256,7 @@ export interface MainUser {
      * @type {string}
      * @memberof MainUser
      */
-    name: string;
+    lastName: string;
     /**
      * 
      * @type {Array<MainUnit>}

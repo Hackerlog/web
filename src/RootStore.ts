@@ -1,12 +1,13 @@
+import { RouterStore } from 'mobx-react-router';
+
 import UserStore from './modules/user/UserStore';
-import EntryStore from './modules/entry/EntryStore';
 
 export default class RootStore {
+  public routerStore: RouterStore;
   protected userStore: UserStore;
-  protected entryStore: EntryStore;
 
   constructor() {
+    this.routerStore = new RouterStore();
     this.userStore = new UserStore(this);
-    this.entryStore = new EntryStore(this);
   }
 }
