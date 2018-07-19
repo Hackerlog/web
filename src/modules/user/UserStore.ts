@@ -1,12 +1,11 @@
+import { action, computed } from 'mobx';
+
 import RootStore from '../../RootStore';
 import User from './UserModel';
-import { IUserUpdate, IUserLogin, IUser } from './types';
-import { action } from '../../../node_modules/mobx';
-import { AuthApi } from '../../services/api';
-import logger from '../../services/logger';
+import { IUserUpdate, IUser } from './types';
 
 export default class UserStore {
-  private rootStore: RootStore;
+  public rootStore: RootStore;
 
   public user: User | null = null;
 
@@ -14,9 +13,24 @@ export default class UserStore {
     this.rootStore = rootStore;
   }
 
+  @computed
+  public get isLoggedIn(): boolean {
+    if (this.user) {
+      return true;
+    }
+    const user = this.retrieveStoredUser();
+    if (!user) {
+      return false;
+    }
+
+    this.create(user);
+    return true;
+  }
+
   @action
-  public create({ firstName, lastName, email, token }: IUser): void {
-    this.user = new User(this, { firstName, lastName, email, token });
+  public create(user: IUser): void {
+    this.user = new User(this, user);
+    this.storeUser(user);
   }
 
   @action
@@ -25,50 +39,36 @@ export default class UserStore {
     // Make the update now...
   }
 
-  @action
-  public async login(email: string, password: string): Promise<IUserLogin> {
-    if (!(email && password)) {
-      return {
-        success: false,
-        error: 'You must supply a username and password.',
-      };
-    }
+  public storeUser(user: IUser): void {
     try {
-      const req = new AuthApi();
-      const { token, user } = await req.usersLoginPost({ email, password });
-      if (user) {
-        this.create({
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          token: token || '',
-        });
-        return {
-          success: true,
-        };
-      }
-      return {
-        success: false,
-        error: 'There was no user returned from the response',
-      };
-    } catch (error) {
-      logger.error('There was an error logging in: ', error);
-      return {
-        success: false,
-        error: error.message,
-      };
-    }
-  }
-
-  public storeToken(token: string): void {
-    try {
-      localStorage.setItem('@hackerlog.token', token);
+      localStorage.setItem('@hackerlog.user', JSON.stringify(user));
     } catch (_) {
       // do not throw here
     }
   }
 
-  get root(): RootStore {
-    return this.rootStore;
+  public retrieveStoredUser(): IUser | null {
+    try {
+      const user = localStorage.getItem('@hackerlog.user');
+      if (user) {
+        return JSON.parse(user);
+      }
+    } catch (_) {
+      // do not throw here
+    }
+    return null;
+  }
+
+  private clearStorage(): void {
+    try {
+      localStorage.clear();
+    } catch (_) {
+      // do nothing
+    }
+  }
+
+  public reset(): void {
+    this.user = null;
+    this.clearStorage();
   }
 }

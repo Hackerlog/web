@@ -13,13 +13,9 @@ export interface IUserUpdate {
 }
 
 export interface IUser {
+  id: number | undefined;
   firstName: string;
   lastName: string;
   email: string;
   token: string;
-}
-
-export interface IUserLogin {
-  success: boolean;
-  error?: string;
 }

@@ -1,6 +1,23 @@
-import styled from '../theme';
+import styled, { keyframes } from '../theme';
 
-const Button = styled.button`
+import * as React from 'react';
+
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg);
+`;
+
+const Loading = styled.div`
+  border: 3px solid ${props => props.theme.grey.default};
+  border-top: 3px solid ${props => props.theme.grey.lightest};
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  animation: ${spin} 2s linear infinite;
+  background: none;
+`;
+
+const StyledButton = styled.button`
   height: 48px;
   display: flex;
   justify-content: center;
@@ -15,7 +32,24 @@ const Button = styled.button`
   &:focus {
     outline: none;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
+
+interface IButton {
+  isLoading?: boolean;
+  children: any;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  className?: string;
+}
+
+const Button = ({ isLoading, children, onClick, className }: IButton) => (
+  <StyledButton className={className} onClick={onClick} disabled={isLoading}>
+    {isLoading ? <Loading /> : children}
+  </StyledButton>
+);
 
 export const PrimaryButton = styled(Button)`
   background: ${props => props.theme.primary};

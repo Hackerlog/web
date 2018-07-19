@@ -4,7 +4,7 @@ import UserStore from './UserStore';
 import { IUser } from './types';
 
 export default class User {
-  public id = null;
+  public id: number | undefined;
   public store: UserStore | null = null;
 
   @observable public firstName: string;
@@ -12,13 +12,17 @@ export default class User {
   @observable public email: string;
   @observable public token: string;
 
-  public constructor(store: UserStore, { firstName, lastName, email, token }: IUser) {
+  public constructor(store: UserStore, { firstName, lastName, email, token, id }: IUser) {
     this.store = store;
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.token = token;
   }
 
-  @computed public fullName = () => `${this.firstName} ${this.lastName}`;
+  @computed
+  public get fullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
 }

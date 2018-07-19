@@ -14,4 +14,4 @@ class Me extends React.Component {
   }
 }
 
-export default inject('routing', 'root')(observer(Me));
+export default inject('store')(observer(Me));

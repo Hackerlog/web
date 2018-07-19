@@ -27,6 +27,7 @@ export interface IThemeInterface {
   gradients: {
     darkToPrimary: string;
     secondaryToLight: string;
+    login: string;
   };
   sizes: {
     desktop: number;
@@ -59,6 +60,7 @@ export const theme: IThemeInterface = {
   gradients: {
     darkToPrimary: Colors.DarkToPrimaryGradient,
     secondaryToLight: Colors.SecondaryToLightGradient,
+    login: Colors.LoginGradient,
   },
   sizes: {
     desktop: 992,

@@ -6,15 +6,16 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import DevTools from 'mobx-react-devtools';
 import { GoogleFont, TypographyStyle } from 'react-typography';
 
+import { AuthApi, UsersApi } from '../services/api';
 import { ThemeProvider, theme } from '../theme';
 import globalStyles from '../theme/global';
 import typography from '../assets/typography';
 import RootStore from '../RootStore';
 import Pages from '../pages';
 
-const rootStore = new RootStore();
+const rootStore = new RootStore(new AuthApi(), new UsersApi());
 const browserHistory = createBrowserHistory();
-const history = syncHistoryWithStore(browserHistory, rootStore.routerStore);
+const history = syncHistoryWithStore(browserHistory, rootStore.routing);
 
 globalStyles();
 
