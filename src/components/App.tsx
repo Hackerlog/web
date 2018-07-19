@@ -1,24 +1,21 @@
 import * as React from 'react';
 import { Provider } from 'mobx-react';
-import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
+import { syncHistoryWithStore } from 'mobx-react-router';
 import { Router } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import DevTools from 'mobx-react-devtools';
 import { GoogleFont, TypographyStyle } from 'react-typography';
 
+import { AuthApi, UsersApi } from '../services/api';
 import { ThemeProvider, theme } from '../theme';
 import globalStyles from '../theme/global';
 import typography from '../assets/typography';
 import RootStore from '../RootStore';
 import Pages from '../pages';
 
+const rootStore = new RootStore(new AuthApi(), new UsersApi());
 const browserHistory = createBrowserHistory();
-const routingStore: RouterStore = new RouterStore();
-const history = syncHistoryWithStore(browserHistory, routingStore);
-const stores = {
-  routing: routingStore,
-  root: new RootStore(),
-};
+const history = syncHistoryWithStore(browserHistory, rootStore.routing);
 
 globalStyles();
 
@@ -26,7 +23,7 @@ const App = () => (
   <React.Fragment>
     <TypographyStyle typography={typography} />
     <GoogleFont typography={typography} />
-    <Provider {...stores}>
+    <Provider store={rootStore}>
       <ThemeProvider theme={theme}>
         <Router history={history}>
           <Pages />

@@ -238,4 +238,4 @@ export class Home extends React.Component {
   }
 }
 
-export default inject('routing')(observer(Home));
+export default inject('store')(observer(Home));

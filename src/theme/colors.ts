@@ -12,6 +12,7 @@ enum Colors {
   Error = '#ED5447',
   DarkToPrimaryGradient = 'linear-gradient(120deg, #212F49, #454EB2)',
   SecondaryToLightGradient = 'linear-gradient(120deg, #DBDFF8, #C2C8F2)',
+  LoginGradient = 'linear-gradient(120deg, #4552B1, #B9C1EF)',
 }
 
 export default Colors;
