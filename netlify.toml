@@ -1,18 +1,18 @@
 [context.production.environment]
   REACT_APP_BASE_URL = "https://api.hackerlog.io"
-  REACT_APP_IS_RELEASED = false
+  REACT_APP_IS_RELEASED = "false"
 
 [context.deploy-preview.environment]
   REACT_APP_BASE_URL = "https://staging-api.hackerlog.io"
-  REACT_APP_IS_RELEASED = true
+  REACT_APP_IS_RELEASED = "true"
 
 [context.branch-deploy.environment]
   REACT_APP_BASE_URL = "https://staging-api.hackerlog.io"
-  REACT_APP_IS_RELEASED = true
+  REACT_APP_IS_RELEASED = "true"
 
 [context.develop.environment]
   REACT_APP_BASE_URL = "https://staging-api.hackerlog.io"
-  REACT_APP_IS_RELEASED = true
+  REACT_APP_IS_RELEASED = "true"
 
 [[redirects]]
   from = "/*"
