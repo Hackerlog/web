@@ -10,6 +10,8 @@ import {
   LoginButton,
   SignupText,
   CreateAccountLink,
+  WhiteLink,
+  SmallText,
 } from '../modules/login/styles';
 import { ErrorAlert } from '../components/Alert';
 
@@ -38,10 +40,16 @@ const Login = ({ store }: { store: any }) => (
       <SignupText>
         Not registered yet?{' '}
         <CreateAccountLink to="/signup">Create a free account!</CreateAccountLink>
+        <SmallText>
+          <WhiteLink to="/password-reset">Forget password?</WhiteLink>
+        </SmallText>
       </SignupText>
     </Wrapper>
   </Background>
 );
+
+// @ts-ignore
+Login.NOT_RELEASED = true;
 
 export default inject(({ store }: { store: any }) => {
   return { store: store.loginStore };

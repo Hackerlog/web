@@ -6,4 +6,6 @@ declare module 'typography';
 declare module 'react-typography';
 declare module 'mobx-react-form';
 declare module 'loadable-components';
-declare module 'remotedev';
+declare var process: {
+  env: any;
+};

@@ -3,15 +3,16 @@ import { types, getRoot, flow } from 'mobx-state-tree';
 import { compact } from 'lodash';
 import logger from '../../services/logger';
 import { MainUser } from '../../services/api';
+import { SESSION_KEY } from '../../utils/constants';
 
 const ALLOWED_CHARS: RegExp = /^[0-9a-zA-Z]{2,30}$/g;
 
 const SignupStore = types
   .model('SignupStore', {
-    firstName: types.optional(types.string, 'sdfsdf'),
-    lastName: types.optional(types.string, 'sdfsdf'),
-    email: types.optional(types.string, 'sdsdf@sad.com'),
-    password: types.optional(types.string, 'sdfsdfsd'),
+    firstName: types.optional(types.string, ''),
+    lastName: types.optional(types.string, ''),
+    email: types.optional(types.string, ''),
+    password: types.optional(types.string, ''),
     isLoading: false,
     error: types.maybe(types.string),
     username: types.optional(types.string, ''),
@@ -35,6 +36,10 @@ const SignupStore = types
 
     get root() {
       return getRoot(self);
+    },
+
+    get sessionKey(): string {
+      return SESSION_KEY('signup');
     },
   }))
   .actions(self => {

@@ -4,7 +4,6 @@ import { Router } from 'react-router-dom';
 import DevTools from 'mobx-react-devtools';
 import { GoogleFont, TypographyStyle } from 'react-typography';
 
-import { AuthApi, UsersApi } from '../services/api';
 import { ThemeProvider, theme } from '../theme';
 import globalStyles from '../theme/global';
 import typography from '../assets/typography';

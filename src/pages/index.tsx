@@ -26,6 +26,16 @@ const AsyncMe = loadable({
   loading: Loading,
 });
 
+const AsyncPasswordReset = loadable({
+  loader: () => import(/* webpackChunkName: "me" */ './PasswordReset'),
+  loading: Loading,
+});
+
+const AsyncResetPassword = loadable({
+  loader: () => import(/* webpackChunkName: "me" */ './ResetPassword'),
+  loading: Loading,
+});
+
 const Pages = () => (
   <React.Fragment>
     <Route path="/" component={Tracking} />
@@ -33,6 +43,8 @@ const Pages = () => (
       <Route exact={true} path="/" component={AsyncHome} />
       <Route exact={true} path="/login" component={AsyncLogin} />
       <Route exact={true} path="/signup" component={AsyncSignup} />
+      <Route exact={true} path="/password-reset" component={AsyncPasswordReset} />
+      <Route exact={true} path="/reset-password/:token" component={AsyncResetPassword} />
       <Route exact={true} path="/me" component={protect(AsyncMe)} />
     </Switch>
   </React.Fragment>

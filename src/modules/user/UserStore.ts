@@ -1,5 +1,7 @@
 import { types } from 'mobx-state-tree';
+
 import { IUser } from './types';
+import { SESSION_KEY } from '../../utils/constants';
 
 const User = types
   .model('UserModel', {
@@ -19,6 +21,11 @@ const UserStore: any = types
   .model('UserModel', {
     user: types.maybe(types.reference(User)),
   })
+  .views(self => ({
+    get sessionKey(): string {
+      return SESSION_KEY('user');
+    },
+  }))
   .actions((self: typeof UserStore.Type) => ({
     isLoggedIn(): boolean {
       if (self.user) {
@@ -42,7 +49,7 @@ const UserStore: any = types
 
     storeUser(user: IUser): void {
       try {
-        localStorage.setItem('@hackerlog.user', JSON.stringify(user));
+        localStorage.setItem(self.sessionKey, JSON.stringify(user));
       } catch (_) {
         // do not throw here
       }
@@ -50,7 +57,7 @@ const UserStore: any = types
 
     retrieveStoredUser(): IUser | null {
       try {
-        const user = localStorage.getItem('@hackerlog.user');
+        const user = localStorage.getItem(self.sessionKey);
         if (user) {
           return JSON.parse(user);
         }
@@ -62,7 +69,7 @@ const UserStore: any = types
 
     clearStorage(): void {
       try {
-        localStorage.clear();
+        localStorage.removeItem(self.sessionKey);
       } catch (_) {
         // do nothing
       }

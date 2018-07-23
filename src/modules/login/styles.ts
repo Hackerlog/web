@@ -17,6 +17,11 @@ export const Wrapper = styled.main`
   max-width: 400px;
   width: 100%;
   padding: 0 12px;
+  transform: translateY(-20%);
+
+  @media (max-height: 700px) {
+    transform: translateY(0);
+  }
 `;
 
 export const Logo = styled.img`
@@ -48,4 +53,27 @@ export const CreateAccountLink = styled(Link)`
   font-weight: 600;
   color: ${props => props.theme.white};
   text-decoration: underline;
+`;
+
+export const FooterText = styled.footer`
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: none;
+  text-align: center;
+  padding: 12px 0;
+`;
+
+export const WhiteLink = styled(Link)`
+  color: ${props => props.theme.grey.lightest};
+  text-decoration: none;
+`;
+
+export const SmallText = styled.div`
+  color: ${props => props.theme.grey.lightest};
+  margin: 18px auto;
+  font-size: 15px;
+  text-align: center;
 `;

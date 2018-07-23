@@ -7,6 +7,8 @@ type State = Readonly<typeof initialState>;
 const initialState = {};
 
 class Me extends React.Component<any, any> {
+  public static NOT_RELEASED = true;
+
   public state: State = initialState;
 
   public render() {

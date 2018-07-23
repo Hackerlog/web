@@ -30,7 +30,7 @@ const InputGroup = styled.div`
   }
 `;
 
-type InputType = 'email' | 'text' | 'number';
+type InputType = 'email' | 'text' | 'number' | 'password';
 interface IProps {
   children: string;
   placeholder: string;
@@ -40,6 +40,8 @@ interface IProps {
   type: InputType;
   inputTestId: string;
   buttonTestId: string;
+  isLoading?: boolean;
+  disabled?: boolean;
 }
 
 export const InputWithButton = ({
@@ -51,6 +53,8 @@ export const InputWithButton = ({
   type,
   inputTestId,
   buttonTestId,
+  isLoading = false,
+  disabled = false,
 }: IProps) => (
   <InputGroup>
     <Input
@@ -60,7 +64,12 @@ export const InputWithButton = ({
       type={type}
       data-testid={inputTestId}
     />
-    <PrimaryButton onClick={onClick} data-testid={buttonTestId}>
+    <PrimaryButton
+      onClick={onClick}
+      data-testid={buttonTestId}
+      isLoading={isLoading}
+      disabled={disabled}
+    >
       {children}
     </PrimaryButton>
   </InputGroup>

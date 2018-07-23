@@ -8,6 +8,7 @@ export const InfoAlert = styled.div`
   padding: 18px;
   margin: 18px 0;
   width: 100%;
+  font-size: 14px;
   box-shadow: ${props => props.theme.shadows.small};
 `;
 

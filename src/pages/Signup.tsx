@@ -1,7 +1,14 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 
-import { LoginInput, LoginButton, SignupText, CreateAccountLink } from '../modules/login/styles';
+import {
+  LoginInput,
+  LoginButton,
+  SignupText,
+  CreateAccountLink,
+  SmallText,
+  WhiteLink,
+} from '../modules/login/styles';
 import { ErrorAlert } from '../components/Alert';
 import logo from '../assets/img/logo-white.svg';
 import { ISignup } from '../modules/signup/types';
@@ -20,6 +27,8 @@ interface IProps {
 }
 
 class Signup extends React.Component<IProps, any> {
+  public static NOT_RELEASED = true;
+
   public render() {
     const { store } = this.props;
 
@@ -68,6 +77,9 @@ class Signup extends React.Component<IProps, any> {
           <SignupText>
             Already a user? <CreateAccountLink to="/login">Log in here!</CreateAccountLink>
           </SignupText>
+          <SmallText>
+            <WhiteLink to="/login">Back to login?</WhiteLink>
+          </SmallText>
         </FormWrapper>
         <UsernameWrapper className={store.showUsername ? 'transition' : ''}>
           <p>
