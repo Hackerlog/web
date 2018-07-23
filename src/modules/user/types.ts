@@ -13,7 +13,7 @@ export interface IUserUpdate {
 }
 
 export interface IUser {
-  id: number | undefined;
+  id: number;
   firstName: string;
   lastName: string;
   email: string;

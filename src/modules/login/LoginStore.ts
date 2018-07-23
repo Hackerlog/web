@@ -1,55 +1,56 @@
-import { observable, action } from 'mobx';
+import * as React from 'react';
+import { types, getRoot, flow } from 'mobx-state-tree';
 
-import RootStore from '../../RootStore';
 import logger from '../../services/logger';
-import { ILogin } from './types';
 
-export default class LoginStore implements ILogin {
-  public rootStore: RootStore;
-  @observable public email: string = '';
-  @observable public password: string = '';
-  @observable public error: string | null = null;
-  @observable public isLoading: boolean = false;
+const LoginStore = types
+  .model('LoginStore', {
+    email: types.optional(types.string, ''),
+    password: types.optional(types.string, ''),
+    error: types.optional(types.string, ''),
+    isLoading: false,
+  })
+  .actions(self => ({
+    handleInputChange(event: React.FormEvent<HTMLInputElement>): void {
+      self[event.currentTarget.name] = event.currentTarget.value;
+    },
 
-  public constructor(rootStore: RootStore) {
-    this.rootStore = rootStore;
-  }
+    handleLogin: flow(function* handleLogin(
+      event: React.FormEvent<HTMLFormElement>
+    ): IterableIterator<void> {
+      self.isLoading = true;
+      event.preventDefault();
 
-  @action
-  public handleEmailChange = (event: React.FormEvent<HTMLInputElement>): void => {
-    this.email = event.currentTarget.value;
-  };
+      try {
+        const { token, user } = yield getRoot(self).authApi.authLoginPost({
+          body: JSON.stringify({ email: self.email, password: self.password }),
+        });
 
-  @action
-  public handlePasswordChange = (event: React.FormEvent<HTMLInputElement>): void => {
-    this.password = event.currentTarget.value;
-  };
-
-  @action
-  public handleLogin = (event: React.FormEvent<HTMLFormElement>): void => {
-    this.isLoading = true;
-    event.preventDefault();
-
-    this.rootStore.authApi
-      .authLoginPost({ body: JSON.stringify({ email: this.email, password: this.password }) })
-      .then(res => {
-        const { token, user } = res;
         if (user && token) {
-          this.rootStore.userStore.create({
+          const userModel = {
             id: user.id,
             firstName: user.first_name,
             lastName: user.last_name,
             email: user.email,
             token,
-          });
-          this.isLoading = false;
-          this.rootStore.routing.push('/me');
+          };
+
+          getRoot(self).userStore.createUser(userModel);
+          getRoot(self).userStore.storeUser(userModel);
+
+          self.isLoading = false;
+
+          getRoot(self).routing.push('/me');
         }
-      })
-      .catch(err => {
-        this.isLoading = false;
-        this.error = err.message;
-        logger.error(err);
-      });
-  };
-}
+      } catch (e) {
+        self.isLoading = false;
+        self.error = e.message;
+
+        logger.error('Login failed', e);
+
+        throw new Error(e);
+      }
+    }),
+  }));
+
+export default LoginStore;

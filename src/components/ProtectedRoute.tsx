@@ -1,16 +1,11 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Redirect } from 'react-router';
-import RootStore from '../RootStore';
-
-interface IProps {
-  store: RootStore;
-}
 
 const protect = (ProtectedRoute: any) => {
-  class ProtectHoc extends React.Component<IProps, {}> {
+  class ProtectHoc extends React.Component<any, {}> {
     private isLoggedIn = (): boolean => {
-      return this.props.store.userStore.isLoggedIn;
+      return this.props.store.userStore.isLoggedIn();
     };
 
     public render() {
@@ -21,6 +16,7 @@ const protect = (ProtectedRoute: any) => {
       return <ProtectedRoute {...this.props} />;
     }
   }
+
   return inject('store')(observer(ProtectHoc));
 };
 

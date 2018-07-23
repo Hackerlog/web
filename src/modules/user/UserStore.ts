@@ -1,74 +1,77 @@
-import { action, computed } from 'mobx';
+import { types } from 'mobx-state-tree';
+import { IUser } from './types';
 
-import RootStore from '../../RootStore';
-import User from './UserModel';
-import { IUserUpdate, IUser } from './types';
+const User = types
+  .model('UserModel', {
+    id: types.identifierNumber,
+    firstName: types.string,
+    lastName: types.string,
+    email: types.string,
+    token: types.string,
+  })
+  .views(self => ({
+    get fullName(): string {
+      return `${self.firstName} ${self.lastName}`;
+    },
+  }));
 
-export default class UserStore {
-  public rootStore: RootStore;
-
-  public user: User | null = null;
-
-  constructor(rootStore: RootStore) {
-    this.rootStore = rootStore;
-  }
-
-  @computed
-  public get isLoggedIn(): boolean {
-    if (this.user) {
-      return true;
-    }
-    const user = this.retrieveStoredUser();
-    if (!user) {
-      return false;
-    }
-
-    this.create(user);
-    return true;
-  }
-
-  @action
-  public create(user: IUser): void {
-    this.user = new User(this, user);
-    this.storeUser(user);
-  }
-
-  @action
-  public update(attributes: IUserUpdate): void {
-    // const attributesToUpdate = pickBy(attributes, identity);
-    // Make the update now...
-  }
-
-  public storeUser(user: IUser): void {
-    try {
-      localStorage.setItem('@hackerlog.user', JSON.stringify(user));
-    } catch (_) {
-      // do not throw here
-    }
-  }
-
-  public retrieveStoredUser(): IUser | null {
-    try {
-      const user = localStorage.getItem('@hackerlog.user');
-      if (user) {
-        return JSON.parse(user);
+const UserStore: any = types
+  .model('UserModel', {
+    user: types.maybe(types.reference(User)),
+  })
+  .actions((self: typeof UserStore.Type) => ({
+    isLoggedIn(): boolean {
+      if (self.user) {
+        return true;
       }
-    } catch (_) {
-      // do not throw here
-    }
-    return null;
-  }
 
-  private clearStorage(): void {
-    try {
-      localStorage.clear();
-    } catch (_) {
-      // do nothing
-    }
-  }
+      const user = self.retrieveStoredUser();
 
-  public reset(): void {
-    this.user = null;
-    this.clearStorage();
-  }
-}
+      if (!user) {
+        return false;
+      }
+
+      self.createUser(user);
+
+      return true;
+    },
+
+    createUser(user: IUser): void {
+      self.user = User.create(user);
+    },
+
+    storeUser(user: IUser): void {
+      try {
+        localStorage.setItem('@hackerlog.user', JSON.stringify(user));
+      } catch (_) {
+        // do not throw here
+      }
+    },
+
+    retrieveStoredUser(): IUser | null {
+      try {
+        const user = localStorage.getItem('@hackerlog.user');
+        if (user) {
+          return JSON.parse(user);
+        }
+      } catch (_) {
+        // do not throw here
+      }
+      return null;
+    },
+
+    clearStorage(): void {
+      try {
+        localStorage.clear();
+      } catch (_) {
+        // do nothing
+      }
+    },
+
+    reset(): void {
+      self.user = null;
+      self.clearStorage();
+    },
+  }));
+
+export default UserStore;

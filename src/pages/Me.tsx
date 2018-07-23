@@ -6,10 +6,12 @@ type State = Readonly<typeof initialState>;
 
 const initialState = {};
 
-class Me extends React.Component {
+class Me extends React.Component<any, any> {
   public state: State = initialState;
 
   public render() {
+    // tslint:disable-next-line:no-console
+    console.log(this.props.store);
     return <Wrapper>This will be the dashboard...</Wrapper>;
   }
 }

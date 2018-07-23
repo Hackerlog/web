@@ -27,6 +27,7 @@ const StyledButton = styled.button`
   border-radius: 48px;
   padding: 0 60px;
   border: 2px solid transparent;
+  box-shadow: ${props => props.theme.shadows.small};
 
   &:active,
   &:focus {
@@ -36,6 +37,15 @@ const StyledButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+
+  &:disabled,
+  &[disabled] {
+    opacity: 0.5;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
 `;
 
 interface IButton {
@@ -43,10 +53,11 @@ interface IButton {
   children: any;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
+  disabled?: boolean;
 }
 
-const Button = ({ isLoading, children, onClick, className }: IButton) => (
-  <StyledButton className={className} onClick={onClick} disabled={isLoading}>
+const Button = ({ isLoading, children, onClick, className, disabled }: IButton) => (
+  <StyledButton className={className} onClick={onClick} disabled={disabled || isLoading}>
     {isLoading ? <Loading /> : children}
   </StyledButton>
 );

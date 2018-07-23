@@ -8,7 +8,7 @@ const Input = styled.input`
   background: ${props => props.theme.white};
   border-radius: 48px;
   border: none;
-  box-shadow: ${props => props.theme.shadows.large};
+  box-shadow: ${props => props.theme.shadows.small};
   width: 100%;
   padding: 0 24px;
 

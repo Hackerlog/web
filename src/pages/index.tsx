@@ -16,6 +16,11 @@ const AsyncLogin = loadable({
   loading: Loading,
 });
 
+const AsyncSignup = loadable({
+  loader: () => import(/* webpackChunkName: "signup" */ './Signup'),
+  loading: Loading,
+});
+
 const AsyncMe = loadable({
   loader: () => import(/* webpackChunkName: "me" */ './Me'),
   loading: Loading,
@@ -27,6 +32,7 @@ const Pages = () => (
     <Switch>
       <Route exact={true} path="/" component={AsyncHome} />
       <Route exact={true} path="/login" component={AsyncLogin} />
+      <Route exact={true} path="/signup" component={AsyncSignup} />
       <Route exact={true} path="/me" component={protect(AsyncMe)} />
     </Switch>
   </React.Fragment>

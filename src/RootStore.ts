@@ -1,32 +1,42 @@
-import { configure } from 'mobx';
-import { RouterStore } from 'mobx-react-router';
+import { types, getEnv } from 'mobx-state-tree';
+import { RouterModel, syncHistoryWithStore } from 'mst-react-router';
+import createBrowserHistory from 'history/createBrowserHistory';
 
-import UserStore from './modules/user/UserStore';
 import { AuthApi, UsersApi } from './services/api';
 import LoginStore from './modules/login/LoginStore';
+import UserStore from './modules/user/UserStore';
+import SignupStore from './modules/signup/SignupStore';
 
-export default class RootStore {
-  public authApi: AuthApi;
-  public userApi: UsersApi;
-  public routing: RouterStore;
-  public userStore: UserStore;
-  public loginStore: LoginStore;
+export const routerModel = RouterModel.create();
+export const history = syncHistoryWithStore(createBrowserHistory(), routerModel);
 
-  constructor(authApi: AuthApi, userApi: UsersApi) {
-    configure({
-      // Make sure we are using actions
-      enforceActions: true,
-    });
+const RootModel = types
+  .model('Root', {
+    routing: types.optional(RouterModel, routerModel),
+    loginStore: types.optional(LoginStore, {}),
+    userStore: types.optional(UserStore, {}),
+    signupStore: types.optional(SignupStore, {}),
+  })
+  .views(self => ({
+    get userApi(): UsersApi {
+      return getEnv(self).userApi;
+    },
+    get authApi(): AuthApi {
+      return getEnv(self).authApi;
+    },
+  }));
 
-    this.authApi = authApi;
-    this.userApi = userApi;
-    this.routing = new RouterStore();
-    this.userStore = new UserStore(this);
-    this.loginStore = new LoginStore(this);
+const RootStore = RootModel.create(
+  {
+    routing: routerModel,
+    loginStore: {},
+    userStore: {},
+    signupStore: {},
+  },
+  {
+    userApi: new UsersApi(),
+    authApi: new AuthApi(),
   }
+);
 
-  public destroyState(): void {
-    this.userStore.reset();
-    this.routing.replace('/login');
-  }
-}
+export default RootStore;

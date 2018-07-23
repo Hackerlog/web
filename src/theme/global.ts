@@ -1,8 +1,6 @@
 import { injectGlobal } from '.';
 
 const globalStyles = () => injectGlobal`
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,600,700,900');
-
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,

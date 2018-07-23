@@ -46,7 +46,7 @@ export const TextWrapper = styled.div`
 export const Solution = {
   Section: styled.section`
     background: ${props => props.theme.grey.lightest};
-    padding: 60px 0;
+    padding: 60px 12px;
     margin: 0 auto;
     position: relative;
   `,
@@ -77,7 +77,7 @@ export const Feature = {
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 72px;
+      height: 15%;
       transform: skewY(-2deg);
       transform-origin: bottom right;
     }
@@ -129,18 +129,18 @@ export const Feature = {
 export const SectionTitleWhite = styled.h2`
   color: ${props => props.theme.white};
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 36px;
 `;
 
 export const SignUp = {
   Section: styled.section`
     background: ${props => props.theme.secondary};
-    padding: 60px 0;
+    padding: 48px 12px;
     position: relative;
   `,
   Wrapper: styled.div`
     max-width: 600px;
-    margin: 48px auto;
+    margin: 24px auto;
   `,
 };
 
