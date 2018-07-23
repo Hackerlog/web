@@ -1,12 +1,42 @@
+import { types, getEnv } from 'mobx-state-tree';
+import { RouterModel, syncHistoryWithStore } from 'mst-react-router';
+import createBrowserHistory from 'history/createBrowserHistory';
+
+import { AuthApi, UsersApi } from './services/api';
+import LoginStore from './modules/login/LoginStore';
 import UserStore from './modules/user/UserStore';
-import EntryStore from './modules/entry/EntryStore';
+import SignupStore from './modules/signup/SignupStore';
 
-export default class RootStore {
-  protected userStore: UserStore;
-  protected entryStore: EntryStore;
+export const routerModel = RouterModel.create();
+export const history = syncHistoryWithStore(createBrowserHistory(), routerModel);
 
-  constructor() {
-    this.userStore = new UserStore(this);
-    this.entryStore = new EntryStore(this);
+const RootModel = types
+  .model('Root', {
+    routing: types.optional(RouterModel, routerModel),
+    loginStore: types.optional(LoginStore, {}),
+    userStore: types.optional(UserStore, {}),
+    signupStore: types.optional(SignupStore, {}),
+  })
+  .views(self => ({
+    get userApi(): UsersApi {
+      return getEnv(self).userApi;
+    },
+    get authApi(): AuthApi {
+      return getEnv(self).authApi;
+    },
+  }));
+
+const RootStore = RootModel.create(
+  {
+    routing: routerModel,
+    loginStore: {},
+    userStore: {},
+    signupStore: {},
+  },
+  {
+    userApi: new UsersApi(),
+    authApi: new AuthApi(),
   }
-}
+);
+
+export default RootStore;

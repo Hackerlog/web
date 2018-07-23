@@ -106,14 +106,25 @@ export class Home extends React.Component {
         <Solution.Section>
           <TextWrapper>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit neque, blandit imperdiet curae
-              fames vitae netus potenti sed vel, pellentesque proin diam dui sociosqu torquent
-              penatibus. Dis tempor massa justo tellus nostra mus, curabitur a scelerisque amet nec
-              eu elit, duis libero placerat id aptent. Leo dictumst donec a mollis mattis maecenas
-              dolor tempus nam natoque, nulla erat molestie velit sollicitudin sociosqu sodales dui.
-              Duis porta adipiscing blandit rhoncus tempus dictum netus vulputate eleifend vehicula
-              ligula platea vivamus diam, accumsan mi quisque sem et posuere sed convallis mollis
-              metus praesent nulla condimentum.
+              Have you attempted to get a job as a developer? If so, you most likely experienced the
+              somewhat painful process of sending your resume to companies and hoping to get a
+              callback (pun intended 😃). Once you got a callback, you probably had to answer some
+              technical questions. If you were good enough to answer those correctly, then you
+              possibly had to solve some type of algorithm problems, or maybe even build a small
+              application just to prove you know what you are doing. But, don't you spend most of
+              your days already writing code? Doesn't that code prove you know what you are doing?
+            </p>
+
+            <p>
+              We think so. We want to use the work that you already do each day to prove your
+              skills. This way, when a potential hiring employer is looking for a good candidate,
+              they will see your skills and know your talent matches their needs, without you
+              spending hours on a take-home project (that, "should only take a few minutes...").
+            </p>
+
+            <p>
+              It's simple... you have the skills and we want to display those skills for you so you
+              can get noticed and get the job you deserve. Oh yeah... and it's free.
             </p>
           </TextWrapper>
         </Solution.Section>
@@ -238,4 +249,4 @@ export class Home extends React.Component {
   }
 }
 
-export default inject('routing')(observer(Home));
+export default inject('store')(observer(Home));

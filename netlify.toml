@@ -1,0 +1,11 @@
+[context.production.environment]
+  REACT_APP_BASE_URL = "http://api.hackerlog.io"
+
+[context.deploy-preview.environment]
+  REACT_APP_BASE_URL = "http://staging-api.hackerlog.io"
+
+[context.branch-deploy.environment]
+  REACT_APP_BASE_URL = "http://staging-api.hackerlog.io"
+
+[context.develop.environment]
+  REACT_APP_BASE_URL = "http://staging-api.hackerlog.io"
