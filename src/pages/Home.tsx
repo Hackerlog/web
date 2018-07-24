@@ -148,7 +148,7 @@ export class Home extends React.Component {
           <Feature.Grid>
             <Feature.Detail>
               <Feature.DetailLeft>
-                <img src={liveResults} alt="Live Results" />
+                <img src={liveResults} alt="Live Stats" />
               </Feature.DetailLeft>
               <Feature.DetailRight>
                 <h3>Live Results</h3>
