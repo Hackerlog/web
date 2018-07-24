@@ -1,5 +1,6 @@
 import styled from '../../theme';
 import headerImage from '../../assets/img/header-image.svg';
+import rocket from '../../assets/img/rocket.svg';
 
 export const HomeWrapper = styled.main`
   background: ${props => props.theme.white};
@@ -22,25 +23,45 @@ export const Logo = styled.img`
 
 export const Intro = {
   Header: styled.header`
-    padding: 60px 12px;
+    padding: 36px 12px;
     background-image: url(${headerImage});
     background-repeat: no-repeat;
     background-position: 90% 100%;
     background-size: 100%;
 
     @media (min-width: ${props => props.theme.sizes.desktop}px) {
-      padding: 60px 120px;
+      padding: 24px 120px;
     }
+  `,
+  Blue: styled.span`
+    color: ${props => props.theme.primary};
   `,
   Strong: styled.strong`
     font-weight: 700;
     color: ${props => props.theme.primary};
+  `,
+  H1: styled.h1`
+    padding-right: 120px;
+
+    @media (max-width: ${props => props.theme.sizes.tablet}px) {
+      padding-right: 0;
+      text-align: center;
+    }
   `,
 };
 
 export const TextWrapper = styled.div`
   max-width: 720px;
   margin: 0 auto;
+`;
+
+export const H2 = styled.h2`
+  text-align: center;
+  color: ${props => props.theme.grey.dark};
+`;
+
+export const Strong = styled.strong`
+  color: ${props => props.theme.primary};
 `;
 
 export const Solution = {
@@ -56,7 +77,7 @@ export const Feature = {
   Section: styled.section`
     background: ${props => props.theme.gradients.darkToPrimary};
     padding-top: 84px;
-    padding-bottom: 84px;
+    padding-bottom: 120px;
     margin: 0 auto;
     position: relative;
 
@@ -78,7 +99,7 @@ export const Feature = {
       left: 0;
       width: 100%;
       height: 15%;
-      transform: skewY(-2deg);
+      transform: skewY(-1.5deg);
       transform-origin: bottom right;
     }
   `,
@@ -130,6 +151,7 @@ export const SectionTitleWhite = styled.h2`
   color: ${props => props.theme.white};
   text-align: center;
   margin-bottom: 36px;
+  text-shadow: ${props => props.theme.shadows.medium};
 `;
 
 export const SignUp = {
@@ -137,6 +159,14 @@ export const SignUp = {
     background: ${props => props.theme.secondary};
     padding: 48px 12px;
     position: relative;
+    background-image: url(${rocket});
+    background-repeat: no-repeat;
+    background-position: left center;
+
+    @media (max-width: ${props => props.theme.sizes.tablet}px) {
+      background-position: center center;
+      background-size: 50%;
+    }
   `,
   Wrapper: styled.div`
     max-width: 600px;

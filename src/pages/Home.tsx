@@ -25,6 +25,8 @@ import {
   SignUp,
   TwitterButton,
   Modal,
+  H2,
+  Strong,
 } from '../modules/home/styles';
 import { theme } from '../theme';
 import { MailingListApi } from '../services/api';
@@ -94,37 +96,43 @@ export class Home extends React.Component {
         </Nav>
         <Intro.Header>
           <TextWrapper>
-            <h1>
-              As a developer, getting noticed is a circus of never ending take home projects and
-              fibonacci fizz-buzz algorithms.
-            </h1>
-            <h1>
-              We want to <Intro.Strong>change</Intro.Strong> that.
-            </h1>
+            <Intro.H1>
+              Introducing <Intro.Blue>Hackerlog</Intro.Blue>.
+            </Intro.H1>
+            <Intro.H1>
+              A new way for developers like <Intro.Strong>you</Intro.Strong> to find work.
+            </Intro.H1>
           </TextWrapper>
         </Intro.Header>
         <Solution.Section>
           <TextWrapper>
+            <H2>The Problem</H2>
+            <p>Right now, getting a job as a developer is a real pain in the pixels.</p>
             <p>
-              Have you attempted to get a job as a developer? If so, you most likely experienced the
-              somewhat painful process of sending your resume to companies and hoping to get a
-              callback (pun intended 😃). Once you got a callback, you probably had to answer some
-              technical questions. If you were good enough to answer those correctly, then you
-              possibly had to solve some type of algorithm problems, or maybe even build a small
-              application just to prove you know what you are doing. But, don't you spend most of
-              your days already writing code? Doesn't that code prove you know what you are doing?
+              You send out your resume, wait for a callback (pun intended), wait a little longer. If
+              you’re lucky enough to get that call, you’ll probably have to answer some technical
+              questions, then solve some kind of algorithm problem “that will only take a couple of
+              minutes” (yeah, right!), or maybe even build a small application. Then there’s the
+              video call, and the face-to-face interview. All this just to prove you know what you
+              are doing.
             </p>
-
             <p>
-              We think so. We want to use the work that you already do each day to prove your
-              skills. This way, when a potential hiring employer is looking for a good candidate,
-              they will see your skills and know your talent matches their needs, without you
-              spending hours on a take-home project (that, "should only take a few minutes...").
+              Wouldn’t it be so much easier if you could <Strong>SHOW</Strong> employers that you{' '}
+              <Strong>KNOW</Strong> what you’re doing?
             </p>
-
             <p>
-              It's simple... you have the skills and we want to display those skills for you so you
-              can get noticed and get the job you deserve. Oh yeah... and it's free.
+              Hackerlog will do exactly that, allowing employers to see the work you’re currently
+              doing and have done, plus where you’ve worked, so they can easily see that your skills
+              match their needs.
+            </p>
+            <p>
+              It makes getting noticed <Strong>easier</Strong>.
+            </p>
+            <p>
+              It puts <Strong>you</Strong> in the running for the jobs you’re suited.
+            </p>
+            <p>
+              And better still, it’s all <Strong>free</Strong>.
             </p>
           </TextWrapper>
         </Solution.Section>
@@ -153,8 +161,8 @@ export class Home extends React.Component {
               <Feature.DetailRight>
                 <h3>Git Metrics</h3>
                 <p>
-                  Connect your git accounts and showcase projects, pull requests or even specific
-                  blocks of code.
+                  Hackerlog connects with your Git accounts so you can showcase those projects
+                  you’re proud of, or even specific chunks of code.
                 </p>
               </Feature.DetailRight>
             </Feature.Detail>
@@ -163,10 +171,10 @@ export class Home extends React.Component {
                 <img src={resume} alt="Resume" />
               </Feature.DetailLeft>
               <Feature.DetailRight>
-                <h3>Résumé</h3>
+                <h3>Resumé</h3>
                 <p>
-                  Build your resume here by entering your current and past employers along with your
-                  roles, responsibilities and accomplishments.
+                  Easily enter details of current and previous employers and show your
+                  responsibilities and accomplishments.
                 </p>
               </Feature.DetailRight>
             </Feature.Detail>
@@ -177,15 +185,16 @@ export class Home extends React.Component {
               <Feature.DetailRight>
                 <h3>Experience</h3>
                 <p>
-                  Enter all of this information in an easy to use builder and have it displayed
-                  elegantly on an easy to read timeline.
+                  Polish everything off with an elegant timeline that shows how you’ve grown as a
+                  developer, in an easy to read format that recruiters and technical managers will
+                  love!
                 </p>
               </Feature.DetailRight>
             </Feature.Detail>
           </Feature.Grid>
         </Feature.Section>
         <SignUp.Section>
-          <SectionTitleWhite>Interested?</SectionTitleWhite>
+          <SectionTitleWhite>Be among the first to know when Hackerlog launches!</SectionTitleWhite>
           <SignUp.Wrapper>
             Are you as excited about Hackerlog as we are? SIgn up below and you will be the first to
             know when we launch. We may even contact you to be a beta tester. Oh, and don’t worry…
