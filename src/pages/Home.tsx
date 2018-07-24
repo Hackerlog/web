@@ -9,8 +9,10 @@ import liveResults from '../assets/img/live-results.svg';
 import gitMetrics from '../assets/img/git-metrics.svg';
 import resume from '../assets/img/resume.svg';
 import experience from '../assets/img/experience.svg';
-import twitterLogo from '../assets/img/twitter-logo.svg';
 import modalImage from '../assets/img/modal-image.svg';
+import twitter from '../assets/img/twitter.png';
+import facebook from '../assets/img/facebook.png';
+import linkedin from '../assets/img/linkedin.png';
 import { InputWithButton } from '../components/Input';
 import {
   HomeWrapper,
@@ -23,14 +25,14 @@ import {
   Feature,
   SectionTitleWhite,
   SignUp,
-  TwitterButton,
   Modal,
   H2,
   Strong,
+  ShareButton,
+  Closer,
 } from '../modules/home/styles';
 import { theme } from '../theme';
 import { MailingListApi } from '../services/api';
-import { DefaultOutlineButton } from '../components/Button';
 import Logger from '../services/logger';
 
 const initialState = {
@@ -43,8 +45,10 @@ type State = Readonly<typeof initialState>;
 export class Home extends React.Component {
   public state: State = initialState;
 
-  private twitterMessage =
-    'http://twitter.com/home?status=Check out @hackerlogapp! They are transforming how developers showcase their skills.';
+  private twitterPost =
+    'http://twitter.com/home?status=Check%20out%20%40hackerlogapp!%20They%20are%20transforming%20how%20developers%20showcase%20their%20skills.%20https%3A%2F%2Fhackerlog.io';
+  private facebookPost = `https://www.facebook.com/dialog/feed?app_id=184683071273&link=https%3A%2F%2Fhackerlog.io&picture=http%3A%2F%2Fwww.insert-image-share-url-here.jpg&name=Hackerlog%20-%20A%20new%20way%20for%20developers%20to%20get%20noticed&caption=%20&description=Check%20out%20Hackerlog!%20They%20are%20transforming%20how%20developers%20showcase%20their%20skills.&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F`;
+  private linkedinPost = `https://www.linkedin.com/shareArticle?mini=true&url=https%3A//hackerlog.io&title=Hackerlog%20-%20A%20new%20way%20for%20developers%20to%20get%20noticed&text=Check%20out%20Hackerlog!%20They%20are%20transforming%20how%20developers%20showcase%20their%20skills.%20https%3A//hackerlog.io&source=`;
 
   private handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -234,17 +238,27 @@ export class Home extends React.Component {
                   you say?
                 </p>
                 <Modal.Actions>
-                  <TwitterButton
-                    href={this.twitterMessage}
+                  <ShareButton
+                    href={this.twitterPost}
                     target="_blank"
                     onClick={this.handleShareClick}
                   >
-                    <img src={twitterLogo} alt="Spread the word!" />
-                    I'll help!
-                  </TwitterButton>
-                  <DefaultOutlineButton onClick={this.handleModalClose}>
-                    No thanks
-                  </DefaultOutlineButton>
+                    <img src={twitter} alt="Share on Twitter!" />
+                  </ShareButton>
+                  <ShareButton
+                    href={this.facebookPost}
+                    target="_blank"
+                    onClick={this.handleShareClick}
+                  >
+                    <img src={facebook} alt="Share on Facebook!" />
+                  </ShareButton>
+                  <ShareButton
+                    href={this.linkedinPost}
+                    target="_blank"
+                    onClick={this.handleShareClick}
+                  >
+                    <img src={linkedin} alt="Share on LinkedIn!" />
+                  </ShareButton>
                 </Modal.Actions>
               </Modal.Left>
               <Modal.Right>
@@ -252,6 +266,7 @@ export class Home extends React.Component {
               </Modal.Right>
             </Modal.Bottom>
           </Modal.Wrapper>
+          <Closer onClick={this.handleModalClose}>x</Closer>
         </ReactModal>
       </HomeWrapper>
     );

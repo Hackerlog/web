@@ -23,14 +23,14 @@ export const Logo = styled.img`
 
 export const Intro = {
   Header: styled.header`
-    padding: 36px 12px;
+    padding: 36px 12px 72px 12px;
     background-image: url(${headerImage});
     background-repeat: no-repeat;
     background-position: 90% 100%;
     background-size: 100%;
 
     @media (min-width: ${props => props.theme.sizes.desktop}px) {
-      padding: 24px 120px;
+      padding: 24px 120px 72px 24px;
     }
   `,
   Blue: styled.span`
@@ -57,7 +57,9 @@ export const TextWrapper = styled.div`
 
 export const H2 = styled.h2`
   text-align: center;
-  color: ${props => props.theme.grey.dark};
+  color: ${props => props.theme.primary};
+  margin-bottom: 36px;
+  font-weight: 700;
 `;
 
 export const Strong = styled.strong`
@@ -255,27 +257,26 @@ export const Modal = {
   `,
 };
 
-export const TwitterButton = styled.a`
-  background: #1fa0f3;
-  border: 2px solid #1fa0f3;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-  color: ${props => props.theme.white};
-  border-radius: 48px;
-  padding: 0 60px;
-  text-decoration: none;
-
+export const ShareButton = styled.a`
   &:active,
   &:focus {
     outline: none;
   }
 
   img {
-    height: 24px;
-    margin: 0 12px 0 0;
+    margin: 12px;
     position: relative;
+  }
+`;
+
+export const Closer = styled.span`
+  color: ${props => props.theme.grey.default};
+  position: absolute;
+  top: 12px;
+  right: 24px;
+  font-size: 20px;
+
+  &:hover {
+    cursor: pointer;
   }
 `;
