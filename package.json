@@ -26,6 +26,7 @@
     "react-detect-offline": "^2.1.2",
     "react-dom": "^16.4.1",
     "react-ga": "^2.5.3",
+    "react-lazyload": "^2.3.0",
     "react-loadable": "^5.4.0",
     "react-modal": "^3.5.1",
     "react-router-dom": "^4.3.1",

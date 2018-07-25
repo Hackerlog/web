@@ -30,7 +30,7 @@ export const Intro = {
     background-size: 100%;
 
     @media (min-width: ${props => props.theme.sizes.desktop}px) {
-      padding: 24px 120px 72px 24px;
+      padding: 24px 100px 120px 24px;
     }
   `,
   Blue: styled.span`

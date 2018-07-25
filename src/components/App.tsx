@@ -4,7 +4,6 @@ import { Router } from 'react-router-dom';
 import { GoogleFont, TypographyStyle } from 'react-typography';
 
 import { ThemeProvider, theme } from '../theme';
-import globalStyles from '../theme/global';
 import typography from '../assets/typography';
 import Pages from '../pages';
 import RootStore, { history } from '../RootStore';
@@ -20,8 +19,6 @@ if (process.env.NODE_ENV === 'development') {
   // tslint:disable-next-line:no-var-requires
   connectReduxDevtools(require('remotedev'), RootStore);
 }
-
-globalStyles();
 
 const App = () => (
   <React.Fragment>
