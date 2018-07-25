@@ -1,5 +1,6 @@
 import styled from '../../theme';
 import headerImage from '../../assets/img/header-image.svg';
+import rocket from '../../assets/img/rocket.svg';
 
 export const HomeWrapper = styled.main`
   background: ${props => props.theme.white};
@@ -22,19 +23,30 @@ export const Logo = styled.img`
 
 export const Intro = {
   Header: styled.header`
-    padding: 60px 12px;
+    padding: 36px 12px 72px 12px;
     background-image: url(${headerImage});
     background-repeat: no-repeat;
     background-position: 90% 100%;
     background-size: 100%;
 
     @media (min-width: ${props => props.theme.sizes.desktop}px) {
-      padding: 60px 120px;
+      padding: 24px 100px 120px 24px;
     }
+  `,
+  Blue: styled.span`
+    color: ${props => props.theme.primary};
   `,
   Strong: styled.strong`
     font-weight: 700;
     color: ${props => props.theme.primary};
+  `,
+  H1: styled.h1`
+    padding-right: 120px;
+
+    @media (max-width: ${props => props.theme.sizes.tablet}px) {
+      padding-right: 0;
+      text-align: center;
+    }
   `,
 };
 
@@ -43,6 +55,17 @@ export const TextWrapper = styled.div`
   margin: 0 auto;
 `;
 
+export const H2 = styled.h2`
+  text-align: center;
+  color: ${props => props.theme.primary};
+  margin-bottom: 36px;
+  font-weight: 700;
+`;
+
+export const Strong = styled.strong`
+  color: ${props => props.theme.primary};
+`;
+// FIXME: Not using image...
 export const Solution = {
   Section: styled.section`
     background: ${props => props.theme.grey.lightest};
@@ -50,36 +73,39 @@ export const Solution = {
     margin: 0 auto;
     position: relative;
   `,
+  Image: styled.img`
+    position: absolute;
+    left: -100px;
+    top: 50%;
+    max-width: 320px;
+    width: 100%;
+    transform: rotate(-10deg) translateY(-50%);
+  `,
 };
 
 export const Feature = {
   Section: styled.section`
     background: ${props => props.theme.gradients.darkToPrimary};
     padding-top: 84px;
-    padding-bottom: 84px;
+    padding-bottom: 120px;
     margin: 0 auto;
     position: relative;
 
-    svg {
+    #feature-top {
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
       height: 48px;
       width: 100%;
-      transform: rotate(180deg);
     }
 
-    &:after {
-      content: '';
-      background: ${props => props.theme.secondary};
+    #feature-bottom {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 15%;
-      transform: skewY(-2deg);
-      transform-origin: bottom right;
+      height: 48px;
+      transform: rotate(180deg);
     }
   `,
   Grid: styled.div`
@@ -130,6 +156,7 @@ export const SectionTitleWhite = styled.h2`
   color: ${props => props.theme.white};
   text-align: center;
   margin-bottom: 36px;
+  text-shadow: ${props => props.theme.shadows.medium};
 `;
 
 export const SignUp = {
@@ -137,6 +164,14 @@ export const SignUp = {
     background: ${props => props.theme.secondary};
     padding: 48px 12px;
     position: relative;
+    background-image: url(${rocket});
+    background-repeat: no-repeat;
+    background-position: -48px center;
+
+    @media (max-width: ${props => props.theme.sizes.tablet}px) {
+      background-position: center center;
+      background-size: 50%;
+    }
   `,
   Wrapper: styled.div`
     max-width: 600px;
@@ -225,27 +260,26 @@ export const Modal = {
   `,
 };
 
-export const TwitterButton = styled.a`
-  background: #1fa0f3;
-  border: 2px solid #1fa0f3;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-  color: ${props => props.theme.white};
-  border-radius: 48px;
-  padding: 0 60px;
-  text-decoration: none;
-
+export const ShareButton = styled.a`
   &:active,
   &:focus {
     outline: none;
   }
 
   img {
-    height: 24px;
-    margin: 0 12px 0 0;
+    margin: 12px;
     position: relative;
+  }
+`;
+
+export const Closer = styled.span`
+  color: ${props => props.theme.grey.default};
+  position: absolute;
+  top: 12px;
+  right: 24px;
+  font-size: 20px;
+
+  &:hover {
+    cursor: pointer;
   }
 `;

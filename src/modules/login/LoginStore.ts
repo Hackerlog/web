@@ -19,6 +19,7 @@ const LoginStore = types
       event: React.FormEvent<HTMLFormElement>
     ): IterableIterator<void> {
       self.isLoading = true;
+      self.error = '';
       event.preventDefault();
 
       try {
@@ -44,11 +45,9 @@ const LoginStore = types
         }
       } catch (e) {
         self.isLoading = false;
-        self.error = e.message;
-
+        const message = yield e.json();
+        self.error = message.error;
         logger.error('Login failed', e);
-
-        throw new Error(e);
       }
     }),
   }));
