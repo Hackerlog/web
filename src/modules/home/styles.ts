@@ -65,13 +65,21 @@ export const H2 = styled.h2`
 export const Strong = styled.strong`
   color: ${props => props.theme.primary};
 `;
-
+// FIXME: Not using image...
 export const Solution = {
   Section: styled.section`
     background: ${props => props.theme.grey.lightest};
     padding: 60px 12px;
     margin: 0 auto;
     position: relative;
+  `,
+  Image: styled.img`
+    position: absolute;
+    left: -100px;
+    top: 50%;
+    max-width: 320px;
+    width: 100%;
+    transform: rotate(-10deg) translateY(-50%);
   `,
 };
 
@@ -83,26 +91,21 @@ export const Feature = {
     margin: 0 auto;
     position: relative;
 
-    svg {
+    #feature-top {
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
       height: 48px;
       width: 100%;
-      transform: rotate(180deg);
     }
 
-    &:after {
-      content: '';
-      background: ${props => props.theme.secondary};
+    #feature-bottom {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 15%;
-      transform: skewY(-1.5deg);
-      transform-origin: bottom right;
+      height: 48px;
+      transform: rotate(180deg);
     }
   `,
   Grid: styled.div`
@@ -163,7 +166,7 @@ export const SignUp = {
     position: relative;
     background-image: url(${rocket});
     background-repeat: no-repeat;
-    background-position: left center;
+    background-position: -48px center;
 
     @media (max-width: ${props => props.theme.sizes.tablet}px) {
       background-position: center center;

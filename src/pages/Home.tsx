@@ -101,50 +101,47 @@ export class Home extends React.Component {
         <Intro.Header>
           <TextWrapper>
             <Intro.H1>
-              Introducing <Intro.Blue>Hackerlog</Intro.Blue>.
+              Introducing <Intro.Strong>Hackerlog</Intro.Strong>.
             </Intro.H1>
             <Intro.H1>
-              A new way for developers like <Intro.Strong>you</Intro.Strong> to find work.
+              A new way for developers like <Intro.Strong>you</Intro.Strong> to showcase your
+              skills.
             </Intro.H1>
           </TextWrapper>
         </Intro.Header>
         <Solution.Section>
           <TextWrapper>
             <H2>The Problem</H2>
-            <p>Right now, getting a job as a developer is a real pain in the pixels.</p>
+            <p>Right now, getting a job as a developer is a real pain in the you know what.</p>
             <p>
               You send out your resume, wait for a callback (pun intended), wait a little longer. If
               you’re lucky enough to get that call, you’ll probably have to answer some technical
-              questions, then solve some kind of algorithm problem “that will only take a couple of
-              minutes” (yeah, right!), or maybe even build a small application. Then there’s the
-              video call, and the face-to-face interview. All this just to prove you know what you
-              are doing.
+              questions and if that goes well, then you will be given a take-home project that
+              "should only take a couple of hours” (yeah, right!). All this just to prove you know
+              what you are doing.
             </p>
             <p>
-              Wouldn’t it be so much easier if you could <Strong>SHOW</Strong> employers that you{' '}
-              <Strong>KNOW</Strong> what you’re doing?
+              Wouldn’t it be much easier if potential employers could see your work before they even
+              talked to you?
             </p>
             <p>
-              Hackerlog will do exactly that, allowing employers to see the work you’re currently
-              doing and have done, plus where you’ve worked, so they can easily see that your skills
-              match their needs.
-            </p>
-            <p>
-              It makes getting noticed <Strong>easier</Strong>.
-            </p>
-            <p>
-              It puts <Strong>you</Strong> in the running for the jobs you’re suited.
-            </p>
-            <p>
-              And better still, it’s all <Strong>free</Strong>.
+              We think so. <Strong>Hackerlog</Strong> provides a platform where developers like you
+              can display your true skills in an undeniable fashion. It makes getting noticed
+              easier. It puts you in the running for the jobs you’re suited. And better still, it’s
+              all <Strong>free</Strong>.
             </p>
           </TextWrapper>
         </Solution.Section>
         <Feature.Section>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <polygon fill={theme.grey.lightest} points="0,100 0,0 100,100" />
+          <svg
+            id="feature-top"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
+            <polygon fill={theme.grey.lightest} points="0,0 100,0 0,100" />
           </svg>
-          <SectionTitleWhite>How do we solve this problem?</SectionTitleWhite>
+          <SectionTitleWhite>How Hackerlog solves this problem</SectionTitleWhite>
           <Feature.Grid>
             <Feature.Detail>
               <Feature.DetailLeft>
@@ -187,15 +184,23 @@ export class Home extends React.Component {
                 <img src={experience} alt="Experience" />
               </Feature.DetailLeft>
               <Feature.DetailRight>
-                <h3>Experience</h3>
+                <h3>Experience Timeline</h3>
                 <p>
-                  Polish everything off with an elegant timeline that shows how you’ve grown as a
-                  developer, in an easy to read format that recruiters and technical managers will
-                  love!
+                  Polish everything off with an elegant timeline that displays your software
+                  engineering prowess, in an easy to read format that recruiters and technical
+                  managers will love!
                 </p>
               </Feature.DetailRight>
             </Feature.Detail>
           </Feature.Grid>
+          <svg
+            id="feature-bottom"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
+            <polygon fill={theme.secondary} points="0,0 100,0 100,100" />
+          </svg>
         </Feature.Section>
         <SignUp.Section>
           <SectionTitleWhite>Be among the first to know when Hackerlog launches!</SectionTitleWhite>
@@ -234,8 +239,8 @@ export class Home extends React.Component {
                 <p>
                   We truly think Hackerlog is going to transform the way developers display their
                   talent and we want everyone to know about it. Would you help us spread the word? A
-                  simple tweet would help tremendously and we would really appreciate it. What do
-                  you say?
+                  simple social share would help tremendously and we would really appreciate it.
+                  What do you say?
                 </p>
                 <Modal.Actions>
                   <ShareButton
