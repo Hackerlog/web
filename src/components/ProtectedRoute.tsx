@@ -2,8 +2,6 @@ import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Redirect } from 'react-router';
 
-import { IS_RELEASED } from '../utils/constants';
-
 const protect = (ProtectedRoute: any) => {
   class ProtectHoc extends React.Component<any, {}> {
     private isLoggedIn = (): boolean => {
@@ -11,14 +9,11 @@ const protect = (ProtectedRoute: any) => {
     };
 
     public render() {
-      switch (true) {
-        case !IS_RELEASED && ProtectedRoute.NOT_RELEASED:
-          return <Redirect to="/" />;
-        case !this.isLoggedIn():
-          return <Redirect to="/login" />;
-        default:
-          return <ProtectedRoute {...this.props} />;
+      if (!this.isLoggedIn()) {
+        return <Redirect to="/login" />;
       }
+
+      return <ProtectedRoute {...this.props} />;
     }
   }
 
