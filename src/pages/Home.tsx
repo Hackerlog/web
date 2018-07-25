@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { noop } from 'lodash';
+import noop from 'lodash-es/noop';
 import * as ReactModal from 'react-modal';
 import * as ReactGA from 'react-ga';
 import LazyLoad from 'react-lazyload';

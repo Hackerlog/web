@@ -1,5 +1,5 @@
 import { onSnapshot } from 'mobx-state-tree';
-import { debounce } from 'lodash';
+import debounce from 'lodash-es/debounce';
 
 import { SESSION_KEY } from './constants';
 

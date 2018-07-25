@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { noop, get } from 'lodash';
+import noop from 'lodash-es/noop';
+import get from 'lodash-es/get';
 
 import { Background } from '../modules/signup/styles';
 import { AuthApi } from '../services/api';

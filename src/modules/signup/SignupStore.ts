@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { types, getRoot, flow } from 'mobx-state-tree';
-import { compact } from 'lodash';
+import compact from 'lodash-es/compact';
+
 import logger from '../../services/logger';
 import { MainUser } from '../../services/api';
 import { SESSION_KEY } from '../../utils/constants';
