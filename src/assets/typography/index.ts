@@ -12,12 +12,6 @@ const typography = new Typography({
   headerColor: Colors.Black,
   bodyColor: Colors.Black,
   bodyWeight: 300,
-  googleFonts: [
-    {
-      name: 'Source Sans Pro',
-      styles: ['300', '300i', '600', '700', '900'],
-    },
-  ],
   includeNormalize: true,
   overrideStyles: ({ adjustFontSizeTo }: { adjustFontSizeTo: IAdjustSizeTo }) => ({
     '@media (max-width: 576px)': {
