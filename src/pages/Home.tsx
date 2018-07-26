@@ -11,6 +11,7 @@ import gitMetrics from '../assets/img/git-metrics.svg';
 import resume from '../assets/img/resume.svg';
 import experience from '../assets/img/experience.svg';
 import modalImage from '../assets/img/modal-image.svg';
+import headerImage from '../assets/img/header-image.svg';
 import twitter from '../assets/img/twitter.png';
 import facebook from '../assets/img/facebook.png';
 import linkedin from '../assets/img/linkedin.png';
@@ -109,6 +110,7 @@ export class Home extends React.Component {
               skills.
             </Intro.H1>
           </TextWrapper>
+          <Intro.HeaderImage src={headerImage} alt="Hackerlog" />
         </Intro.Header>
         <Solution.Section>
           <TextWrapper>
@@ -135,14 +137,13 @@ export class Home extends React.Component {
         </Solution.Section>
         <LazyLoad once={true} height="100%">
           <Feature.Section>
-            <svg
-              id="feature-top"
+            <Feature.TopAngle
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
             >
               <polygon fill={theme.grey.lightest} points="0,0 100,0 0,100" />
-            </svg>
+            </Feature.TopAngle>
             <SectionTitleWhite>How Hackerlog solves this problem</SectionTitleWhite>
             <Feature.Grid>
               <Feature.Detail>
@@ -203,14 +204,14 @@ export class Home extends React.Component {
                 </Feature.DetailRight>
               </Feature.Detail>
             </Feature.Grid>
-            <svg
+            <Feature.BottomAngle
               id="feature-bottom"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
             >
               <polygon fill={theme.secondary} points="0,0 100,0 100,100" />
-            </svg>
+            </Feature.BottomAngle>
           </Feature.Section>
         </LazyLoad>
         <LazyLoad once={true} height="100%">
