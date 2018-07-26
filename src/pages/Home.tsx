@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { inject, observer } from 'mobx-react';
 import noop from 'lodash-es/noop';
 import * as ReactModal from 'react-modal';
 import * as ReactGA from 'react-ga';
@@ -11,19 +10,19 @@ import gitMetrics from '../assets/img/git-metrics.svg';
 import resume from '../assets/img/resume.svg';
 import experience from '../assets/img/experience.svg';
 import modalImage from '../assets/img/modal-image.svg';
-import headerImage from '../assets/img/header-image.svg';
 import twitter from '../assets/img/twitter.png';
 import facebook from '../assets/img/facebook.png';
 import linkedin from '../assets/img/linkedin.png';
 import { InputWithButton } from '../components/Input';
+import headerImage from '../assets/img/header-image.svg';
 import {
-  HomeWrapper,
   TopBorder,
+  HomeWrapper,
   Nav,
   Logo,
   Intro,
   TextWrapper,
-  Solution,
+  TheProblem,
   Feature,
   SectionTitleWhite,
   SignUp,
@@ -33,7 +32,6 @@ import {
   ShareButton,
   Closer,
 } from '../modules/home/styles';
-import { theme } from '../theme';
 import { MailingListApi } from '../services/api';
 import Logger from '../services/logger';
 
@@ -44,7 +42,7 @@ const initialState = {
 
 type State = Readonly<typeof initialState>;
 
-export class Home extends React.Component {
+export default class Home extends React.Component {
   public state: State = initialState;
 
   private twitterPost =
@@ -101,6 +99,7 @@ export class Home extends React.Component {
           <Logo src={logo} alt="Hackerlog" />
         </Nav>
         <Intro.Header>
+          <Intro.Image src={headerImage} alt="Hackerlog!" />
           <TextWrapper>
             <Intro.H1>
               Introducing <Intro.Strong>Hackerlog</Intro.Strong>.
@@ -110,9 +109,8 @@ export class Home extends React.Component {
               skills.
             </Intro.H1>
           </TextWrapper>
-          <Intro.HeaderImage src={headerImage} alt="Hackerlog" />
         </Intro.Header>
-        <Solution.Section>
+        <TheProblem.Section>
           <TextWrapper>
             <H2>The Problem</H2>
             <p>Right now, getting a job as a developer is a real pain in the you know what.</p>
@@ -134,16 +132,9 @@ export class Home extends React.Component {
               all <Strong>free</Strong>.
             </p>
           </TextWrapper>
-        </Solution.Section>
+        </TheProblem.Section>
         <LazyLoad once={true} height="100%">
           <Feature.Section>
-            <Feature.TopAngle
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <polygon fill={theme.grey.lightest} points="0,0 100,0 0,100" />
-            </Feature.TopAngle>
             <SectionTitleWhite>How Hackerlog solves this problem</SectionTitleWhite>
             <Feature.Grid>
               <Feature.Detail>
@@ -153,9 +144,9 @@ export class Home extends React.Component {
                   </LazyLoad>
                 </Feature.DetailLeft>
                 <Feature.DetailRight>
-                  <h3>Live Results</h3>
+                  <h3>Real-time Stats</h3>
                   <p>
-                    Prove your skills with real metrics like daily coding activity with specific
+                    Prove your skills with live stats like daily coding activity with specific
                     languages.
                   </p>
                 </Feature.DetailRight>
@@ -169,8 +160,9 @@ export class Home extends React.Component {
                 <Feature.DetailRight>
                   <h3>Git Metrics</h3>
                   <p>
-                    Hackerlog connects with your Git accounts so you can showcase those projects
-                    you’re proud of, or even specific chunks of code.
+                    Hackerlog connects to your Git accounts so you can showcase those projects
+                    you’re proud of, or even specific chunks of code that show you know how to solve
+                    a particular problem.
                   </p>
                 </Feature.DetailRight>
               </Feature.Detail>
@@ -184,7 +176,7 @@ export class Home extends React.Component {
                   <h3>Resumé</h3>
                   <p>
                     Easily enter details of current and previous employers and show your
-                    responsibilities and accomplishments.
+                    responsibilities and accomplishments. Or, simply import your LinkedIn data.
                   </p>
                 </Feature.DetailRight>
               </Feature.Detail>
@@ -204,14 +196,6 @@ export class Home extends React.Component {
                 </Feature.DetailRight>
               </Feature.Detail>
             </Feature.Grid>
-            <Feature.BottomAngle
-              id="feature-bottom"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <polygon fill={theme.secondary} points="0,0 100,0 100,100" />
-            </Feature.BottomAngle>
           </Feature.Section>
         </LazyLoad>
         <LazyLoad once={true} height="100%">
@@ -220,9 +204,9 @@ export class Home extends React.Component {
               Be among the first to know when Hackerlog launches!
             </SectionTitleWhite>
             <SignUp.Wrapper>
-              Are you as excited about Hackerlog as we are? SIgn up below and you will be the first
-              to know when we launch. We may even contact you to be a beta tester. Oh, and don’t
-              worry… we will never share your email address with anyone.
+              Hackerlog is going to transform the way you attract employers. Sign up below and you
+              will be the first to know when we launch. We may even contact you to be a beta tester.
+              Oh, and don’t worry… we will never spam you or share your email address with anyone.
             </SignUp.Wrapper>
             <SignUp.Wrapper>
               <form onSubmit={this.handleSubmit} data-testid="home-form-newsletter">
@@ -253,10 +237,9 @@ export class Home extends React.Component {
             <Modal.Bottom>
               <Modal.Left>
                 <p>
-                  We truly think Hackerlog is going to transform the way developers display their
-                  talent and we want everyone to know about it. Would you help us spread the word? A
-                  simple social share would help tremendously and we would really appreciate it.
-                  What do you say?
+                  We want everyone developer to know about Hackerlog and how it can help them. Would
+                  you help us spread the word? A simple social share would help tremendously and we
+                  would really appreciate it. What do you say?
                 </p>
                 <Modal.Actions>
                   <ShareButton
@@ -293,5 +276,3 @@ export class Home extends React.Component {
     );
   }
 }
-
-export default inject('store')(observer(Home));
