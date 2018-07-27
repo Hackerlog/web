@@ -51,7 +51,7 @@ export const Intro = {
     max-width: 30%;
     width: 100%;
     right: 3%;
-    z-index: 99;
+    z-index: 1;
   `,
 };
 
@@ -173,6 +173,7 @@ export const Modal = {
     justify-content: center;
     margin: auto;
     position: relative;
+    z-index: 99;
 
     p {
       padding-right: 120px;
@@ -201,7 +202,7 @@ export const Modal = {
     display: flex;
 
     @media (max-width: ${props => props.theme.sizes.tablet}px) {
-      flex-direction: column;
+      flex-direction: row;
     }
 
     button {
@@ -222,6 +223,10 @@ export const Modal = {
   `,
   Top: styled.div`
     display: flex;
+
+    @media (max-width: ${props => props.theme.sizes.tablet}px) {
+      margin-top: 60px;
+    }
   `,
   Bottom: styled.div`
     display: flex;

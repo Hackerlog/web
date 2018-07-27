@@ -38,7 +38,7 @@ import Logger from '../services/logger';
 
 const initialState = {
   email: '',
-  showModal: false,
+  showModal: true,
 };
 
 type State = Readonly<typeof initialState>;
@@ -241,6 +241,14 @@ export default class Home extends React.Component {
           isOpen={this.state.showModal}
           contentLabel="Share the news!"
           ariaHideApp={false}
+          style={{
+            overlay: {
+              zIndex: '99',
+            },
+            content: {
+              zIndex: '99',
+            },
+          }}
         >
           <Modal.Wrapper>
             <Modal.Top>
