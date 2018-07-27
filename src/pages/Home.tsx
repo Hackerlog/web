@@ -38,7 +38,7 @@ import Logger from '../services/logger';
 
 const initialState = {
   email: '',
-  showModal: true,
+  showModal: false,
 };
 
 type State = Readonly<typeof initialState>;
