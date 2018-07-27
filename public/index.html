@@ -8,10 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
   <meta name="description" content="Transforming the way developers showcase their skills. Showing recruiters developers work, helping them find jobs and get hired.">
   <meta name="keywords" content="developers,skills,resume,hire,work">
-  <meta name="application-name" content="Hackerlog" />
+
+  <meta name="application-name" content="Hackerlog - Transforming the way developers showcase their skills" />
   <meta name="theme-color" content="#4552B1">
 
+  <meta name="msapplication-TileColor" content="#FFFFFF" />
+  <meta name="msapplication-TileImage" content="https://hackerlog.iomstile-144x144.png" />
+  <meta name="msapplication-square70x70logo" content="https://hackerlog.iomstile-70x70.png" />
+  <meta name="msapplication-square150x150logo" content="https://hackerlog.iomstile-150x150.png" />
+  <meta name="msapplication-wide310x150logo" content="https://hackerlog.iomstile-310x150.png" />
+  <meta name="msapplication-square310x310logo" content="https://hackerlog.iomstile-310x310.png" />
+
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+
   <link rel="apple-touch-icon-precomposed" sizes="57x57" href="%PUBLIC_URL%/images/favicons/apple-touch-icon-57x57.png" />
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="%PUBLIC_URL%/images/favicons/apple-touch-icon-114x114.png"
   />
@@ -29,13 +38,6 @@
   <link rel="icon" type="image/png" href="%PUBLIC_URL%/images/favicons/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="%PUBLIC_URL%/images/favicons/favicon-16x16.png" sizes="16x16" />
   <link rel="icon" type="image/png" href="%PUBLIC_URL%/images/favicons/favicon-128.png" sizes="128x128" />
-  <meta name="application-name" content="Hackerlog" />
-  <meta name="msapplication-TileColor" content="#F9FAFC" />
-  <meta name="msapplication-TileImage" content="%PUBLIC_URL%/images/favicons/mstile-144x144.png" />
-  <meta name="msapplication-square70x70logo" content="%PUBLIC_URL%/images/favicons/mstile-70x70.png" />
-  <meta name="msapplication-square150x150logo" content="%PUBLIC_URL%/images/favicons/mstile-150x150.png" />
-  <meta name="msapplication-wide310x150logo" content="%PUBLIC_URL%/images/favicons/mstile-310x150.png" />
-  <meta name="msapplication-square310x310logo" content="%PUBLIC_URL%/images/favicons/mstile-310x310.png" />
 
   <link rel="preload" href="%PUBLIC_URL%/fonts/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkids18S0xR41.woff2" as="font" crossorigin>
   <link rel="preload" href="%PUBLIC_URL%/fonts/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2" as="font" crossorigin>
@@ -85,7 +87,7 @@
     }
   </style>
 
-  <script>
+  <!-- <script>
     (function (h, o, t, j, a, r) {
       h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
       h._hjSettings = { hjid: 959079, hjsv: 6 };
@@ -94,14 +96,33 @@
       r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
       a.appendChild(r);
     })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-  </script>
+  </script> -->
 </head>
 
 <body>
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
+
   <div id="root"></div>
+
+  <script>
+    window['_fs_debug'] = false;
+    window['_fs_host'] = 'fullstory.com';
+    window['_fs_org'] = 'DKCKF';
+    window['_fs_namespace'] = 'FS';
+    (function (m, n, e, t, l, o, g, y) {
+      if (e in m) { if (m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].'); } return; }
+      g = m[e] = function (a, b) { g.q ? g.q.push([a, b]) : g._api(a, b); }; g.q = [];
+      o = n.createElement(t); o.async = 1; o.src = 'https://' + _fs_host + '/s/fs.js';
+      y = n.getElementsByTagName(t)[0]; y.parentNode.insertBefore(o, y);
+      g.identify = function (i, v) { g(l, { uid: i }); if (v) g(l, v) }; g.setUserVars = function (v) { g(l, v) }; g.event = function (i, v) { g('event', { n: i, p: v }) };
+      g.shutdown = function () { g("rec", !1) }; g.restart = function () { g("rec", !0) };
+      g.consent = function (a) { g("consent", !arguments.length || a) };
+      g.identifyAccount = function (i, v) { o = 'account'; v = v || {}; v.acctId = i; g(o, v) };
+      g.clearUserCookie = function () { };
+    })(window, document, window['_fs_namespace'], 'script', 'user');
+  </script>
 </body>
 
 </html>

@@ -16,12 +16,12 @@ const typography = new Typography({
   overrideStyles: ({ adjustFontSizeTo }: { adjustFontSizeTo: IAdjustSizeTo }) => ({
     '@media (max-width: 576px)': {
       html: {
-        ...adjustFontSizeTo('14px'),
+        ...adjustFontSizeTo('15px'),
       },
     },
     '@media (max-width: 768px)': {
       html: {
-        ...adjustFontSizeTo('16px'),
+        ...adjustFontSizeTo('17px'),
       },
     },
     h1: {
