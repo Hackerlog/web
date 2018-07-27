@@ -268,3 +268,26 @@ export const Closer = styled.span`
     cursor: pointer;
   }
 `;
+
+export const Footer = styled.footer`
+  background-color: ${props => props.theme.grey.dark};
+  color: ${props => props.theme.grey.lightest};
+  text-align: center;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  p {
+    opacity: 0.6;
+    margin: 0;
+  }
+
+  a {
+    color: ${props => props.theme.grey.lightest};
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 12px;
+  }
+`;

@@ -31,6 +31,7 @@ import {
   Strong,
   ShareButton,
   Closer,
+  Footer,
 } from '../modules/home/styles';
 import { MailingListApi } from '../services/api';
 import Logger from '../services/logger';
@@ -225,6 +226,17 @@ export default class Home extends React.Component {
             </SignUp.Wrapper>
           </SignUp.Section>
         </LazyLoad>
+        <Footer>
+          <p>
+            <a href="https://twitter.com/hackerlogapp" target="_blank">
+              @HackerlogApp
+            </a>{' '}
+            |{' '}
+            <a href="mailto:info@hello.hackerlog.io" target="_blank">
+              info@hello.hackerlog.io
+            </a>
+          </p>
+        </Footer>
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="Share the news!"
