@@ -59,6 +59,8 @@ export default class Home extends React.Component {
       action: 'Signup',
     });
 
+    Logger.setUserContext(this.state.email);
+
     const send = new MailingListApi();
     send
       .listPost({

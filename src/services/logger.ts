@@ -28,10 +28,10 @@ class Logger {
     this.level = level;
   }
 
-  public setUserContext(id: number, email: string): void {
+  public setUserContext(email: string, id?: number): void {
     Raven.setUserContext({
-      id,
       email,
+      id,
     });
   }
 
@@ -83,9 +83,11 @@ class Logger {
     }
   }
 
-  // FIXME: fix this properly
   private getVersion(): string {
-    return '0.1';
+    const version = process.env.npm_package_number;
+    const branch = process.env.BRANCH;
+    const hash = process.env.COMMIT_REF;
+    return `${version}-${branch}-${hash}`;
   }
 
   private sendToSentry(msg: string): void {
