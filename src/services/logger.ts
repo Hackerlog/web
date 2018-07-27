@@ -84,10 +84,10 @@ class Logger {
   }
 
   private getVersion(): string {
-    const version = process.env.npm_package_number;
-    const branch = process.env.BRANCH;
-    const hash = process.env.COMMIT_REF;
-    return `${version}-${branch}-${hash}`;
+    const context = process.env.REACT_APP_CONTEXT;
+    const branch = process.env.REACT_APP_BRANCH;
+    const hash = process.env.REACT_APP_COMMIT_REF;
+    return `${context}-${branch}-${hash}`;
   }
 
   private sendToSentry(msg: string): void {
