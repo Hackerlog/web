@@ -1,3 +1,4 @@
+// tslint:disable:jsx-no-lambda
 import * as React from 'react';
 import noop from 'lodash-es/noop';
 import * as ReactModal from 'react-modal';
@@ -87,10 +88,11 @@ export default class Home extends React.Component {
     this.setState({ showModal: false });
   };
 
-  private handleShareClick = () => {
+  private handleShareClick = network => {
     ReactGA.event({
       category: 'ShareModal',
       action: 'Did share',
+      value: network,
     });
   };
 
@@ -267,21 +269,21 @@ export default class Home extends React.Component {
                   <ShareButton
                     href={this.twitterPost}
                     target="_blank"
-                    onClick={this.handleShareClick}
+                    onClick={() => this.handleShareClick('Twitter')}
                   >
                     <img src={twitter} alt="Share on Twitter!" />
                   </ShareButton>
                   <ShareButton
                     href={this.facebookPost}
                     target="_blank"
-                    onClick={this.handleShareClick}
+                    onClick={() => this.handleShareClick('Facebook')}
                   >
                     <img src={facebook} alt="Share on Facebook!" />
                   </ShareButton>
                   <ShareButton
                     href={this.linkedinPost}
                     target="_blank"
-                    onClick={this.handleShareClick}
+                    onClick={() => this.handleShareClick('LinkedIn')}
                   >
                     <img src={linkedin} alt="Share on LinkedIn!" />
                   </ShareButton>
