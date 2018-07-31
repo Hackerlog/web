@@ -175,6 +175,14 @@ export const Modal = {
     position: relative;
     z-index: 99;
 
+    @media (max-width: ${props => props.theme.sizes.tablet}px) {
+      display: block;
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
     p {
       padding-right: 120px;
 
@@ -192,7 +200,7 @@ export const Modal = {
     z-index: 0;
 
     @media (max-width: ${props => props.theme.sizes.tablet}px) {
-      max-width: 120px;
+      max-width: 96px;
       top: 0;
       left: 50%;
       transform: translate(-50%, 0);
@@ -203,6 +211,10 @@ export const Modal = {
 
     @media (max-width: ${props => props.theme.sizes.tablet}px) {
       flex-direction: row;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
     }
 
     button {
@@ -225,7 +237,7 @@ export const Modal = {
     display: flex;
 
     @media (max-width: ${props => props.theme.sizes.tablet}px) {
-      margin-top: 60px;
+      padding-top: 84px;
     }
   `,
   Bottom: styled.div`
