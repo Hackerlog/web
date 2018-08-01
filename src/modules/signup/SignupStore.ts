@@ -105,13 +105,11 @@ const SignupStore = types
 
       try {
         const res: MainUser = yield self.root.userApi.usersPost({
-          body: JSON.stringify({
-            email: self.email,
-            first_name: self.firstName,
-            last_name: self.lastName,
-            password: self.password,
-            username: self.username,
-          }),
+          email: self.email,
+          first_name: self.firstName,
+          last_name: self.lastName,
+          password: self.password,
+          username: self.username,
         });
 
         if (!!res.id) {

@@ -11,6 +11,7 @@ import {
   AsyncPasswordReset,
   AsyncMe,
   AsyncResetPassword,
+  AsyncFourOhFour,
 } from './routes';
 
 const Pages = () => (
@@ -20,9 +21,14 @@ const Pages = () => (
       <Route exact={true} path="/" component={AsyncHome} />
       <Route exact={true} path="/login" component={hideFeature(AsyncLogin)} />
       <Route exact={true} path="/signup" component={hideFeature(AsyncSignup)} />
-      <Route exact={true} path="/password-reset" component={AsyncPasswordReset} />
+      <Route exact={true} path="/password-reset" component={hideFeature(AsyncPasswordReset)} />
       <Route exact={true} path="/me" component={hideFeature(protect(AsyncMe))} />
-      <Route exact={true} path="/reset-password/:token" component={AsyncResetPassword} />
+      <Route
+        exact={true}
+        path="/reset-password/:token"
+        component={hideFeature(AsyncResetPassword)}
+      />
+      <Route component={AsyncFourOhFour} />
     </Switch>
   </React.Fragment>
 );

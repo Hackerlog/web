@@ -23,11 +23,16 @@ export const AsyncMe = loadable({
 });
 
 export const AsyncPasswordReset = loadable({
-  loader: () => import(/* webpackChunkName: "me" */ './PasswordReset'),
+  loader: () => import(/* webpackChunkName: "password-reset" */ './PasswordReset'),
   loading: Loading,
 });
 
 export const AsyncResetPassword = loadable({
-  loader: () => import(/* webpackChunkName: "me" */ './ResetPassword'),
+  loader: () => import(/* webpackChunkName: "reset-password" */ './ResetPassword'),
+  loading: Loading,
+});
+
+export const AsyncFourOhFour = loadable({
+  loader: () => import(/* webpackChunkName: "404" */ './404'),
   loading: Loading,
 });

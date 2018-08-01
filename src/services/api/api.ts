@@ -273,6 +273,12 @@ export interface MainUser {
     last_name: string;
     /**
      * 
+     * @type {string}
+     * @memberof MainUser
+     */
+    password: string;
+    /**
+     * 
      * @type {Array<MainUnit>}
      * @memberof MainUser
      */
@@ -980,20 +986,29 @@ export const UsersApiFetchParamCreator = function (configuration?: Configuration
         /**
          * Creates a user with the body params that are passed in
          * @summary Creates/Registers a user
+         * @param {MainUser} user User object: first_name, last_name, email, password, username
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersPost(options: any = {}): FetchArgs {
+        usersPost(user: MainUser, options: any = {}): FetchArgs {
+            // verify required parameter 'user' is not null or undefined
+            if (user === null || user === undefined) {
+                throw new RequiredError('user','Required parameter user was null or undefined when calling usersPost.');
+            }
             const localVarPath = `/users`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"MainUser" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body =  needsSerialization ? JSON.stringify(user || {}) : (user || "");
 
             return {
                 url: url.format(localVarUrlObj),
@@ -1097,11 +1112,12 @@ export const UsersApiFp = function(configuration?: Configuration) {
         /**
          * Creates a user with the body params that are passed in
          * @summary Creates/Registers a user
+         * @param {MainUser} user User object: first_name, last_name, email, password, username
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersPost(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainUser> {
-            const localVarFetchArgs = UsersApiFetchParamCreator(configuration).usersPost(options);
+        usersPost(user: MainUser, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainUser> {
+            const localVarFetchArgs = UsersApiFetchParamCreator(configuration).usersPost(user, options);
             return (fetch: FetchAPI = window.fetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1173,11 +1189,12 @@ export const UsersApiFactory = function (configuration?: Configuration, fetch?: 
         /**
          * Creates a user with the body params that are passed in
          * @summary Creates/Registers a user
+         * @param {MainUser} user User object: first_name, last_name, email, password, username
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersPost(options?: any) {
-            return UsersApiFp(configuration).usersPost(options)(fetch, basePath);
+        usersPost(user: MainUser, options?: any) {
+            return UsersApiFp(configuration).usersPost(user, options)(fetch, basePath);
         },
         /**
          * Checks if a username is available and responds as such
@@ -1238,12 +1255,13 @@ export class UsersApi extends BaseAPI {
     /**
      * Creates a user with the body params that are passed in
      * @summary Creates/Registers a user
+     * @param {MainUser} user User object: first_name, last_name, email, password, username
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public usersPost(options?: any) {
-        return UsersApiFp(this.configuration).usersPost(options)(this.fetch, this.basePath);
+    public usersPost(user: MainUser, options?: any) {
+        return UsersApiFp(this.configuration).usersPost(user, options)(this.fetch, this.basePath);
     }
 
     /**
