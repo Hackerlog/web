@@ -1,0 +1,16 @@
+{
+  "name": "@hackerlog/web-sdk",
+  "version": "1.0.0",
+  "description": "Hackerlog API",
+  "author": "Hackerlog",
+  "license": "Unlicense",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --outDir ../"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.9",
+    "typescript": "^2.0"
+  }
+}

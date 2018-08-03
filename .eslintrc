@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "root": true,
+  "extends": [
+    "airbnb",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/warnings",
+    "prettier",
+    "prettier/react"
+  ],
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "linebreak-style": "off",
+    "react/prop-types": "off"
+  },
+  "plugins": ["react", "jsx-a11y", "import", "prettier"]
+}
