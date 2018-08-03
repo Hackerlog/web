@@ -279,6 +279,12 @@ export interface MainUser {
     password: string;
     /**
      * 
+     * @type {string}
+     * @memberof MainUser
+     */
+    profile_image?: string;
+    /**
+     * 
      * @type {Array<MainUnit>}
      * @memberof MainUser
      */
@@ -984,6 +990,44 @@ export const UsersApiFetchParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Adds a profile image to a user
+         * @summary Add Profile Image
+         * @param {string} id The ID of the user
+         * @param {any} image_url The URL of the profile image
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersIdPatch(id: string, image_url: any, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling usersIdPatch.');
+            }
+            // verify required parameter 'image_url' is not null or undefined
+            if (image_url === null || image_url === undefined) {
+                throw new RequiredError('image_url','Required parameter image_url was null or undefined when calling usersIdPatch.');
+            }
+            const localVarPath = `/users/{id}}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'PATCH' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"any" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body =  needsSerialization ? JSON.stringify(image_url || {}) : (image_url || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Creates a user with the body params that are passed in
          * @summary Creates/Registers a user
          * @param {MainUser} user User object: first_name, last_name, email, password, username
@@ -1110,6 +1154,26 @@ export const UsersApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Adds a profile image to a user
+         * @summary Add Profile Image
+         * @param {string} id The ID of the user
+         * @param {any} image_url The URL of the profile image
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersIdPatch(id: string, image_url: any, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainGenericResponse> {
+            const localVarFetchArgs = UsersApiFetchParamCreator(configuration).usersIdPatch(id, image_url, options);
+            return (fetch: FetchAPI = window.fetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
          * Creates a user with the body params that are passed in
          * @summary Creates/Registers a user
          * @param {MainUser} user User object: first_name, last_name, email, password, username
@@ -1187,6 +1251,17 @@ export const UsersApiFactory = function (configuration?: Configuration, fetch?: 
             return UsersApiFp(configuration).usersIdGet(id, options)(fetch, basePath);
         },
         /**
+         * Adds a profile image to a user
+         * @summary Add Profile Image
+         * @param {string} id The ID of the user
+         * @param {any} image_url The URL of the profile image
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersIdPatch(id: string, image_url: any, options?: any) {
+            return UsersApiFp(configuration).usersIdPatch(id, image_url, options)(fetch, basePath);
+        },
+        /**
          * Creates a user with the body params that are passed in
          * @summary Creates/Registers a user
          * @param {MainUser} user User object: first_name, last_name, email, password, username
@@ -1250,6 +1325,19 @@ export class UsersApi extends BaseAPI {
      */
     public usersIdGet(id: number, options?: any) {
         return UsersApiFp(this.configuration).usersIdGet(id, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * Adds a profile image to a user
+     * @summary Add Profile Image
+     * @param {string} id The ID of the user
+     * @param {any} image_url The URL of the profile image
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public usersIdPatch(id: string, image_url: any, options?: any) {
+        return UsersApiFp(this.configuration).usersIdPatch(id, image_url, options)(this.fetch, this.basePath);
     }
 
     /**
