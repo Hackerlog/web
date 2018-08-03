@@ -12,6 +12,7 @@ const {
 
 export interface IThemeInterface {
   white: string;
+  default: string;
   grey: {
     lightest: string;
     light: string;
@@ -45,6 +46,7 @@ export interface IThemeInterface {
 
 export const theme: IThemeInterface = {
   white: Colors.White,
+  default: Colors.Grey,
   grey: {
     lightest: Colors.GreyLightest,
     light: Colors.GreyLight,

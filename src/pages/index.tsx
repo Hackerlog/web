@@ -12,6 +12,7 @@ import {
   AsyncMe,
   AsyncResetPassword,
   AsyncFourOhFour,
+  AsyncComponents,
 } from './routes';
 
 const Pages = () => (
@@ -23,6 +24,7 @@ const Pages = () => (
       <Route exact={true} path="/signup" component={hideFeature(AsyncSignup)} />
       <Route exact={true} path="/password-reset" component={hideFeature(AsyncPasswordReset)} />
       <Route exact={true} path="/me" component={hideFeature(protect(AsyncMe))} />
+      <Route exact={true} path="/components" component={hideFeature(AsyncComponents)} />
       <Route
         exact={true}
         path="/reset-password/:token"

@@ -36,3 +36,8 @@ export const AsyncFourOhFour = loadable({
   loader: () => import(/* webpackChunkName: "404" */ './404'),
   loading: Loading,
 });
+
+export const AsyncComponents = loadable({
+  loader: () => import(/* webpackChunkName: "components" */ './Components'),
+  loading: Loading,
+});
