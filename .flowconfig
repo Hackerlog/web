@@ -1,0 +1,17 @@
+[ignore]
+/.history
+/node_modules
+/build
+/public
+
+[include]
+
+[libs]
+defs.flow.js
+
+[lints]
+
+[options]
+module.name_mapper.extension='\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)' -> 'RelativeImageStub'
+
+[strict]

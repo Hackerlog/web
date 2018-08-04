@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "target": "es6",
+    "module": "esnext",
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}
