@@ -7,7 +7,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "build:api": "cd src/services/api/src && npm run build",
-    "build-netlify": "REACT_APP_BRANCH=\"$BRANCH\" REACT_APP_COMMIT_REF=\"$COMMIT_REF\" REACT_APP_CONTEXT=\"$CONTEXT\" yarn build",
+    "build-netlify": "REACT_APP_BRANCH=\"$BRANCH\" REACT_APP_COMMIT_REF=\"$COMMIT_REF\" REACT_APP_CONTEXT=\"$CONTEXT\" npm run build",
     "analyze": "ANALYZE=1 react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "lint": "eslint src/**/*.{js,jsx}",
