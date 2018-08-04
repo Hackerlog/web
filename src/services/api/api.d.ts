@@ -133,6 +133,25 @@ export interface MainGenericResponse {
 /**
  *
  * @export
+ * @interface MainLoginRequest
+ */
+export interface MainLoginRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MainLoginRequest
+     */
+    email?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MainLoginRequest
+     */
+    password?: string;
+}
+/**
+ *
+ * @export
  * @interface MainUnit
  */
 export interface MainUnit {
@@ -309,10 +328,11 @@ export declare const AuthApiFetchParamCreator: (configuration?: Configuration) =
     /**
      * Authenticates a user and returns a JWT on successful login
      * @summary Authenticates a user
+     * @param {MainLoginRequest} login email, password
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    login(options?: any): FetchArgs;
+    authenticate(login: MainLoginRequest, options?: any): FetchArgs;
     /**
      * Sends an email to the user with a link to reset their password
      * @summary Starts a password reset
@@ -336,10 +356,11 @@ export declare const AuthApiFp: (configuration?: Configuration) => {
     /**
      * Authenticates a user and returns a JWT on successful login
      * @summary Authenticates a user
+     * @param {MainLoginRequest} login email, password
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    login(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainAuth>;
+    authenticate(login: MainLoginRequest, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainAuth>;
     /**
      * Sends an email to the user with a link to reset their password
      * @summary Starts a password reset
@@ -363,10 +384,11 @@ export declare const AuthApiFactory: (configuration?: Configuration, fetch?: Fet
     /**
      * Authenticates a user and returns a JWT on successful login
      * @summary Authenticates a user
+     * @param {MainLoginRequest} login email, password
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    login(options?: any): Promise<MainAuth>;
+    authenticate(login: MainLoginRequest, options?: any): Promise<MainAuth>;
     /**
      * Sends an email to the user with a link to reset their password
      * @summary Starts a password reset
@@ -392,11 +414,12 @@ export declare class AuthApi extends BaseAPI {
     /**
      * Authenticates a user and returns a JWT on successful login
      * @summary Authenticates a user
+     * @param {MainLoginRequest} login email, password
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    login(options?: any): Promise<MainAuth>;
+    authenticate(login: MainLoginRequest, options?: any): Promise<MainAuth>;
     /**
      * Sends an email to the user with a link to reset their password
      * @summary Starts a password reset
@@ -493,10 +516,11 @@ export declare const MailingListApiFetchParamCreator: (configuration?: Configura
     /**
      * This adds a user to the mailing list
      * @summary Adds a user to the mailing list
+     * @param {any} email Email address
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listPost(options?: any): FetchArgs;
+    addUser(email: any, options?: any): FetchArgs;
 };
 /**
  * MailingListApi - functional programming interface
@@ -506,10 +530,11 @@ export declare const MailingListApiFp: (configuration?: Configuration) => {
     /**
      * This adds a user to the mailing list
      * @summary Adds a user to the mailing list
+     * @param {any} email Email address
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listPost(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainGenericResponse>;
+    addUser(email: any, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainGenericResponse>;
 };
 /**
  * MailingListApi - factory interface
@@ -519,10 +544,11 @@ export declare const MailingListApiFactory: (configuration?: Configuration, fetc
     /**
      * This adds a user to the mailing list
      * @summary Adds a user to the mailing list
+     * @param {any} email Email address
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listPost(options?: any): Promise<MainGenericResponse>;
+    addUser(email: any, options?: any): Promise<MainGenericResponse>;
 };
 /**
  * MailingListApi - object-oriented interface
@@ -534,11 +560,12 @@ export declare class MailingListApi extends BaseAPI {
     /**
      * This adds a user to the mailing list
      * @summary Adds a user to the mailing list
+     * @param {any} email Email address
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MailingListApi
      */
-    listPost(options?: any): Promise<MainGenericResponse>;
+    addUser(email: any, options?: any): Promise<MainGenericResponse>;
 }
 /**
  * UnitsApi - fetch parameter creator

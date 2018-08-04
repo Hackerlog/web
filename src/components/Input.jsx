@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { PrimaryButton } from './Button';
+import Button from './Button';
 
 const Input = styled.input`
   height: 48px;
@@ -50,13 +50,14 @@ export const InputWithButton = ({
       type={type}
       data-testid={inputTestId}
     />
-    <PrimaryButton
+    <Button
+      type="primary"
       onClick={onClick}
       data-testid={buttonTestId}
       isLoading={isLoading}
       disabled={disabled}
     >
       {children}
-    </PrimaryButton>
+    </Button>
   </InputGroup>
 );

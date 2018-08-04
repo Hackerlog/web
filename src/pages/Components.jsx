@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'antd';
 
-import { Button } from '../components/Button';
+import Button from '../components/Button';
 
 const Wrapper = styled.section`
   margin: 12px;
@@ -18,7 +18,9 @@ export default function() {
     <div>
       <Wrapper>
         <W>
-          <Button type="primary">Primary Button</Button>
+          <Button type="primary" fluid>
+            Primary Button
+          </Button>
         </W>
         <W>
           <Button type="primary" isLoading>

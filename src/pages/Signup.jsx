@@ -55,6 +55,7 @@ class Signup extends React.Component {
             onChange={store.handleInputChange}
           />
           <LoginButton
+            type="primary"
             isLoading={store.isLoading}
             onClick={store.transitionToUsername}
             disabled={!store.signupFormIsValid}

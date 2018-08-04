@@ -13,12 +13,12 @@ module.exports = (config, env) => {
     config.plugins.push(new BundleAnalyzer());
   }
 
-  // config = injectBabelPlugin(
-  //   ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
-  //   config
-  // );
+  config = injectBabelPlugin(
+    ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }, 'antd-import'],
+    config
+  );
 
-  // config = updateConfig(config, env, options);
+  config = updateConfig(config, env, options);
 
   return config;
 };

@@ -1,6 +1,30 @@
+// @flow
 import React from 'react';
 import { Icon } from 'antd';
 import styled, { keyframes } from 'styled-components';
+
+type ButtonTypes =
+  | 'primary'
+  | 'primary-outline'
+  | 'default'
+  | 'default-outline'
+  | 'error'
+  | 'error-outline'
+  | 'success'
+  | 'success-outline';
+
+interface IButton {
+  isLoading?: boolean;
+  children?: any;
+  onClick?: () => void;
+  className?: string;
+  disabled?: boolean;
+  type?: ButtonTypes;
+  outline?: boolean;
+  round?: boolean;
+  icon?: string;
+  fluid?: boolean;
+}
 
 const spin = keyframes`
   0% { transform: rotate(0deg); }
@@ -19,7 +43,16 @@ const Loading = styled.div`
 
 const StyledButton = styled.button`
   height: 48px;
-  width: ${props => (props.round ? '48px' : '200px')};
+  width: ${props => {
+    switch (true) {
+      case props.round:
+        return '48px';
+      case props.fluid:
+        return '100%';
+      default:
+        return '200px';
+    }
+  }};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,17 +83,20 @@ const StyledButton = styled.button`
       cursor: not-allowed;
     }
   }
+
+  i {
+    font-size: 22px;
+  }
 `;
 
 const renderChild = (children, round, icon, className) => {
-  console.log(round, icon);
   if (round) {
     return <Icon className={className} type={icon} />;
   }
   return children;
 };
 
-export const Button = ({
+const Button: IButton = ({
   isLoading,
   children,
   onClick,
@@ -70,6 +106,7 @@ export const Button = ({
   outline,
   round,
   icon,
+  fluid,
 }) => (
   <StyledButton
     className={className}
@@ -79,103 +116,10 @@ export const Button = ({
     outline={outline}
     round={round}
     icon={icon}
+    fluid={fluid}
   >
     {isLoading ? <Loading /> : renderChild(children, round, icon, className)}
   </StyledButton>
 );
 
-export const PrimaryButton = styled(Button)`
-  background: ${props => props.theme.primary};
-  border: 2px solid ${props => props.theme.primary};
-`;
-
-export const DefaultButton = styled(Button)`
-  background: ${props => props.theme.grey.default};
-  border-color: ${props => props.theme.grey.default};
-`;
-
-export const SuccessButton = styled(Button)`
-  background: ${props => props.theme.success};
-  border: 2px solid ${props => props.theme.success};
-`;
-
-export const ErrorButton = styled(Button)`
-  background: ${props => props.theme.error};
-  border: 2px solid ${props => props.theme.error};
-`;
-
-export const DefaultOutlineButton = styled(DefaultButton)`
-  background: ${props => props.theme.white};
-  color: ${props => props.theme.grey.default};
-`;
-
-const StyledPrimaryRoundButton = styled(PrimaryButton)`
-  width: 48px;
-`;
-
-const StyledOutlinePrimaryRoundButton = styled(DefaultOutlineButton)`
-  width: 48px;
-  color: ${props => props.theme.primary};
-  border-color: ${props => props.theme.primary};
-`;
-
-const StyledOutlineDefaultRoundButton = styled(DefaultOutlineButton)`
-  width: 48px;
-`;
-
-const StyledOutlineSuccessRoundButton = styled(StyledOutlinePrimaryRoundButton)`
-  color: ${props => props.theme.success};
-  border-color: ${props => props.theme.success};
-`;
-
-const StyledOutlineErrorRoundButton = styled(StyledOutlinePrimaryRoundButton)`
-  color: ${props => props.theme.error};
-  border-color: ${props => props.theme.error};
-`;
-
-export const RoundButton = props => {
-  switch (props.type) {
-    case 'primary':
-      return (
-        <StyledPrimaryRoundButton {...props}>
-          <Icon type={props.icon} />
-        </StyledPrimaryRoundButton>
-      );
-    case 'primary-outline':
-      return (
-        <StyledOutlinePrimaryRoundButton {...props}>
-          <Icon type={props.icon} />
-        </StyledOutlinePrimaryRoundButton>
-      );
-    case 'default-outline':
-      return (
-        <StyledOutlineDefaultRoundButton {...props}>
-          <Icon type={props.icon} />
-        </StyledOutlineDefaultRoundButton>
-      );
-    case 'success':
-      return (
-        <StyledOutlineDefaultRoundButton {...props}>
-          <Icon type={props.icon} />
-        </StyledOutlineDefaultRoundButton>
-      );
-    case 'success-outline':
-      return (
-        <StyledOutlineSuccessRoundButton {...props}>
-          <Icon type={props.icon} />
-        </StyledOutlineSuccessRoundButton>
-      );
-    case 'error-outline':
-      return (
-        <StyledOutlineErrorRoundButton {...props}>
-          <Icon type={props.icon} />
-        </StyledOutlineErrorRoundButton>
-      );
-    default:
-      return (
-        <StyledPrimaryRoundButton {...props}>
-          <Icon type={props.icon} />
-        </StyledPrimaryRoundButton>
-      );
-  }
-};
+export default Button;

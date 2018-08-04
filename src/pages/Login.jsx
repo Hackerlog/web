@@ -34,7 +34,9 @@ const Login = ({ store }) => (
           value={store.password}
           onChange={store.handleInputChange}
         />
-        <LoginButton isLoading={store.isLoading}>Login</LoginButton>
+        <LoginButton type="primary" isLoading={store.isLoading}>
+          Login
+        </LoginButton>
       </form>
       <ErrorAlert isActive={!!store.error}>{store.error}</ErrorAlert>
       <SignupText>
@@ -48,7 +50,6 @@ const Login = ({ store }) => (
   </Background>
 );
 
-// @ts-ignore
 Login.NOT_RELEASED = true;
 
 export default inject(({ store }) => ({ store: store.loginStore }))(observer(Login));

@@ -1,14 +1,12 @@
-"use strict";
 // tslint:disable
 /// <reference path="./custom.d.ts" />
-Object.defineProperty(exports, "__esModule", { value: true });
-const url = require("url");
+import * as url from "url";
 const BASE_PATH = process.env.REACT_APP_BASE_URL || 'http://localhost:8000/v1';
 /**
  *
  * @export
  */
-exports.COLLECTION_FORMATS = {
+export const COLLECTION_FORMATS = {
     csv: ",",
     ssv: " ",
     tsv: "\t",
@@ -19,7 +17,7 @@ exports.COLLECTION_FORMATS = {
  * @export
  * @class BaseAPI
  */
-class BaseAPI {
+export class BaseAPI {
     constructor(configuration, basePath = BASE_PATH, fetch = window.fetch) {
         this.basePath = basePath;
         this.fetch = fetch;
@@ -29,7 +27,6 @@ class BaseAPI {
         }
     }
 }
-exports.BaseAPI = BaseAPI;
 ;
 /**
  *
@@ -37,35 +34,42 @@ exports.BaseAPI = BaseAPI;
  * @class RequiredError
  * @extends {Error}
  */
-class RequiredError extends Error {
+export class RequiredError extends Error {
     constructor(field, msg) {
         super(msg);
         this.field = field;
     }
 }
-exports.RequiredError = RequiredError;
 /**
  * AuthApi - fetch parameter creator
  * @export
  */
-exports.AuthApiFetchParamCreator = function (configuration) {
+export const AuthApiFetchParamCreator = function (configuration) {
     return {
         /**
          * Authenticates a user and returns a JWT on successful login
          * @summary Authenticates a user
+         * @param {MainLoginRequest} login email, password
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        login(options = {}) {
+        authenticate(login, options = {}) {
+            // verify required parameter 'login' is not null or undefined
+            if (login === null || login === undefined) {
+                throw new RequiredError('login', 'Required parameter login was null or undefined when calling authenticate.');
+            }
             const localVarPath = `/auth/login`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {};
             const localVarQueryParameter = {};
+            localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = ("MainLoginRequest" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(login || {}) : (login || "");
             return {
                 url: url.format(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -119,16 +123,17 @@ exports.AuthApiFetchParamCreator = function (configuration) {
  * AuthApi - functional programming interface
  * @export
  */
-exports.AuthApiFp = function (configuration) {
+export const AuthApiFp = function (configuration) {
     return {
         /**
          * Authenticates a user and returns a JWT on successful login
          * @summary Authenticates a user
+         * @param {MainLoginRequest} login email, password
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        login(options) {
-            const localVarFetchArgs = exports.AuthApiFetchParamCreator(configuration).login(options);
+        authenticate(login, options) {
+            const localVarFetchArgs = AuthApiFetchParamCreator(configuration).authenticate(login, options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -147,7 +152,7 @@ exports.AuthApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         passwordReset(options) {
-            const localVarFetchArgs = exports.AuthApiFetchParamCreator(configuration).passwordReset(options);
+            const localVarFetchArgs = AuthApiFetchParamCreator(configuration).passwordReset(options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -166,7 +171,7 @@ exports.AuthApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         resetPassword(options) {
-            const localVarFetchArgs = exports.AuthApiFetchParamCreator(configuration).resetPassword(options);
+            const localVarFetchArgs = AuthApiFetchParamCreator(configuration).resetPassword(options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -184,16 +189,17 @@ exports.AuthApiFp = function (configuration) {
  * AuthApi - factory interface
  * @export
  */
-exports.AuthApiFactory = function (configuration, fetch, basePath) {
+export const AuthApiFactory = function (configuration, fetch, basePath) {
     return {
         /**
          * Authenticates a user and returns a JWT on successful login
          * @summary Authenticates a user
+         * @param {MainLoginRequest} login email, password
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        login(options) {
-            return exports.AuthApiFp(configuration).login(options)(fetch, basePath);
+        authenticate(login, options) {
+            return AuthApiFp(configuration).authenticate(login, options)(fetch, basePath);
         },
         /**
          * Sends an email to the user with a link to reset their password
@@ -202,7 +208,7 @@ exports.AuthApiFactory = function (configuration, fetch, basePath) {
          * @throws {RequiredError}
          */
         passwordReset(options) {
-            return exports.AuthApiFp(configuration).passwordReset(options)(fetch, basePath);
+            return AuthApiFp(configuration).passwordReset(options)(fetch, basePath);
         },
         /**
          * Allows the user to reset their password with the submitted password
@@ -211,7 +217,7 @@ exports.AuthApiFactory = function (configuration, fetch, basePath) {
          * @throws {RequiredError}
          */
         resetPassword(options) {
-            return exports.AuthApiFp(configuration).resetPassword(options)(fetch, basePath);
+            return AuthApiFp(configuration).resetPassword(options)(fetch, basePath);
         },
     };
 };
@@ -221,16 +227,17 @@ exports.AuthApiFactory = function (configuration, fetch, basePath) {
  * @class AuthApi
  * @extends {BaseAPI}
  */
-class AuthApi extends BaseAPI {
+export class AuthApi extends BaseAPI {
     /**
      * Authenticates a user and returns a JWT on successful login
      * @summary Authenticates a user
+     * @param {MainLoginRequest} login email, password
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    login(options) {
-        return exports.AuthApiFp(this.configuration).login(options)(this.fetch, this.basePath);
+    authenticate(login, options) {
+        return AuthApiFp(this.configuration).authenticate(login, options)(this.fetch, this.basePath);
     }
     /**
      * Sends an email to the user with a link to reset their password
@@ -240,7 +247,7 @@ class AuthApi extends BaseAPI {
      * @memberof AuthApi
      */
     passwordReset(options) {
-        return exports.AuthApiFp(this.configuration).passwordReset(options)(this.fetch, this.basePath);
+        return AuthApiFp(this.configuration).passwordReset(options)(this.fetch, this.basePath);
     }
     /**
      * Allows the user to reset their password with the submitted password
@@ -250,15 +257,14 @@ class AuthApi extends BaseAPI {
      * @memberof AuthApi
      */
     resetPassword(options) {
-        return exports.AuthApiFp(this.configuration).resetPassword(options)(this.fetch, this.basePath);
+        return AuthApiFp(this.configuration).resetPassword(options)(this.fetch, this.basePath);
     }
 }
-exports.AuthApi = AuthApi;
 /**
  * CoreApi - fetch parameter creator
  * @export
  */
-exports.CoreApiFetchParamCreator = function (configuration) {
+export const CoreApiFetchParamCreator = function (configuration) {
     return {
         /**
          * This endpoint takes a few parameters and with those parameters, it looks to see if
@@ -319,7 +325,7 @@ exports.CoreApiFetchParamCreator = function (configuration) {
  * CoreApi - functional programming interface
  * @export
  */
-exports.CoreApiFp = function (configuration) {
+export const CoreApiFp = function (configuration) {
     return {
         /**
          * This endpoint takes a few parameters and with those parameters, it looks to see if
@@ -332,7 +338,7 @@ exports.CoreApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         coreVersionGet(X_Hackerlog_EditorToken, currentVersion, os, arch, options) {
-            const localVarFetchArgs = exports.CoreApiFetchParamCreator(configuration).coreVersionGet(X_Hackerlog_EditorToken, currentVersion, os, arch, options);
+            const localVarFetchArgs = CoreApiFetchParamCreator(configuration).coreVersionGet(X_Hackerlog_EditorToken, currentVersion, os, arch, options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -350,7 +356,7 @@ exports.CoreApiFp = function (configuration) {
  * CoreApi - factory interface
  * @export
  */
-exports.CoreApiFactory = function (configuration, fetch, basePath) {
+export const CoreApiFactory = function (configuration, fetch, basePath) {
     return {
         /**
          * This endpoint takes a few parameters and with those parameters, it looks to see if
@@ -363,7 +369,7 @@ exports.CoreApiFactory = function (configuration, fetch, basePath) {
          * @throws {RequiredError}
          */
         coreVersionGet(X_Hackerlog_EditorToken, currentVersion, os, arch, options) {
-            return exports.CoreApiFp(configuration).coreVersionGet(X_Hackerlog_EditorToken, currentVersion, os, arch, options)(fetch, basePath);
+            return CoreApiFp(configuration).coreVersionGet(X_Hackerlog_EditorToken, currentVersion, os, arch, options)(fetch, basePath);
         },
     };
 };
@@ -373,7 +379,7 @@ exports.CoreApiFactory = function (configuration, fetch, basePath) {
  * @class CoreApi
  * @extends {BaseAPI}
  */
-class CoreApi extends BaseAPI {
+export class CoreApi extends BaseAPI {
     /**
      * This endpoint takes a few parameters and with those parameters, it looks to see if
      * @summary Returns a link of the latest version of the Core app
@@ -386,32 +392,39 @@ class CoreApi extends BaseAPI {
      * @memberof CoreApi
      */
     coreVersionGet(X_Hackerlog_EditorToken, currentVersion, os, arch, options) {
-        return exports.CoreApiFp(this.configuration).coreVersionGet(X_Hackerlog_EditorToken, currentVersion, os, arch, options)(this.fetch, this.basePath);
+        return CoreApiFp(this.configuration).coreVersionGet(X_Hackerlog_EditorToken, currentVersion, os, arch, options)(this.fetch, this.basePath);
     }
 }
-exports.CoreApi = CoreApi;
 /**
  * MailingListApi - fetch parameter creator
  * @export
  */
-exports.MailingListApiFetchParamCreator = function (configuration) {
+export const MailingListApiFetchParamCreator = function (configuration) {
     return {
         /**
          * This adds a user to the mailing list
          * @summary Adds a user to the mailing list
+         * @param {any} email Email address
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPost(options = {}) {
+        addUser(email, options = {}) {
+            // verify required parameter 'email' is not null or undefined
+            if (email === null || email === undefined) {
+                throw new RequiredError('email', 'Required parameter email was null or undefined when calling addUser.');
+            }
             const localVarPath = `/mailing-list`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {};
             const localVarQueryParameter = {};
+            localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = ("any" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(email || {}) : (email || "");
             return {
                 url: url.format(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -423,16 +436,17 @@ exports.MailingListApiFetchParamCreator = function (configuration) {
  * MailingListApi - functional programming interface
  * @export
  */
-exports.MailingListApiFp = function (configuration) {
+export const MailingListApiFp = function (configuration) {
     return {
         /**
          * This adds a user to the mailing list
          * @summary Adds a user to the mailing list
+         * @param {any} email Email address
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPost(options) {
-            const localVarFetchArgs = exports.MailingListApiFetchParamCreator(configuration).listPost(options);
+        addUser(email, options) {
+            const localVarFetchArgs = MailingListApiFetchParamCreator(configuration).addUser(email, options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -450,16 +464,17 @@ exports.MailingListApiFp = function (configuration) {
  * MailingListApi - factory interface
  * @export
  */
-exports.MailingListApiFactory = function (configuration, fetch, basePath) {
+export const MailingListApiFactory = function (configuration, fetch, basePath) {
     return {
         /**
          * This adds a user to the mailing list
          * @summary Adds a user to the mailing list
+         * @param {any} email Email address
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPost(options) {
-            return exports.MailingListApiFp(configuration).listPost(options)(fetch, basePath);
+        addUser(email, options) {
+            return MailingListApiFp(configuration).addUser(email, options)(fetch, basePath);
         },
     };
 };
@@ -469,24 +484,24 @@ exports.MailingListApiFactory = function (configuration, fetch, basePath) {
  * @class MailingListApi
  * @extends {BaseAPI}
  */
-class MailingListApi extends BaseAPI {
+export class MailingListApi extends BaseAPI {
     /**
      * This adds a user to the mailing list
      * @summary Adds a user to the mailing list
+     * @param {any} email Email address
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MailingListApi
      */
-    listPost(options) {
-        return exports.MailingListApiFp(this.configuration).listPost(options)(this.fetch, this.basePath);
+    addUser(email, options) {
+        return MailingListApiFp(this.configuration).addUser(email, options)(this.fetch, this.basePath);
     }
 }
-exports.MailingListApi = MailingListApi;
 /**
  * UnitsApi - fetch parameter creator
  * @export
  */
-exports.UnitsApiFetchParamCreator = function (configuration) {
+export const UnitsApiFetchParamCreator = function (configuration) {
     return {
         /**
          * This gets all of the units of work for a specific user. The user is identified by the
@@ -523,7 +538,7 @@ exports.UnitsApiFetchParamCreator = function (configuration) {
  * UnitsApi - functional programming interface
  * @export
  */
-exports.UnitsApiFp = function (configuration) {
+export const UnitsApiFp = function (configuration) {
     return {
         /**
          * This gets all of the units of work for a specific user. The user is identified by the
@@ -533,7 +548,7 @@ exports.UnitsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         unitsGet(X_Hackerlog_EditorToken, options) {
-            const localVarFetchArgs = exports.UnitsApiFetchParamCreator(configuration).unitsGet(X_Hackerlog_EditorToken, options);
+            const localVarFetchArgs = UnitsApiFetchParamCreator(configuration).unitsGet(X_Hackerlog_EditorToken, options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -551,7 +566,7 @@ exports.UnitsApiFp = function (configuration) {
  * UnitsApi - factory interface
  * @export
  */
-exports.UnitsApiFactory = function (configuration, fetch, basePath) {
+export const UnitsApiFactory = function (configuration, fetch, basePath) {
     return {
         /**
          * This gets all of the units of work for a specific user. The user is identified by the
@@ -561,7 +576,7 @@ exports.UnitsApiFactory = function (configuration, fetch, basePath) {
          * @throws {RequiredError}
          */
         unitsGet(X_Hackerlog_EditorToken, options) {
-            return exports.UnitsApiFp(configuration).unitsGet(X_Hackerlog_EditorToken, options)(fetch, basePath);
+            return UnitsApiFp(configuration).unitsGet(X_Hackerlog_EditorToken, options)(fetch, basePath);
         },
     };
 };
@@ -571,7 +586,7 @@ exports.UnitsApiFactory = function (configuration, fetch, basePath) {
  * @class UnitsApi
  * @extends {BaseAPI}
  */
-class UnitsApi extends BaseAPI {
+export class UnitsApi extends BaseAPI {
     /**
      * This gets all of the units of work for a specific user. The user is identified by the
      * @summary Gets units of work for a user
@@ -581,15 +596,14 @@ class UnitsApi extends BaseAPI {
      * @memberof UnitsApi
      */
     unitsGet(X_Hackerlog_EditorToken, options) {
-        return exports.UnitsApiFp(this.configuration).unitsGet(X_Hackerlog_EditorToken, options)(this.fetch, this.basePath);
+        return UnitsApiFp(this.configuration).unitsGet(X_Hackerlog_EditorToken, options)(this.fetch, this.basePath);
     }
 }
-exports.UnitsApi = UnitsApi;
 /**
  * UsersApi - fetch parameter creator
  * @export
  */
-exports.UsersApiFetchParamCreator = function (configuration) {
+export const UsersApiFetchParamCreator = function (configuration) {
     return {
         /**
          * Adds a profile image to a user
@@ -767,7 +781,7 @@ exports.UsersApiFetchParamCreator = function (configuration) {
  * UsersApi - functional programming interface
  * @export
  */
-exports.UsersApiFp = function (configuration) {
+export const UsersApiFp = function (configuration) {
     return {
         /**
          * Adds a profile image to a user
@@ -778,7 +792,7 @@ exports.UsersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         addProfileImage(id, image_url, options) {
-            const localVarFetchArgs = exports.UsersApiFetchParamCreator(configuration).addProfileImage(id, image_url, options);
+            const localVarFetchArgs = UsersApiFetchParamCreator(configuration).addProfileImage(id, image_url, options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -798,7 +812,7 @@ exports.UsersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         createUser(user, options) {
-            const localVarFetchArgs = exports.UsersApiFetchParamCreator(configuration).createUser(user, options);
+            const localVarFetchArgs = UsersApiFetchParamCreator(configuration).createUser(user, options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -818,7 +832,7 @@ exports.UsersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         findUser(id, options) {
-            const localVarFetchArgs = exports.UsersApiFetchParamCreator(configuration).findUser(id, options);
+            const localVarFetchArgs = UsersApiFetchParamCreator(configuration).findUser(id, options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -838,7 +852,7 @@ exports.UsersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         fundUserByEditorToken(editor, options) {
-            const localVarFetchArgs = exports.UsersApiFetchParamCreator(configuration).fundUserByEditorToken(editor, options);
+            const localVarFetchArgs = UsersApiFetchParamCreator(configuration).fundUserByEditorToken(editor, options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -858,7 +872,7 @@ exports.UsersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         isEmailAvailable(q, options) {
-            const localVarFetchArgs = exports.UsersApiFetchParamCreator(configuration).isEmailAvailable(q, options);
+            const localVarFetchArgs = UsersApiFetchParamCreator(configuration).isEmailAvailable(q, options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -878,7 +892,7 @@ exports.UsersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         isUsernameAvailable(q, options) {
-            const localVarFetchArgs = exports.UsersApiFetchParamCreator(configuration).isUsernameAvailable(q, options);
+            const localVarFetchArgs = UsersApiFetchParamCreator(configuration).isUsernameAvailable(q, options);
             return (fetch = window.fetch, basePath = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -896,7 +910,7 @@ exports.UsersApiFp = function (configuration) {
  * UsersApi - factory interface
  * @export
  */
-exports.UsersApiFactory = function (configuration, fetch, basePath) {
+export const UsersApiFactory = function (configuration, fetch, basePath) {
     return {
         /**
          * Adds a profile image to a user
@@ -907,7 +921,7 @@ exports.UsersApiFactory = function (configuration, fetch, basePath) {
          * @throws {RequiredError}
          */
         addProfileImage(id, image_url, options) {
-            return exports.UsersApiFp(configuration).addProfileImage(id, image_url, options)(fetch, basePath);
+            return UsersApiFp(configuration).addProfileImage(id, image_url, options)(fetch, basePath);
         },
         /**
          * Creates a user with the body params that are passed in
@@ -917,7 +931,7 @@ exports.UsersApiFactory = function (configuration, fetch, basePath) {
          * @throws {RequiredError}
          */
         createUser(user, options) {
-            return exports.UsersApiFp(configuration).createUser(user, options)(fetch, basePath);
+            return UsersApiFp(configuration).createUser(user, options)(fetch, basePath);
         },
         /**
          * Finds a user given their ID as a path param
@@ -927,7 +941,7 @@ exports.UsersApiFactory = function (configuration, fetch, basePath) {
          * @throws {RequiredError}
          */
         findUser(id, options) {
-            return exports.UsersApiFp(configuration).findUser(id, options)(fetch, basePath);
+            return UsersApiFp(configuration).findUser(id, options)(fetch, basePath);
         },
         /**
          * Finds a user given their editor token as a path param
@@ -937,7 +951,7 @@ exports.UsersApiFactory = function (configuration, fetch, basePath) {
          * @throws {RequiredError}
          */
         fundUserByEditorToken(editor, options) {
-            return exports.UsersApiFp(configuration).fundUserByEditorToken(editor, options)(fetch, basePath);
+            return UsersApiFp(configuration).fundUserByEditorToken(editor, options)(fetch, basePath);
         },
         /**
          * Checks if an email is available and responds as such
@@ -947,7 +961,7 @@ exports.UsersApiFactory = function (configuration, fetch, basePath) {
          * @throws {RequiredError}
          */
         isEmailAvailable(q, options) {
-            return exports.UsersApiFp(configuration).isEmailAvailable(q, options)(fetch, basePath);
+            return UsersApiFp(configuration).isEmailAvailable(q, options)(fetch, basePath);
         },
         /**
          * Checks if a username is available and responds as such
@@ -957,7 +971,7 @@ exports.UsersApiFactory = function (configuration, fetch, basePath) {
          * @throws {RequiredError}
          */
         isUsernameAvailable(q, options) {
-            return exports.UsersApiFp(configuration).isUsernameAvailable(q, options)(fetch, basePath);
+            return UsersApiFp(configuration).isUsernameAvailable(q, options)(fetch, basePath);
         },
     };
 };
@@ -967,7 +981,7 @@ exports.UsersApiFactory = function (configuration, fetch, basePath) {
  * @class UsersApi
  * @extends {BaseAPI}
  */
-class UsersApi extends BaseAPI {
+export class UsersApi extends BaseAPI {
     /**
      * Adds a profile image to a user
      * @summary Add Profile Image
@@ -978,7 +992,7 @@ class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     addProfileImage(id, image_url, options) {
-        return exports.UsersApiFp(this.configuration).addProfileImage(id, image_url, options)(this.fetch, this.basePath);
+        return UsersApiFp(this.configuration).addProfileImage(id, image_url, options)(this.fetch, this.basePath);
     }
     /**
      * Creates a user with the body params that are passed in
@@ -989,7 +1003,7 @@ class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     createUser(user, options) {
-        return exports.UsersApiFp(this.configuration).createUser(user, options)(this.fetch, this.basePath);
+        return UsersApiFp(this.configuration).createUser(user, options)(this.fetch, this.basePath);
     }
     /**
      * Finds a user given their ID as a path param
@@ -1000,7 +1014,7 @@ class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     findUser(id, options) {
-        return exports.UsersApiFp(this.configuration).findUser(id, options)(this.fetch, this.basePath);
+        return UsersApiFp(this.configuration).findUser(id, options)(this.fetch, this.basePath);
     }
     /**
      * Finds a user given their editor token as a path param
@@ -1011,7 +1025,7 @@ class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     fundUserByEditorToken(editor, options) {
-        return exports.UsersApiFp(this.configuration).fundUserByEditorToken(editor, options)(this.fetch, this.basePath);
+        return UsersApiFp(this.configuration).fundUserByEditorToken(editor, options)(this.fetch, this.basePath);
     }
     /**
      * Checks if an email is available and responds as such
@@ -1022,7 +1036,7 @@ class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     isEmailAvailable(q, options) {
-        return exports.UsersApiFp(this.configuration).isEmailAvailable(q, options)(this.fetch, this.basePath);
+        return UsersApiFp(this.configuration).isEmailAvailable(q, options)(this.fetch, this.basePath);
     }
     /**
      * Checks if a username is available and responds as such
@@ -1033,7 +1047,6 @@ class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     isUsernameAvailable(q, options) {
-        return exports.UsersApiFp(this.configuration).isUsernameAvailable(q, options)(this.fetch, this.basePath);
+        return UsersApiFp(this.configuration).isUsernameAvailable(q, options)(this.fetch, this.basePath);
     }
 }
-exports.UsersApi = UsersApi;

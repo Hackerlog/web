@@ -16,13 +16,14 @@ const LoginStore = types
     },
 
     handleLogin: flow(function* handleLogin(event) {
+      event.preventDefault();
       self.isLoading = true;
       self.error = '';
-      event.preventDefault();
 
       try {
-        const { token, user } = yield getRoot(self).authApi.login({
-          body: JSON.stringify({ email: self.email, password: self.password }),
+        const { token, user } = yield getRoot(self).authApi.authenticate({
+          email: self.email,
+          password: self.password,
         });
 
         if (user && token) {

@@ -34,6 +34,9 @@ const SignupStore = types
       return self.usernameIsAvailable && self.username.length > 2 && self.usernameCharIsValid;
     },
 
+    /**
+     * @returns RootStore
+     */
     get root() {
       return getRoot(self);
     },
@@ -50,7 +53,7 @@ const SignupStore = types
     const transitionToUsername = flow(function* transitionToUsername() {
       self.isLoading = true;
       try {
-        const { is_available: isAvailable } = yield self.root.userApi.usersEmailGet(self.email);
+        const { is_available: isAvailable } = yield self.root.userApi.isEmailAvailable(self.email);
         if (!isAvailable) {
           self.error = 'That email is already in use. Need to login?';
         } else {
@@ -71,7 +74,7 @@ const SignupStore = types
     const lookupUsername = flow(function* lookupUsername() {
       try {
         logger.debug('Looking up username');
-        const res = yield self.root.userApi.usersUsernameGet(self.username);
+        const res = yield self.root.userApi.isUsernameAvailable(self.username);
         updateUsernameIsAvailable(res.is_available);
       } catch (e) {
         updateErrorMessage(e.message);
@@ -102,8 +105,9 @@ const SignupStore = types
       self.isLoading = true;
 
       try {
-        const { token, user } = yield getRoot(self).authApi.authLoginPost({
-          body: JSON.stringify({ email: self.email, password: self.password }),
+        const { token, user } = yield getRoot(self).authApi.authenticate({
+          email: self.email,
+          password: self.password,
         });
 
         if (user && token) {
@@ -137,7 +141,7 @@ const SignupStore = types
       self.error = '';
 
       try {
-        const res = yield self.root.userApi.usersPost({
+        const res = yield self.root.userApi.createUser({
           email: self.email,
           first_name: self.firstName,
           last_name: self.lastName,

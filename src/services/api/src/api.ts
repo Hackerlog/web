@@ -152,6 +152,26 @@ export interface MainGenericResponse {
 /**
  * 
  * @export
+ * @interface MainLoginRequest
+ */
+export interface MainLoginRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof MainLoginRequest
+     */
+    email?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MainLoginRequest
+     */
+    password?: string;
+}
+
+/**
+ * 
+ * @export
  * @interface MainUnit
  */
 export interface MainUnit {
@@ -333,20 +353,29 @@ export const AuthApiFetchParamCreator = function (configuration?: Configuration)
         /**
          * Authenticates a user and returns a JWT on successful login
          * @summary Authenticates a user
+         * @param {MainLoginRequest} login email, password
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        login(options: any = {}): FetchArgs {
+        authenticate(login: MainLoginRequest, options: any = {}): FetchArgs {
+            // verify required parameter 'login' is not null or undefined
+            if (login === null || login === undefined) {
+                throw new RequiredError('login','Required parameter login was null or undefined when calling authenticate.');
+            }
             const localVarPath = `/auth/login`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"MainLoginRequest" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body =  needsSerialization ? JSON.stringify(login || {}) : (login || "");
 
             return {
                 url: url.format(localVarUrlObj),
@@ -411,11 +440,12 @@ export const AuthApiFp = function(configuration?: Configuration) {
         /**
          * Authenticates a user and returns a JWT on successful login
          * @summary Authenticates a user
+         * @param {MainLoginRequest} login email, password
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        login(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainAuth> {
-            const localVarFetchArgs = AuthApiFetchParamCreator(configuration).login(options);
+        authenticate(login: MainLoginRequest, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainAuth> {
+            const localVarFetchArgs = AuthApiFetchParamCreator(configuration).authenticate(login, options);
             return (fetch: FetchAPI = window.fetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -474,11 +504,12 @@ export const AuthApiFactory = function (configuration?: Configuration, fetch?: F
         /**
          * Authenticates a user and returns a JWT on successful login
          * @summary Authenticates a user
+         * @param {MainLoginRequest} login email, password
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        login(options?: any) {
-            return AuthApiFp(configuration).login(options)(fetch, basePath);
+        authenticate(login: MainLoginRequest, options?: any) {
+            return AuthApiFp(configuration).authenticate(login, options)(fetch, basePath);
         },
         /**
          * Sends an email to the user with a link to reset their password
@@ -511,12 +542,13 @@ export class AuthApi extends BaseAPI {
     /**
      * Authenticates a user and returns a JWT on successful login
      * @summary Authenticates a user
+     * @param {MainLoginRequest} login email, password
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public login(options?: any) {
-        return AuthApiFp(this.configuration).login(options)(this.fetch, this.basePath);
+    public authenticate(login: MainLoginRequest, options?: any) {
+        return AuthApiFp(this.configuration).authenticate(login, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -697,20 +729,29 @@ export const MailingListApiFetchParamCreator = function (configuration?: Configu
         /**
          * This adds a user to the mailing list
          * @summary Adds a user to the mailing list
+         * @param {any} email Email address
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPost(options: any = {}): FetchArgs {
+        addUser(email: any, options: any = {}): FetchArgs {
+            // verify required parameter 'email' is not null or undefined
+            if (email === null || email === undefined) {
+                throw new RequiredError('email','Required parameter email was null or undefined when calling addUser.');
+            }
             const localVarPath = `/mailing-list`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"any" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body =  needsSerialization ? JSON.stringify(email || {}) : (email || "");
 
             return {
                 url: url.format(localVarUrlObj),
@@ -729,11 +770,12 @@ export const MailingListApiFp = function(configuration?: Configuration) {
         /**
          * This adds a user to the mailing list
          * @summary Adds a user to the mailing list
+         * @param {any} email Email address
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPost(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainGenericResponse> {
-            const localVarFetchArgs = MailingListApiFetchParamCreator(configuration).listPost(options);
+        addUser(email: any, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MainGenericResponse> {
+            const localVarFetchArgs = MailingListApiFetchParamCreator(configuration).addUser(email, options);
             return (fetch: FetchAPI = window.fetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -756,11 +798,12 @@ export const MailingListApiFactory = function (configuration?: Configuration, fe
         /**
          * This adds a user to the mailing list
          * @summary Adds a user to the mailing list
+         * @param {any} email Email address
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPost(options?: any) {
-            return MailingListApiFp(configuration).listPost(options)(fetch, basePath);
+        addUser(email: any, options?: any) {
+            return MailingListApiFp(configuration).addUser(email, options)(fetch, basePath);
         },
     };
 };
@@ -775,12 +818,13 @@ export class MailingListApi extends BaseAPI {
     /**
      * This adds a user to the mailing list
      * @summary Adds a user to the mailing list
+     * @param {any} email Email address
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MailingListApi
      */
-    public listPost(options?: any) {
-        return MailingListApiFp(this.configuration).listPost(options)(this.fetch, this.basePath);
+    public addUser(email: any, options?: any) {
+        return MailingListApiFp(this.configuration).addUser(email, options)(this.fetch, this.basePath);
     }
 
 }

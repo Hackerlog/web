@@ -1,7 +1,5 @@
-"use strict";
 // tslint:disable
-Object.defineProperty(exports, "__esModule", { value: true });
-class Configuration {
+export class Configuration {
     constructor(param = {}) {
         this.apiKey = param.apiKey;
         this.username = param.username;
@@ -10,4 +8,3 @@ class Configuration {
         this.basePath = param.basePath;
     }
 }
-exports.Configuration = Configuration;

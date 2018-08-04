@@ -34,7 +34,7 @@
     "react-loadable": "^5.4.0",
     "react-modal": "^3.5.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^1.1.4",
+    "react-scripts": "2.0.0-next.3e165448",
     "react-typography": "^0.16.13",
     "styled-components": "^3.3.3",
     "typography": "^0.16.17"
@@ -48,15 +48,16 @@
     "@types/react-loadable": "^5.4.0",
     "@types/react-modal": "^3.2.0",
     "@types/react-router-dom": "^4.2.7",
-    "@types/validatorjs": "^3.7.1",
     "babel-eslint": "^8.2.6",
-    "eslint": "^3.19.0",
+    "babel-plugin-import": "^1.8.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-flowtype": "^2.50.0",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.0.1",
+    "flow-bin": "^0.78.0",
     "husky": "^0.14.3",
     "jest-fetch-mock": "^1.6.5",
     "less-loader": "^4.1.0",
@@ -74,12 +75,24 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "yarn lint"
+      "pre-push": "npm run lint"
     }
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,json,css,md}": [
       "prettier --write, git add"
+    ]
+  },
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      ">0.25%",
+      "not op_mini all",
+      "ie 11"
     ]
   }
 }

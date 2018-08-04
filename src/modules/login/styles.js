@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import Input from '../../components/Input';
-import { PrimaryButton } from '../../components/Button';
+import Button from '../../components/Button';
 
 export const Background = styled.div`
   background: ${props => props.theme.gradients.login};
@@ -34,7 +34,7 @@ export const Logo = styled.img`
   }
 `;
 
-export const LoginButton = styled(PrimaryButton)`
+export const LoginButton = styled(Button)`
   width: 100%;
   margin-bottom: 26px;
 `;
@@ -53,6 +53,10 @@ export const CreateAccountLink = styled(Link)`
   font-weight: 600;
   color: ${props => props.theme.white};
   text-decoration: underline;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const FooterText = styled.footer`
@@ -71,9 +75,10 @@ export const WhiteLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const SmallText = styled.div`
+export const SmallText = styled.span`
   color: ${props => props.theme.grey.lightest};
   margin: 18px auto;
   font-size: 15px;
   text-align: center;
+  display: block;
 `;
