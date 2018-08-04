@@ -13,7 +13,8 @@
     "lint": "eslint src/**/*.{js,jsx}",
     "lint:fix": "eslint src/**/*.{js,jsx} --fix",
     "eject": "react-scripts eject",
-    "postinstall": "cd src/services/api/src && npm install"
+    "postinstall": "cd src/services/api/src && npm install",
+    "update": "flow-typed install"
   },
   "dependencies": {
     "antd": "^3.7.3",
@@ -40,14 +41,6 @@
     "typography": "^0.16.17"
   },
   "devDependencies": {
-    "@types/jest": "^23.1.5",
-    "@types/lodash-es": "^4.17.1",
-    "@types/node": "^10.5.2",
-    "@types/react": "^16.4.6",
-    "@types/react-dom": "^16.0.6",
-    "@types/react-loadable": "^5.4.0",
-    "@types/react-modal": "^3.2.0",
-    "@types/react-router-dom": "^4.2.7",
     "babel-eslint": "^8.2.6",
     "babel-plugin-import": "^1.8.0",
     "eslint-config-airbnb": "^15.0.1",
@@ -58,6 +51,7 @@
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.0.1",
     "flow-bin": "^0.78.0",
+    "flow-typed": "^2.5.1",
     "husky": "^0.14.3",
     "jest-fetch-mock": "^1.6.5",
     "less-loader": "^4.1.0",

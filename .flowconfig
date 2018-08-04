@@ -1,6 +1,8 @@
 [ignore]
-.history
-node_modules
+/.history
+/node_modules
+/build
+/public
 
 [include]
 
