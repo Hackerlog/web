@@ -1,4 +1,3 @@
-// @flow
 /* eslint no-param-reassign: off */
 import { types } from 'mobx-state-tree';
 

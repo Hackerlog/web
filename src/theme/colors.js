@@ -1,4 +1,3 @@
-// @flow
 export type Colors = {
   white: string,
   greyLightest: string,
