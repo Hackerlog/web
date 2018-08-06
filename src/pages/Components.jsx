@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Icon } from 'antd';
 
 import Button from '../components/Button';
+import ProfileImage from '../components/ProfileImage';
 
 const Wrapper = styled.section`
   margin: 12px;
@@ -16,6 +17,9 @@ const W = styled.div`
 export default function() {
   return (
     <div>
+      <Wrapper>
+        <ProfileImage />
+      </Wrapper>
       <Wrapper>
         <W>
           <Button type="primary" fluid>

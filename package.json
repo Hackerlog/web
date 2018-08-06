@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "antd": "^3.7.3",
+    "cloudinary-react": "^1.0.6",
     "history": "^4.7.2",
     "lodash-es": "^4.17.10",
     "mobx": "^5.0.3",

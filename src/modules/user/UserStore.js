@@ -1,3 +1,4 @@
+// @flow
 /* eslint no-param-reassign: off */
 import { types } from 'mobx-state-tree';
 
@@ -12,8 +13,11 @@ const User = types
     token: types.string,
   })
   .views(self => ({
-    get fullName() {
+    get fullName(): string {
       return `${self.firstName} ${self.lastName}`;
+    },
+    get profileImage(): string {
+      return `https://res.cloudinary.com/hhz4dqh1x/image/upload/v1533148995/profile/1.jpg`;
     },
   }));
 
@@ -21,9 +25,15 @@ const UserStore = types
   .model('UserModel', {
     user: types.maybe(types.reference(User)),
   })
-  .views(() => ({
-    get sessionKey() {
+  .views(self => ({
+    get sessionKey(): string {
       return SESSION_KEY('user');
+    },
+    get profileImage(): string {
+      if (!self.user) {
+        return `https://res.cloudinary.com/hhz4dqh1x/image/upload/v1533148995/profile/1.jpg`;
+      }
+      return self.user.profileImage;
     },
   }))
   .actions(self => ({

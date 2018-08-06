@@ -1,3 +1,4 @@
+// @flow
 /* eslint no-param-reassign: off */
 import { types, getRoot, flow } from 'mobx-state-tree';
 
@@ -15,7 +16,7 @@ const LoginStore = types
       self[event.currentTarget.name] = event.currentTarget.value;
     },
 
-    handleLogin: flow(function* handleLogin(event) {
+    handleLogin: flow(function* handleLogin(event: SyntheticEvent<HTMLFormElement>) {
       event.preventDefault();
       self.isLoading = true;
       self.error = '';

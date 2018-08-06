@@ -1,5 +1,8 @@
+// @flow
 /* eslint-disable */
 import Raven from 'raven-js';
+
+type Levels = 'debug' | 'info' | 'warn' | 'error';
 
 class Logger {
   static levels = {
@@ -8,6 +11,8 @@ class Logger {
     warn: 'warn',
     error: 'error',
   };
+
+  level: Levels = 'warn';
 
   levelAmount = {
     [Logger.levels.debug]: 0,
@@ -24,18 +29,24 @@ class Logger {
     this.initSentry();
   }
 
-  setLevel(level) {
+  setLevel(level: Levels) {
     this.level = level;
   }
 
-  setUserContext(email, id = null) {
-    Raven.setUserContext({
+  setUserContext(email: string, id?: string) {
+    const context = {
       email,
-      id,
-    });
+      id: '',
+    };
+
+    if (id) {
+      context.id = id;
+    }
+
+    Raven.setUserContext(context);
   }
 
-  log(level, msg) {
+  log(level: Levels, msg: string) {
     if (this.levelAmount[level] >= this.levelAmount[this.level]) {
       msg = `[Hackerlog] [${level.toUpperCase()}] ${msg}`;
       if (level === Logger.levels.debug) {
@@ -53,20 +64,20 @@ class Logger {
     }
   }
 
-  debug(msg) {
+  debug(msg: string) {
     this.log(Logger.levels.debug, msg);
   }
 
-  info(msg) {
+  info(msg: string) {
     this.log(Logger.levels.info, msg);
   }
 
-  warn(msg) {
+  warn(msg: string) {
     this.sendToSentry(msg);
     this.log(Logger.levels.warn, msg);
   }
 
-  error(msg, err = null) {
+  error(msg: string, err?: Error) {
     this.log(Logger.levels.error, msg);
     this.sendToSentry(msg);
     if (err && !this.isDebugging) {
@@ -83,14 +94,19 @@ class Logger {
     }
   }
 
-  getVersion() {
+  getVersion(): string {
     const context = process.env.REACT_APP_CONTEXT;
     const branch = process.env.REACT_APP_BRANCH;
     const hash = process.env.REACT_APP_COMMIT_REF;
-    return `${context}-${branch}-${hash}`;
+
+    if (context && branch && hash) {
+      return `${context}-${branch}-${hash}`;
+    }
+
+    return '';
   }
 
-  sendToSentry(msg) {
+  sendToSentry(msg: string) {
     if (!this.isDebugging) {
       Raven.captureMessage(msg);
     }
