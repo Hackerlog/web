@@ -1,5 +1,5 @@
-import React from 'react';
-import noop from 'lodash-es/noop';
+import * as React from 'react';
+import noop from 'lodash/noop';
 import styled from 'styled-components';
 
 import { Background } from '../modules/signup/styles';
@@ -25,7 +25,25 @@ const Wrapper = styled.div`
   }
 `;
 
-export default class ResetPassword extends React.Component {
+type Props = {
+  match: {
+    params: {
+      token: string,
+    },
+  },
+  history: {
+    push: string => void,
+  },
+};
+
+type State = {
+  password: string,
+  isLoading: boolean,
+  error: string,
+  success: boolean,
+};
+
+export default class ResetPassword extends React.Component<Props, State> {
   state = {
     password: '',
     isLoading: false,
@@ -33,15 +51,15 @@ export default class ResetPassword extends React.Component {
     success: false,
   };
 
-  get isValidPassword() {
+  get isValidPassword(): boolean {
     return this.state.password.length < 5;
   }
 
-  handleOnChange = e => {
+  handleOnChange = (e: SyntheticEvent<HTMLInputElement>): void => {
     this.setState({ password: e.currentTarget.value });
   };
 
-  handleSubmit = async e => {
+  handleSubmit = async (e: SyntheticEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     this.setState({ isLoading: true, error: '' });
     try {

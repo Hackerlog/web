@@ -1,24 +1,67 @@
-import Colors from './colors';
+// @flow
+import colors from './colors';
 
-export default {
-  white: Colors.white,
-  default: Colors.grey,
+type ViewSizes = {|
+  desktop: number,
+  tablet: number,
+  mobile: number,
+|};
+
+type ShadowSizes = {|
+  small: string,
+  medium: string,
+  large: string,
+  xl: string,
+  xxl: string,
+|};
+
+type GradientColors = {|
+  darkToPrimary: string,
+  secondaryToLight: string,
+  login: string,
+|};
+
+export type Theme = {
+  white: string,
+  default: string,
+  grey: {|
+    lightest: string,
+    light: string,
+    default: string,
+    dark: string,
+  |},
+  black: string,
+  primary: string,
+  secondary: string,
+  tertiary: string,
+  success: string,
+  info: string,
+  error: string,
+  gradients: GradientColors,
+  sizes: ViewSizes,
+  shadows: ShadowSizes,
+};
+
+const theme: Theme = {
+  white: colors.white,
+  default: colors.grey,
   grey: {
-    lightest: Colors.greyLightest,
-    light: Colors.greyLight,
-    default: Colors.grey,
-    dark: Colors.greyDark,
+    lightest: colors.greyLightest,
+    light: colors.greyLight,
+    default: colors.grey,
+    dark: colors.greyDark,
   },
-  black: Colors.black,
-  primary: Colors.primary,
-  secondary: Colors.secondary,
-  success: Colors.success,
-  info: Colors.info,
-  error: Colors.error,
+  black: colors.black,
+  primary: colors.primary,
+  secondary: colors.secondary,
+  tertiary: colors.tertiary,
+  success: colors.success,
+  info: colors.info,
+  error: colors.error,
   gradients: {
-    darkToPrimary: Colors.darkToPrimaryGradient,
-    secondaryToLight: Colors.secondaryToLightGradient,
-    login: Colors.loginGradient,
+    darkToPrimary: colors.darkToPrimaryGradient,
+    secondaryToLight: colors.secondaryToLightGradient,
+    login: colors.loginGradient,
   },
   sizes: {
     desktop: 992,
@@ -33,3 +76,5 @@ export default {
     xxl: '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)',
   },
 };
+
+export default theme;

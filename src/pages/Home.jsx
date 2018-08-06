@@ -1,6 +1,5 @@
-// @flow
 import React, { Component } from 'react';
-import noop from 'lodash-es/noop';
+import noop from 'lodash/noop';
 import ReactModal from 'react-modal';
 import ReactGA from 'react-ga';
 import LazyLoad from 'react-lazyload';

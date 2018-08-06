@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "build:api": "cd src/services/api/src && npm run build",
+    "build:api": "cd src/services/api/src && npm run build && npx flowgen ../api.d.ts -o ../api.flow.js",
     "build-netlify": "REACT_APP_BRANCH=\"$BRANCH\" REACT_APP_COMMIT_REF=\"$COMMIT_REF\" REACT_APP_CONTEXT=\"$CONTEXT\" npm run build",
     "analyze": "ANALYZE=1 react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
@@ -20,7 +20,7 @@
     "antd": "^3.7.3",
     "cloudinary-react": "^1.0.6",
     "history": "^4.7.2",
-    "lodash-es": "^4.17.10",
+    "lodash": "^4.17.10",
     "mobx": "^5.0.3",
     "mobx-react": "^5.2.3",
     "mobx-state-tree": "^3.0.0",
@@ -44,6 +44,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-plugin-import": "^1.8.0",
+    "babel-plugin-react-remove-properties": "^0.2.5",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-flowtype": "^2.50.0",
@@ -55,6 +56,7 @@
     "flow-typed": "^2.5.1",
     "husky": "^0.14.3",
     "jest-fetch-mock": "^1.6.5",
+    "jest-styled-components": "^5.0.1",
     "less-loader": "^4.1.0",
     "less-vars-to-js": "^1.2.1",
     "lint-staged": "^7.2.0",
@@ -62,7 +64,7 @@
     "prettier": "^1.14.0",
     "react-app-rewire-antd-theme": "^1.1.2",
     "react-app-rewire-less": "^2.1.2",
-    "react-app-rewired": "^1.5.2",
+    "react-app-rewired": "^2.0.0",
     "react-testing-library": "^4.1.2",
     "remotedev": "^0.2.7",
     "webpack-bundle-analyzer": "^2.13.1"
@@ -81,13 +83,12 @@
   "browserslist": {
     "development": [
       "last 2 chrome versions",
-      "last 2 firefox versions",
-      "last 2 edge versions"
+      "last 2 firefox versions"
     ],
     "production": [
       ">0.25%",
       "not op_mini all",
-      "ie 11"
+      "not ie 11"
     ]
   }
 }

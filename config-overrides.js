@@ -10,14 +10,20 @@ const options = {
 
 module.exports = (config, env) => {
   if (process.env.ANALYZE) {
+    // Run bundle analyzer
     config.plugins.push(new BundleAnalyzer());
   }
 
+  // Use Ant Design
   config = injectBabelPlugin(
     ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }, 'antd-import'],
     config
   );
 
+  // Remove data-testid properties
+  config = injectBabelPlugin(['react-remove-properties', { properties: ['data-testid'] }], config);
+
+  // Use custom Ant Design variables
   config = updateConfig(config, env, options);
 
   return config;

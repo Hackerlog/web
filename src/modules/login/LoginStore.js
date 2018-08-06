@@ -44,10 +44,15 @@ const LoginStore = types
           getRoot(self).routing.push('/me');
         }
       } catch (e) {
-        self.isLoading = false;
-        const message = yield e.json();
-        self.error = message.error;
-        logger.error('Login failed', e);
+        try {
+          self.isLoading = false;
+          const message = yield e.json();
+          self.error = message.error;
+          logger.error('Login failed', e);
+        } catch (error) {
+          self.isLoading = false;
+          logger.error('Login failed', error);
+        }
       }
     }),
   }));

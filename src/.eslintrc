@@ -20,12 +20,14 @@
     "prettier/prettier": "error",
     "linebreak-style": "off",
     "react/prop-types": "off",
-    "strict": 0
+    "strict": "off",
+    "react/no-unescaped-entities": "off",
+    "flowtype/no-types-missing-file-annotation": "off"
   },
   "plugins": ["react", "jsx-a11y", "flowtype", "prettier"],
   "settings": {
     "flowtype": {
-      "onlyFilesWithFlowAnnotation": true
+      "onlyFilesWithFlowAnnotation": false
     }
   }
 }

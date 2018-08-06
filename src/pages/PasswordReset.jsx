@@ -1,6 +1,6 @@
-import React from 'react';
-import noop from 'lodash-es/noop';
-import get from 'lodash-es/get';
+import * as React from 'react';
+import noop from 'lodash/noop';
+import get from 'lodash/get';
 import styled from 'styled-components';
 
 import { Background } from '../modules/signup/styles';
@@ -25,7 +25,14 @@ const Wrapper = styled.div`
   }
 `;
 
-export default class PasswordReset extends React.Component {
+type State = {
+  email: string,
+  isLoading: boolean,
+  error: string,
+  success: boolean,
+};
+
+export default class PasswordReset extends React.Component<{}, State> {
   state = {
     email: '',
     isLoading: false,
@@ -33,17 +40,17 @@ export default class PasswordReset extends React.Component {
     success: false,
   };
 
-  get isValidEmail() {
+  get isValidEmail(): boolean {
     const f = get(this.state, 'email', '').split('@');
     const r = get(f, '[1]', '').split('.');
     return f.length === 2 && r.length > 1;
   }
 
-  handleOnChange = e => {
+  handleOnChange = (e: SyntheticEvent<HTMLInputElement>): void => {
     this.setState({ email: e.currentTarget.value });
   };
 
-  handleSubmit = async e => {
+  handleSubmit = async (e: SyntheticEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     this.setState({ isLoading: true, error: '' });
     try {

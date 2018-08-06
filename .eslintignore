@@ -1,5 +1,5 @@
 config-overrides.js
-src/services/api/api.js
+src/services/api
 src/registerServiceWorker.js
 /.history
 /.vscode

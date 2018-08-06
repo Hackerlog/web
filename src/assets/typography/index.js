@@ -1,5 +1,6 @@
 import Typography from 'typography';
-import Colors from '../../theme/colors';
+
+import colors from '../../theme/colors';
 
 const typography = new Typography({
   baseFontSize: '18px',
@@ -7,8 +8,8 @@ const typography = new Typography({
   scaleRatio: 2.7,
   headerFontFamily: ['Source Sans Pro', 'Arial', 'sans-serif'],
   bodyFontFamily: ['Source Sans Pro', 'Arial', 'sans-serif'],
-  headerColor: Colors.Black,
-  bodyColor: Colors.Black,
+  headerColor: colors.Black,
+  bodyColor: colors.Black,
   bodyWeight: 300,
   includeNormalize: true,
   overrideStyles: ({ adjustFontSizeTo }) => ({

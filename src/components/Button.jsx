@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { Icon } from 'antd';
 import styled, { keyframes } from 'styled-components';
@@ -31,7 +30,9 @@ const spin = keyframes`
   100% { transform: rotate(360deg);
 `;
 
-const Loading = styled.div`
+const Loading = styled.div.attrs({
+  'data-testid': 'loading-indicator',
+})`
   border: 3px solid ${props => props.theme.grey.default};
   border-top: 3px solid ${props => props.theme.grey.lightest};
   border-radius: 50%;

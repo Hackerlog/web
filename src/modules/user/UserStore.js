@@ -3,6 +3,7 @@
 import { types } from 'mobx-state-tree';
 
 import { SESSION_KEY } from '../../utils/constants';
+import logger from '../../services/logger';
 
 const User = types
   .model('UserModel', {
@@ -71,8 +72,8 @@ const UserStore = types
         if (user) {
           return JSON.parse(user);
         }
-      } catch (_) {
-        // do not throw here
+      } catch (e) {
+        logger.info('Could not retrieve stored user from localStorage', e);
       }
       return null;
     },
@@ -80,8 +81,8 @@ const UserStore = types
     clearStorage() {
       try {
         localStorage.removeItem(self.sessionKey);
-      } catch (_) {
-        // do nothing
+      } catch (e) {
+        logger.info('Could not clear localStorage', e);
       }
     },
 

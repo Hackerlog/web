@@ -1,6 +1,7 @@
+// @flow
 /* eslint no-param-reassign: off */
 import { types, getRoot, flow } from 'mobx-state-tree';
-import compact from 'lodash-es/compact';
+import compact from 'lodash/compact';
 
 import logger from '../../services/logger';
 import { SESSION_KEY } from '../../utils/constants';

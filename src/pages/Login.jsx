@@ -19,12 +19,13 @@ const Login = ({ store }) => (
   <Background>
     <Wrapper>
       <Logo src={logo} alt="Login to Hackerlog!" />
-      <form onSubmit={store.handleLogin}>
+      <form onSubmit={store.handleLogin} data-testid="login-form">
         <LoginInput
           type="email"
           name="email"
           placeholder="jon@appleseed.com"
           value={store.email}
+          data-testid="login-email-input"
           onChange={store.handleInputChange}
         />
         <LoginInput
@@ -32,9 +33,10 @@ const Login = ({ store }) => (
           name="password"
           placeholder="************"
           value={store.password}
+          data-testid="login-password-input"
           onChange={store.handleInputChange}
         />
-        <LoginButton type="primary" isLoading={store.isLoading}>
+        <LoginButton type="primary" isLoading={store.isLoading} data-testid="login-submit-button">
           Login
         </LoginButton>
       </form>

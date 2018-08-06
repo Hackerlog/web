@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -54,11 +54,13 @@ const GoHome = styled(Link)`
   margin-top: 72px;
 `;
 
-const FourOhFour = () => (
+const FourOhFour = (): React.ReactNode => (
   <Wrapper>
     <Text>
       <h1 className="main">404</h1>
-      <h1 className="text">That page does not exists</h1>
+      <h1 className="text" data-testid="404">
+        That page does not exists
+      </h1>
     </Text>
     <GoHome to="/">Go home?</GoHome>
   </Wrapper>
