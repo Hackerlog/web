@@ -12,10 +12,14 @@ export const InfoAlert = styled.div`
   box-shadow: ${props => props.theme.shadows.small};
 `;
 
+InfoAlert.displayName = 'InfoAlert';
+
 export const ErrorAlert = styled(InfoAlert)`
   background: ${props => props.theme.error};
 `;
+ErrorAlert.displayName = 'ErrorAlert';
 
 export const SuccessAlert = styled(InfoAlert)`
   background: ${props => props.theme.success};
+SuccessAlert.displayName = 'SuccessAlert';
 `;

@@ -18,7 +18,7 @@ export default function() {
   return (
     <div>
       <Wrapper>
-        <ProfileImage />
+        <ProfileImage id="1223" />
       </Wrapper>
       <Wrapper>
         <W>

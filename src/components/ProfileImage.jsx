@@ -1,14 +1,24 @@
 import * as React from 'react';
-import { observer, inject } from 'mobx-react';
-import { Image } from 'cloudinary-react';
 import styled from 'styled-components';
+import * as sha1 from 'sha1';
+import { Spin, Icon } from 'antd';
 
-const uploadUrl = 'https://api.cloudinary.com/v1_1/hhz4dqh1x/image/upload';
+import logger from '../services/logger';
+
+const spinner = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+
+const Loader = styled(Spin)`
+  max-width: 120px;
+  max-height: 120px;
+`;
 
 const ProfileImageWrapper = styled.label.attrs({
   htmlFor: 'profile-upload',
 })`
   user-select: none;
+  display: flex;
+  height: 120px;
+  width: 120px;
 `;
 
 const FileInput = styled.input.attrs({
@@ -19,62 +29,91 @@ const FileInput = styled.input.attrs({
   display: none;
 `;
 
-interface IProfileImage {
-  profileImage: string;
-}
+const StyledImage = styled.img`
+  max-width: 200px;
 
-class ProfileImage extends React.Component<IProfileImage, { file?: File, url?: string }> {
-  state = {
-    file: undefined,
-    url: '',
-  };
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+type Params = {|
+  public_id: string,
+  timestamp: number,
+  upload_preset: string,
+|};
+
+export default class ProfileImage extends React.Component<
+  { id?: string },
+  { file?: File, url?: string, isLoading: boolean }
+> {
+  static uploadUrl = 'https://api.cloudinary.com/v1_1/hhz4dqh1x/image/upload';
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: undefined,
+      url: `http://res.cloudinary.com/hhz4dqh1x/image/upload/c_thumb,g_face,h_120,r_max,w_120,d_avatar.png/profile/${
+        props.id
+      }.png`,
+      isLoading: false,
+    };
+  }
 
   handleOnChange = (e: SyntheticEvent<HTMLInputElement>): void => {
-    this.setState({ file: e.currentTarget.files[0] }, () => {
+    this.setState({ file: e.currentTarget.files[0], isLoading: true }, () => {
       this.uploadImage();
     });
   };
 
+  createHash = (params: Params): string => {
+    const query = `${new URLSearchParams(params).toString()}${
+      process.env.REACT_APP_CLOUDINARY_API_SECRET
+    }`;
+    return sha1(query);
+  };
+
   uploadImage = async (): Promise<void> => {
     try {
+      const timestamp = +new Date();
+      const hash = this.createHash({
+        public_id: '123',
+        timestamp,
+        upload_preset: 'profile',
+      });
       const form = new FormData();
       if (this.state.file) {
         form.append('file', this.state.file);
       }
-      form.append('upload_preset', 'profile-pic');
-      form.append('public_id', '1');
+      form.append('upload_preset', 'profile');
+      form.append('public_id', '123');
+      form.append('api_key', process.env.REACT_APP_CLOUDINARY_API_KEY);
+      form.append('signature', hash);
+      form.append('timestamp', timestamp);
 
-      const res = await fetch(uploadUrl, {
+      const res = await fetch(ProfileImage.uploadUrl, {
         method: 'POST',
         headers: {
           'X-Requested-With': 'XMLHttpRequest',
         },
         body: form,
       });
-      this.setState({ url: res.url });
+      const j = await res.json();
+      this.setState({ url: j.secure_url, isLoading: false });
     } catch (error) {
-      throw new Error(error);
+      this.setState({ isLoading: false });
+      logger.error('Error uploading profile image', error);
     }
   };
 
   render() {
     return (
       <ProfileImageWrapper>
-        <Image
-          cloudName="hhz4dqh1x"
-          publicId="profile/1.jpg"
-          height="120"
-          width="120"
-          crop="thumb"
-          radius="max"
-          gravity="face"
-        />
+        <Loader spinning={this.state.isLoading} indicator={spinner}>
+          <StyledImage src={this.state.url} />
+        </Loader>
         <FileInput onChange={this.handleOnChange} />
       </ProfileImageWrapper>
     );
   }
 }
-
-export default inject(({ store: { userStore } }) => ({ profileImage: userStore.profileImage }))(
-  observer(ProfileImage)
-);

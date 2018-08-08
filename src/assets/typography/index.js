@@ -8,8 +8,8 @@ const typography = new Typography({
   scaleRatio: 2.7,
   headerFontFamily: ['Source Sans Pro', 'Arial', 'sans-serif'],
   bodyFontFamily: ['Source Sans Pro', 'Arial', 'sans-serif'],
-  headerColor: colors.Black,
-  bodyColor: colors.Black,
+  headerColor: colors.black,
+  bodyColor: colors.black,
   bodyWeight: 300,
   includeNormalize: true,
   overrideStyles: ({ adjustFontSizeTo }) => ({
