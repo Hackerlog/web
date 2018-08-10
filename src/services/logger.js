@@ -1,8 +1,6 @@
 /* eslint-disable */
 import Raven from 'raven-js';
 
-type Levels = 'debug' | 'info' | 'warn' | 'error' | 'test';
-
 class Logger {
   static levels = {
     test: 'test',
@@ -12,7 +10,7 @@ class Logger {
     error: 'error',
   };
 
-  level: Levels = 'warn';
+  level = 'warn';
 
   levelAmount = {
     [Logger.levels.test]: -1,
@@ -22,7 +20,7 @@ class Logger {
     [Logger.levels.error]: 4,
   };
 
-  get env(): Levels {
+  get env() {
     if (this.isTesting()) {
       return Logger.levels.test;
     }
@@ -35,11 +33,11 @@ class Logger {
     this.initSentry();
   }
 
-  isDebugging = (): boolean => process.env.NODE_ENV !== 'production';
+  isDebugging = () => process.env.NODE_ENV !== 'production';
 
-  isTesting = (): boolean => process.env.NODE_ENV === 'test';
+  isTesting = () => process.env.NODE_ENV === 'test';
 
-  setUserContext(email: string, id?: string) {
+  setUserContext(email, id) {
     const context = {
       email,
       id: '',
@@ -52,7 +50,7 @@ class Logger {
     Raven.setUserContext(context);
   }
 
-  static getVersion(): string {
+  static getVersion() {
     const context = process.env.REACT_APP_CONTEXT;
     const branch = process.env.REACT_APP_BRANCH;
     const hash = process.env.REACT_APP_COMMIT_REF;
@@ -64,11 +62,11 @@ class Logger {
     return '';
   }
 
-  setLevel(level: Levels) {
+  setLevel(level) {
     this.level = level;
   }
 
-  log(level: Levels, message: string = '', error?: Error) {
+  log(level, message = '', error) {
     if (this.levelAmount[level] >= this.levelAmount[this.level]) {
       const logMessage = `[Hackerlog | ${level.toUpperCase()}]: ${message}`;
       // Do not log messages when testing
@@ -95,20 +93,20 @@ class Logger {
     }
   }
 
-  debug(msg: string, error?: Error) {
+  debug(msg, error) {
     this.log(Logger.levels.debug, msg, error);
   }
 
-  info(msg: string, error?: Error) {
+  info(msg, error) {
     this.log(Logger.levels.info, msg, error);
   }
 
-  warn(msg: string, error?: Error) {
+  warn(msg, error) {
     this.sendToSentry(msg);
     this.log(Logger.levels.warn, msg, error);
   }
 
-  error(msg: string, error?: Error) {
+  error(msg, error) {
     this.log(Logger.levels.error, msg, error);
     this.sendToSentry(msg);
     if (error && !this.isDebugging) {
@@ -125,7 +123,7 @@ class Logger {
     }
   }
 
-  sendToSentry(msg: string) {
+  sendToSentry(msg) {
     if (!this.isDebugging) {
       Raven.captureMessage(msg);
     }

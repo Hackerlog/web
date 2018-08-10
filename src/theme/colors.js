@@ -1,22 +1,4 @@
-export type Colors = {
-  white: string,
-  greyLightest: string,
-  greyLight: string,
-  grey: string,
-  greyDark: string,
-  black: string,
-  primary: string,
-  secondary: string,
-  tertiary: string,
-  success: string,
-  info: string,
-  error: string,
-  darkToPrimaryGradient: string,
-  secondaryToLightGradient: string,
-  loginGradient: string,
-};
-
-const colors: Colors = {
+const colors = {
   white: '#ffffff',
   greyLightest: '#F9FAFC',
   greyLight: '#DADDF2',

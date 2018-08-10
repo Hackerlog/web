@@ -22,7 +22,8 @@
     "react/prop-types": "off",
     "strict": "off",
     "react/no-unescaped-entities": "off",
-    "flowtype/no-types-missing-file-annotation": "off"
+    "flowtype/no-types-missing-file-annotation": "off",
+    "class-methods-use-this": "off"
   },
   "plugins": ["react", "jsx-a11y", "flowtype", "prettier"],
   "settings": {

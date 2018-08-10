@@ -1,47 +1,6 @@
 import colors from './colors';
 
-type ViewSizes = {|
-  desktop: number,
-  tablet: number,
-  mobile: number,
-|};
-
-type ShadowSizes = {|
-  small: string,
-  medium: string,
-  large: string,
-  xl: string,
-  xxl: string,
-|};
-
-type GradientColors = {|
-  darkToPrimary: string,
-  secondaryToLight: string,
-  login: string,
-|};
-
-export type Theme = {
-  white: string,
-  default: string,
-  grey: {|
-    lightest: string,
-    light: string,
-    default: string,
-    dark: string,
-  |},
-  black: string,
-  primary: string,
-  secondary: string,
-  tertiary: string,
-  success: string,
-  info: string,
-  error: string,
-  gradients: GradientColors,
-  sizes: ViewSizes,
-  shadows: ShadowSizes,
-};
-
-const theme: Theme = {
+const theme = {
   white: colors.white,
   default: colors.grey,
   grey: {

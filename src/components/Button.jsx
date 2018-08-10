@@ -2,29 +2,6 @@ import React from 'react';
 import { Icon } from 'antd';
 import styled, { keyframes } from 'styled-components';
 
-type ButtonTypes =
-  | 'primary'
-  | 'primary-outline'
-  | 'default'
-  | 'default-outline'
-  | 'error'
-  | 'error-outline'
-  | 'success'
-  | 'success-outline';
-
-interface IButton {
-  isLoading?: boolean;
-  children?: any;
-  onClick?: () => void;
-  className?: string;
-  disabled?: boolean;
-  type?: ButtonTypes;
-  outline?: boolean;
-  round?: boolean;
-  icon?: string;
-  fluid?: boolean;
-}
-
 const spin = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg);

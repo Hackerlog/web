@@ -98,7 +98,14 @@ export const UsernameInputWrapper = styled.div`
     top: 50%;
     transform: translateY(-50%);
     z-index: 99;
-    background-image: url(${({ isValid, isDirty }) => (!isDirty ? null : isValid ? yep : nope)});
+    background-image: url(${({ isValid, isDirty }) => {
+      if (!isDirty) {
+        return null;
+      } else if (isValid) {
+        return yep;
+      }
+      return nope;
+    }});
     background-repeat: no-repeat;
   }
 `;

@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import * as sha1 from 'sha1';
+import sha1 from 'sha1';
 import { Spin, Icon } from 'antd';
 
 import logger from '../services/logger';
@@ -37,16 +37,7 @@ const StyledImage = styled.img`
   }
 `;
 
-type Params = {|
-  public_id: string,
-  timestamp: number,
-  upload_preset: string,
-|};
-
-export default class ProfileImage extends React.Component<
-  { id?: string },
-  { file?: File, url?: string, isLoading: boolean }
-> {
+export default class ProfileImage extends React.Component {
   static uploadUrl = 'https://api.cloudinary.com/v1_1/hhz4dqh1x/image/upload';
 
   constructor(props) {
@@ -60,22 +51,28 @@ export default class ProfileImage extends React.Component<
     };
   }
 
-  handleOnChange = (e: SyntheticEvent<HTMLInputElement>): void => {
+  get apiSecret() {
+    return process.env.REACT_APP_CLOUDINARY_API_SECRET || '';
+  }
+
+  get apiKey() {
+    return process.env.REACT_APP_CLOUDINARY_API_KEY || '';
+  }
+
+  handleOnChange = e => {
     this.setState({ file: e.currentTarget.files[0], isLoading: true }, () => {
       this.uploadImage();
     });
   };
 
-  createHash = (params: Params): string => {
-    const query = `${new URLSearchParams(params).toString()}${
-      process.env.REACT_APP_CLOUDINARY_API_SECRET
-    }`;
+  createHash = params => {
+    const query = `${new URLSearchParams(params).toString()}${this.apiSecret}`;
     return sha1(query);
   };
 
-  uploadImage = async (): Promise<void> => {
+  uploadImage = async () => {
     try {
-      const timestamp = +new Date();
+      const timestamp = (+new Date()).toString();
       const hash = this.createHash({
         public_id: '123',
         timestamp,
@@ -87,7 +84,7 @@ export default class ProfileImage extends React.Component<
       }
       form.append('upload_preset', 'profile');
       form.append('public_id', '123');
-      form.append('api_key', process.env.REACT_APP_CLOUDINARY_API_KEY);
+      form.append('api_key', this.apiKey);
       form.append('signature', hash);
       form.append('timestamp', timestamp);
 

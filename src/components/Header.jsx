@@ -24,7 +24,7 @@ const Logo = styled.div`
 const Header = () => (
   <StyledHeader>
     <Logo>
-      <img src={logo} />
+      <img src={logo} alt="Hackerlog" />
     </Logo>
   </StyledHeader>
 );

@@ -13,10 +13,11 @@ const User = types
     token: types.string,
   })
   .views(self => ({
-    get fullName(): string {
+    get fullName() {
       return `${self.firstName} ${self.lastName}`;
     },
-    get profileImage(): string {
+    get profileImage() {
+      // FIXME: Needs a perm fix
       return `https://res.cloudinary.com/hhz4dqh1x/image/upload/v1533148995/profile/1.jpg`;
     },
   }));
@@ -26,10 +27,10 @@ const UserStore = types
     user: types.maybe(types.reference(User)),
   })
   .views(self => ({
-    get sessionKey(): string {
+    get sessionKey() {
       return SESSION_KEY('user');
     },
-    get profileImage(): string {
+    get profileImage() {
       if (!self.user) {
         return `https://res.cloudinary.com/hhz4dqh1x/image/upload/v1533148995/profile/1.jpg`;
       }

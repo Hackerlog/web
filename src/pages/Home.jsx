@@ -36,16 +36,8 @@ import {
 import { MailingListApi } from '../services/api';
 import Logger from '../services/logger';
 
-interface State {
-  email: string;
-  isLoading: boolean;
-  showModal: boolean;
-}
-
-type SocialNetwork = 'Twitter' | 'Facebook' | 'LinkedIn';
-
-export default class Home extends Component<{}, State> {
-  state: State = {
+export default class Home extends Component {
+  state = {
     email: '',
     showModal: false,
     isLoading: true,
@@ -56,7 +48,7 @@ export default class Home extends Component<{}, State> {
   facebookPost = `https://www.facebook.com/dialog/feed?app_id=184683071273&link=https%3A%2F%2Fhackerlog.io&picture=http%3A%2F%2Fwww.insert-image-share-url-here.jpg&name=Hackerlog%20-%20A%20new%20way%20for%20developers%20to%20get%20noticed&caption=%20&description=Check%20out%20Hackerlog!%20They%20are%20transforming%20how%20developers%20showcase%20their%20skills.&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F`;
   linkedinPost = `https://www.linkedin.com/shareArticle?mini=true&url=https%3A//hackerlog.io&title=Hackerlog%20-%20A%20new%20way%20for%20developers%20to%20get%20noticed&text=Check%20out%20Hackerlog!%20They%20are%20transforming%20how%20developers%20showcase%20their%20skills.%20https%3A//hackerlog.io&source=`;
 
-  handleSubmit = (e: SyntheticEvent<HTMLFormElement>): void => {
+  handleSubmit = e => {
     e.preventDefault();
 
     this.setState({ isLoading: true });
@@ -80,11 +72,11 @@ export default class Home extends Component<{}, State> {
       });
   };
 
-  handleOnChange = (e: SyntheticEvent<HTMLInputElement>): void => {
+  handleOnChange = e => {
     this.setState({ email: e.currentTarget.value });
   };
 
-  handleModalClose = (): void => {
+  handleModalClose = () => {
     ReactGA.event({
       category: 'ShareModal',
       action: 'Did not share',
@@ -92,7 +84,7 @@ export default class Home extends Component<{}, State> {
     this.setState({ showModal: false });
   };
 
-  handleShareClick = (network: SocialNetwork) => {
+  handleShareClick = network => {
     ReactGA.event({
       category: 'ShareModal',
       action: 'Did share',

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { observer, inject } from 'mobx-react';
 
 import { LoginInput, LoginButton, SignupText, CreateAccountLink } from '../modules/login/styles';
@@ -14,7 +14,7 @@ import {
   UsernameInput,
 } from '../modules/signup/styles';
 
-const usernameMessage = (isAvailable: boolean, isValid: boolean): string => {
+const usernameMessage = (isAvailable, isValid) => {
   if (!isAvailable) {
     return 'Username not available';
   }
