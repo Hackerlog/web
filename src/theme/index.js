@@ -1,3 +1,5 @@
+import get from 'lodash/get';
+
 import colors from './colors';
 
 const theme = {
@@ -36,3 +38,5 @@ const theme = {
 };
 
 export default theme;
+
+export const c = key => get(theme, key, key.toString());

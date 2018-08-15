@@ -3,7 +3,7 @@ import { Icon } from 'antd';
 import styled, { keyframes } from 'styled-components';
 
 const spin = keyframes`
-  0% { transform: rotate(0deg); }
+  0% { transform: rotate(0deg); }  
   100% { transform: rotate(360deg);
 `;
 
@@ -74,7 +74,7 @@ const renderChild = (children, round, icon, className) => {
   return children;
 };
 
-const Button: IButton = ({
+const Button = ({
   isLoading,
   children,
   onClick,

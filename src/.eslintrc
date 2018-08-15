@@ -4,13 +4,7 @@
     "ecmaVersion": 2018
   },
   "root": true,
-  "extends": [
-    "airbnb",
-    "plugin:jsx-a11y/recommended",
-    "plugin:flowtype/recommended",
-    "prettier",
-    "prettier/react"
-  ],
+  "extends": ["airbnb", "plugin:jsx-a11y/recommended", "prettier", "prettier/react"],
   "env": {
     "es6": true,
     "browser": true,
@@ -22,13 +16,8 @@
     "react/prop-types": "off",
     "strict": "off",
     "react/no-unescaped-entities": "off",
-    "flowtype/no-types-missing-file-annotation": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "no-debugger": "off"
   },
-  "plugins": ["react", "jsx-a11y", "flowtype", "prettier"],
-  "settings": {
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": false
-    }
-  }
+  "plugins": ["react", "jsx-a11y", "prettier"]
 }

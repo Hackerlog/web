@@ -11,6 +11,11 @@ const User = types
     lastName: types.string,
     email: types.string,
     token: types.string,
+    title: types.string,
+    website: types.maybe(types.string),
+    twitterUrl: types.maybe(types.string),
+    linkedInUrl: types.maybe(types.string),
+    keywords: types.optional(types.array(types.string), []),
   })
   .views(self => ({
     get fullName() {
@@ -39,19 +44,20 @@ const UserStore = types
   }))
   .actions(self => ({
     isLoggedIn() {
-      if (self.user) {
-        return true;
-      }
-
-      const user = self.retrieveStoredUser();
-
-      if (!user) {
-        return false;
-      }
-
-      self.createUser(user);
-
       return true;
+      // if (self.user) {
+      //   return true;
+      // }
+
+      // const user = self.retrieveStoredUser();
+
+      // if (!user) {
+      //   return false;
+      // }
+
+      // self.createUser(user);
+
+      // return true;
     },
 
     createUser(user) {

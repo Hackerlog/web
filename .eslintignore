@@ -4,6 +4,5 @@ src/registerServiceWorker.js
 /.history
 /.vscode
 /build
-/flow-typed
 /public
 /node_modules

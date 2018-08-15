@@ -23,6 +23,9 @@ module.exports = (config, env) => {
   // Remove data-testid properties
   config = injectBabelPlugin(['react-remove-properties', { properties: ['data-testid'] }], config);
 
+  // Add decorator support
+  config = injectBabelPlugin(['transform-decorators-legacy'], config);
+
   // Use custom Ant Design variables
   config = updateConfig(config, env, options);
 

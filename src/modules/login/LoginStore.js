@@ -15,7 +15,7 @@ const LoginStore = types
       self[event.currentTarget.name] = event.currentTarget.value;
     },
 
-    handleLogin: flow(function* handleLogin(event: SyntheticEvent<HTMLFormElement>) {
+    handleLogin: flow(function* handleLogin(event) {
       event.preventDefault();
       self.isLoading = true;
       self.error = '';

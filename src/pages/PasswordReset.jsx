@@ -25,14 +25,7 @@ const Wrapper = styled.div`
   }
 `;
 
-type State = {
-  email: string,
-  isLoading: boolean,
-  error: string,
-  success: boolean,
-};
-
-export default class PasswordReset extends React.Component<{}, State> {
+export default class PasswordReset extends React.Component {
   state = {
     email: '',
     isLoading: false,
@@ -40,17 +33,17 @@ export default class PasswordReset extends React.Component<{}, State> {
     success: false,
   };
 
-  get isValidEmail(): boolean {
+  get isValidEmail() {
     const f = get(this.state, 'email', '').split('@');
     const r = get(f, '[1]', '').split('.');
     return f.length === 2 && r.length > 1;
   }
 
-  handleOnChange = (e: SyntheticEvent<HTMLInputElement>): void => {
+  handleOnChange = e => {
     this.setState({ email: e.currentTarget.value });
   };
 
-  handleSubmit = async (e: SyntheticEvent<HTMLFormElement>): Promise<void> => {
+  handleSubmit = async e => {
     e.preventDefault();
     this.setState({ isLoading: true, error: '' });
     try {
