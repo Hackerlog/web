@@ -1,59 +1,67 @@
-/* eslint no-param-reassign: off */
-import { types, getRoot, flow } from 'mobx-state-tree';
+import { observable, action } from 'mobx';
 
-import logger from '../../services/logger';
+class LoginStore {
+  @observable
+  email = '';
 
-const LoginStore = types
-  .model('LoginStore', {
-    email: types.optional(types.string, ''),
-    password: types.optional(types.string, ''),
-    error: types.optional(types.string, ''),
-    isLoading: false,
-  })
-  .actions(self => ({
-    handleInputChange(event) {
-      self[event.currentTarget.name] = event.currentTarget.value;
-    },
+  @observable
+  password = '';
 
-    handleLogin: flow(function* handleLogin(event) {
-      event.preventDefault();
-      self.isLoading = true;
-      self.error = '';
+  @observable
+  error = '';
 
-      try {
-        const { token, user } = yield getRoot(self).authApi.authenticate({
-          email: self.email,
-          password: self.password,
-        });
+  @observable
+  isLoading = false;
 
-        if (user && token) {
-          const userModel = {
-            id: user.id,
-            firstName: user.first_name,
-            lastName: user.last_name,
-            email: user.email,
-            token,
-          };
+  constructor(rootStore) {
+    this.rootStore = rootStore;
+  }
 
-          getRoot(self).userStore.createUser(userModel);
-          getRoot(self).userStore.storeUser(userModel);
+  @action
+  handleInputChange = event => {
+    this[event.currentTarget.name] = event.currentTarget.value;
+  };
 
-          self.isLoading = false;
+  @action
+  handleLogin = async event => {
+    event.preventDefault();
+    this.isLoading = true;
+    this.error = '';
 
-          getRoot(self).routing.push('/me');
-        }
-      } catch (e) {
-        try {
-          self.isLoading = false;
-          const message = yield e.json();
-          self.error = message.error;
-          logger.error('Login failed', e);
-        } catch (error) {
-          self.isLoading = false;
-          logger.error('Login failed', error);
-        }
+    try {
+      const { token, user } = await this.rootStore.authApi.authenticate({
+        email: this.email,
+        password: this.password,
+      });
+
+      if (user && token) {
+        const userModel = {
+          id: user.id,
+          firstName: user.first_name,
+          lastName: user.last_name,
+          email: user.email,
+          token,
+        };
+
+        this.rootStore.userStore.createUser(userModel);
+        this.rootStore.userStore.storeUser(userModel);
+
+        this.isLoading = false;
+
+        this.rootStore.routing.push('/me');
       }
-    }),
-  }));
+    } catch (e) {
+      try {
+        this.isLoading = false;
+        const message = await e.json();
+        this.error = message.error;
+        this.rootStore.logger.error('Login failed', e);
+      } catch (error) {
+        this.isLoading = false;
+        this.rootStore.logger.error('Login failed', error);
+      }
+    }
+  };
+}
 
 export default LoginStore;

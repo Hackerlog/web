@@ -1,15 +1,43 @@
-import { types } from 'mobx-state-tree';
+import { observable } from 'mobx';
 
-const Project = types.model('ProjectModel', {
-  id: types.identifierNumber,
-  name: types.string,
-  source: types.enumeration(['github', 'gitlab', 'bitbucket']),
-  createdOn: types.Date,
-  description: types.maybeNull(types.string),
-  mainLanguage: types.string,
-  numOfCommits: types.number,
-  numOfContributors: types.number,
-  numOfStars: types.number,
-});
+class Project {
+  /* prettier-ignore */
+  @observable name
+  /* prettier-ignore */
+  @observable source
+  /* prettier-ignore */
+  @observable createdOn
+  /* prettier-ignore */
+  @observable description
+  /* prettier-ignore */
+  @observable mainLanguage
+  /* prettier-ignore */
+  @observable numOfCommits
+  /* prettier-ignore */
+  @observable numOfContributors
+  /* prettier-ignore */
+  @observable numOfStars
+  constructor({
+    id,
+    name,
+    source,
+    createdOn,
+    description,
+    mainLanguage,
+    numOfCommits,
+    numOfContributors,
+    numOfStars,
+  }) {
+    this.id = id;
+    this.name = name;
+    this.source = source;
+    this.createdOn = createdOn;
+    this.description = description;
+    this.mainLanguage = mainLanguage;
+    this.numOfCommits = numOfCommits;
+    this.numOfContributors = numOfContributors;
+    this.numOfStars = numOfStars;
+  }
+}
 
 export default Project;

@@ -47,5 +47,5 @@ export const user = {
   twitterUrl: 'https://twitter.com/deez',
   linkedInUrl: 'https://linkedin.com/deez',
   jobs: [job],
-  // projects: [project],
+  projects: [project],
 };
