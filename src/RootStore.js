@@ -3,9 +3,9 @@ import { RouterModel, syncHistoryWithStore } from 'mst-react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
 
 import { AuthApi, UsersApi } from './services/api';
-import LoginStore from './modules/login/LoginStore';
-import UserStore from './modules/user/UserStore';
-import SignupStore from './modules/signup/SignupStore';
+import LoginStore from './modules/login/store';
+import UserStore from './modules/user/store';
+import SignupStore from './modules/signup/store';
 
 export const routerModel = RouterModel.create();
 export const history = syncHistoryWithStore(createBrowserHistory(), routerModel);

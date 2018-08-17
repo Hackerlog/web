@@ -1,8 +1,8 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 
-import Job from '../modules/me/Job';
-import Project from '../modules/me/Project';
+import Job from '../modules/job';
+import Project from '../modules/project';
 import { user as data, job, project } from '../modules/me/mock-data';
 import {
   Wrapper,

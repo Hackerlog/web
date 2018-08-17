@@ -1,17 +1,5 @@
-export const user = {
-  id: 1,
-  token: 'some-secret-token',
-  firstName: 'John',
-  lastName: 'Davidson',
-  email: 'jon@davidson.com',
-  title: 'Software Engineer',
-  website: 'https://davidson.com',
-  keywords: ['javascript', 'aws', 'node', 'react', 'vue', 'go', 'mysql', 'postgres', 'ubuntu'],
-  twitterUrl: 'https://twitter.com/deez',
-  linkedInUrl: 'https://linkedin.com/deez',
-};
-
 export const job = {
+  id: 1,
   companyName: 'Guidewire Inc.',
   position: 'Software Engineer',
   startDate: 'July 2017',
@@ -33,6 +21,7 @@ export const job = {
 };
 
 export const project = {
+  id: 1,
   name: 'react-components',
   source: 'github',
   createdOn: 'Feb 2016',
@@ -44,4 +33,19 @@ export const project = {
   numOfCommits: 212,
   numOfContributors: 7,
   numOfStars: 14,
+};
+
+export const user = {
+  id: 1,
+  token: 'some-secret-token',
+  firstName: 'John',
+  lastName: 'Davidson',
+  email: 'jon@davidson.com',
+  title: 'Software Engineer',
+  website: 'https://davidson.com',
+  keywords: ['javascript', 'aws', 'node', 'react', 'vue', 'go', 'mysql', 'postgres', 'ubuntu'],
+  twitterUrl: 'https://twitter.com/deez',
+  linkedInUrl: 'https://linkedin.com/deez',
+  jobs: [job],
+  // projects: [project],
 };
