@@ -1,6 +1,6 @@
-import { observable } from 'mobx';
+import { observable, computed } from 'mobx';
 
-class Project {
+export default class Project {
   /* prettier-ignore */
   @observable name
   /* prettier-ignore */
@@ -17,17 +17,22 @@ class Project {
   @observable numOfContributors
   /* prettier-ignore */
   @observable numOfStars
-  constructor({
-    id,
-    name,
-    source,
-    createdOn,
-    description,
-    mainLanguage,
-    numOfCommits,
-    numOfContributors,
-    numOfStars,
-  }) {
+
+  constructor(
+    user,
+    {
+      id,
+      name,
+      source,
+      createdOn,
+      description,
+      mainLanguage,
+      numOfCommits,
+      numOfContributors,
+      numOfStars,
+    }
+  ) {
+    this.user = user;
     this.id = id;
     this.name = name;
     this.source = source;
@@ -38,6 +43,9 @@ class Project {
     this.numOfContributors = numOfContributors;
     this.numOfStars = numOfStars;
   }
-}
 
-export default Project;
+  @computed
+  get date() {
+    return `Created on ${this.createdOn}`;
+  }
+}

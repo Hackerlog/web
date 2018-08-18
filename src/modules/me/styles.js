@@ -68,3 +68,12 @@ export const Keyword = styled.span`
   min-width: 42px;
   box-shadow: ${c('shadows.small')};
 `;
+
+export const SocialIconWrapper = styled.div`
+  display: flex;
+
+  img {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+`;

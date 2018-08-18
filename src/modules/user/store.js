@@ -66,8 +66,8 @@ class User {
     this.twitterUrl = twitterUrl;
     this.linkedInUrl = linkedInUrl;
     this.keywords = keywords;
-    this.jobs = this.createJobs(jobs);
-    this.projects = this.createProjects(projects);
+    this.createJobs(jobs);
+    this.createProjects(projects);
   }
 
   @computed
@@ -88,19 +88,20 @@ class User {
 
   @action
   createJobs = jobs => {
-    if (!jobs) {
-      return [];
+    if (jobs) {
+      jobs.forEach(job => {
+        this.jobs.push(new Job(this, job));
+      });
     }
-    return jobs.map(job => new Job(this, job));
   };
 
   @action
   createProjects = projects => {
-    if (!projects) {
-      return [];
+    if (projects) {
+      projects.forEach(project => {
+        this.projects.push(new Project(this, project));
+      });
     }
-
-    return projects.map(project => new Project(this, project));
   };
 }
 

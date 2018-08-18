@@ -1,29 +1,22 @@
 import { computed, observable } from 'mobx';
 
-class Job {
-  @observable
-  companyName;
-
-  @observable
-  position;
-
-  @observable
-  startDate;
-
-  @observable
-  endDate;
-
-  @observable
-  isCurrentJob;
-
-  @observable
-  city;
-
-  @observable
-  state;
-
-  @observable
-  description;
+export default class Job {
+  /* prettier-ignore */
+  @observable companyName;
+  /* prettier-ignore */
+  @observable position;
+  /* prettier-ignore */
+  @observable startDate;
+  /* prettier-ignore */
+  @observable endDate;
+  /* prettier-ignore */
+  @observable isCurrentJob;
+  /* prettier-ignore */
+  @observable city;
+  /* prettier-ignore */
+  @observable state;
+  /* prettier-ignore */
+  @observable description;
 
   constructor(
     user,
@@ -50,5 +43,3 @@ class Job {
     return `${this.startDate} - ${this.endDate}`;
   }
 }
-
-export default Job;

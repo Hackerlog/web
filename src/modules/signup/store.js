@@ -27,7 +27,6 @@ class SignupStore {
 
   constructor(rootStore) {
     this.rootStore = rootStore;
-    console.log(rootStore.userApi);
   }
 
   @computed

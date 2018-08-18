@@ -101,7 +101,7 @@ class Project extends Component {
       name,
       source,
       description,
-      createdOn,
+      date,
       mainLanguage,
       numOfCommits,
       numOfContributors,
@@ -112,7 +112,7 @@ class Project extends Component {
         <Header>
           <h2>{name}</h2>
           <h4>{source}</h4>
-          <p>{createdOn}</p>
+          <p>{date}</p>
         </Header>
         <Body>
           <Markdown>{description}</Markdown>
