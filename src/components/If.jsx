@@ -1,8 +1,8 @@
-const If = ({ condition, then, else: rename = null }) => {
+const If = ({ condition, then, else: renamedElse = null }) => {
   if (condition) {
     return then;
-  } else if (rename) {
-    return rename;
+  } else if (renamedElse) {
+    return renamedElse;
   }
   return null;
 };

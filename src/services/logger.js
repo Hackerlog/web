@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Raven from 'raven-js';
 
-class Logger {
+export default class Logger {
   static levels = {
     test: 'test',
     debug: 'debug',
@@ -129,5 +129,3 @@ class Logger {
     }
   }
 }
-
-export default new Logger();

@@ -1,9 +1,9 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 
-import Job from '../modules/me/Job';
-import Project from '../modules/me/Project';
-import { user as data, job, project } from '../modules/me/mock-data';
+import Job from '../modules/job';
+import Project from '../modules/project';
+import { user as data } from '../modules/me/mock-data';
 import {
   Wrapper,
   Sidebar,
@@ -15,10 +15,15 @@ import {
   Website,
   Keywords,
   Keyword,
+  SocialIconWrapper,
 } from '../modules/me/styles';
 import If from '../components/If';
 import ProfileImage from '../components/ProfileImage';
+import twitterIcon from '../assets/img/twitter.svg';
+import linkedinIcon from '../assets/img/linkedin.svg';
 
+@inject(({ store }) => ({ store: store.userStore }))
+@observer
 class Me extends React.Component {
   static NOT_RELEASED = true;
 
@@ -33,7 +38,7 @@ class Me extends React.Component {
 
   render() {
     const { user } = this.props.store;
-
+    console.log(user);
     return (
       <Wrapper>
         <Sidebar>
@@ -44,18 +49,40 @@ class Me extends React.Component {
           <If condition={!!user.title} then={<Title>{user.title}</Title>} />
           <If condition={!!user.email} then={<Email>{user.email}</Email>} />
           <If condition={!!user.website} then={<Website>{user.website}</Website>} />
+          <SocialIconWrapper>
+            <If
+              condition={!!user.twitterUrl}
+              then={
+                <a href={user.twitterUrl} target="_blank" rel="noopener noreferrer">
+                  <img src={twitterIcon} alt="Twitter" />
+                </a>
+              }
+            />
+            <If
+              condition={!!user.linkedInUrl}
+              then={
+                <a href={user.linkedInUrl} target="_blank" rel="noopener noreferrer">
+                  <img src={linkedinIcon} alt="LinkedIn" />
+                </a>
+              }
+            />
+          </SocialIconWrapper>
           <If
             condition={!!user.keywords}
             then={<Keywords>{this.renderKeywords(user.keywords)}</Keywords>}
           />
         </Sidebar>
         <Main>
-          <Job job={job} />
-          <Project project={project} />
+          {user.jobs.map(job => (
+            <Job job={job} key={job.id} />
+          ))}
+          {user.projects.map(project => (
+            <Project project={project} key={project.id} />
+          ))}
         </Main>
       </Wrapper>
     );
   }
 }
 
-export default inject(({ store }) => ({ store: store.userStore }))(observer(Me));
+export default Me;
