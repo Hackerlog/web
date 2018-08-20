@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Markdown from 'react-markdown';
+import { Modal } from 'antd';
+
+import { ActionButtons } from '../me/styles';
+import Button from '../../components/Button';
 import { c } from '../../theme';
 
 const Wrapper = styled.article`
   display: flex;
   position: relative;
   flex-direction: column;
-  padding: 12px;
+  padding: 12px 84px 12px 12px;
   border-bottom: 1px solid ${c('grey.lightest')};
   margin-bottom: 24px;
+
+  &:hover {
+    .hackerlog-action-buttons {
+      transform: translate(0, -50%);
+    }
+  }
 `;
 
 const Header = styled.div`
@@ -58,31 +68,47 @@ const Location = styled.p`
 `;
 
 class Job extends Component {
-  renderDate(startDate, endDate, isCurrentJob) {
-    if (isCurrentJob) {
-      return `${startDate} - Present`;
-    }
+  state = {
+    showActions: false,
+  };
 
-    return `${startDate} - ${endDate}`;
-  }
+  showActions = () => {
+    this.setState({ showActions: true });
+  };
+
+  hideActions = () => {
+    this.setState({ showActions: false });
+  };
+
+  editJob = () => {
+    // TODO - @deric: this...
+  };
+
+  deleteJob = () => {
+    Modal.confirm({
+      title: 'Are you sure?',
+      content: 'This action is not reversible.',
+      onOk() {
+        console.log('done');
+      },
+      onCancel() {
+        // todo: here...
+      },
+    });
+  };
 
   render() {
-    const {
-      companyName,
-      position,
-      startDate,
-      endDate,
-      isCurrentJob,
-      city,
-      state,
-      description,
-    } = this.props.job;
+    const { companyName, position, date, city, state, description } = this.props.job;
     return (
       <Wrapper>
+        <ActionButtons>
+          <Button onClick={this.editJob} type="success" icon="edit" round title="Edit Job" />
+          <Button onClick={this.deleteJob} type="error" icon="delete" round title="Delete Job" />
+        </ActionButtons>
         <Header>
           <h2>{companyName}</h2>
           <h4>{position}</h4>
-          <p>{this.renderDate(startDate, endDate, isCurrentJob)}</p>
+          <p>{date}</p>
         </Header>
         <Location>
           {city}, {state}

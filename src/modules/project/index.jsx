@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Markdown from 'react-markdown';
 
 import { c } from '../../theme';
+import { ActionButtons } from '../me/styles';
+import Button from '../../components/Button';
 import star from '../../assets/img/star.png';
 import commits from '../../assets/img/commits.png';
 import contributors from '../../assets/img/contributors.png';
@@ -12,9 +14,15 @@ const Wrapper = styled.article`
   display: flex;
   position: relative;
   flex-direction: column;
-  padding: 12px;
+  padding: 12px 84px 12px 12px;
   border-bottom: 1px solid ${c('grey.lightest')};
   margin-bottom: 24px;
+
+  &:hover {
+    .hackerlog-action-buttons {
+      transform: translate(0, -50%);
+    }
+  }
 `;
 
 const Header = styled.div`
@@ -109,6 +117,22 @@ class Project extends Component {
     } = this.props.project;
     return (
       <Wrapper>
+        <ActionButtons>
+          <Button
+            onClick={this.editProject}
+            type="success"
+            icon="edit"
+            round
+            title="Edit Project"
+          />
+          <Button
+            onClick={this.deleteProject}
+            type="error"
+            icon="delete"
+            round
+            title="Delete Project"
+          />
+        </ActionButtons>
         <Header>
           <h2>{name}</h2>
           <h4>{source}</h4>

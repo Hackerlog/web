@@ -32,13 +32,10 @@ class Me extends React.Component {
     props.store.createUser(data);
   }
 
-  state = {};
-
   renderKeywords = keywords => keywords.map(k => <Keyword key={k}>{k}</Keyword>);
 
   render() {
     const { user } = this.props.store;
-    console.log(user);
     return (
       <Wrapper>
         <Sidebar>

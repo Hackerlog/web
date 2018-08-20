@@ -75,16 +75,5 @@
     "src/**/*.{ts,tsx,js,json,css,md}": [
       "prettier --write, git add"
     ]
-  },
-  "browserslist": {
-    "development": [
-      "last 2 chrome versions",
-      "last 2 firefox versions"
-    ],
-    "production": [
-      ">0.25%",
-      "not op_mini all",
-      "not ie > 0"
-    ]
   }
 }

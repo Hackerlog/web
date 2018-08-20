@@ -1,8 +1,11 @@
+import { configure } from 'mobx';
 import { RouterStore } from 'mobx-react-router';
 
 import LoginStore from './modules/login/store';
 import UserStore from './modules/user/store';
 import SignupStore from './modules/signup/store';
+
+configure({ enforceActions: true });
 
 export default class RootStore {
   constructor({ logger, authApi, userApi }) {

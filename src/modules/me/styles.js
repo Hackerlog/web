@@ -7,6 +7,7 @@ export const Wrapper = styled.main`
   grid-template-areas: 'sidebar main';
   grid-template-columns: 260px auto;
   height: 100vh;
+  overflow-x: hidden;
 `;
 
 export const Main = styled.div`
@@ -75,5 +76,28 @@ export const SocialIconWrapper = styled.div`
   img {
     margin-left: 5px;
     margin-right: 5px;
+  }
+`;
+
+export const ActionButtons = styled.div.attrs({
+  className: 'hackerlog-action-buttons',
+})`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: auto;
+  display: 'flex';
+  flex-direction: column;
+  transition: transform ease-in-out 0.3s;
+  transform: translate(160px, -50%);
+
+  button {
+    margin: 6px;
+    transition: box-shadow ease-in-out 0.2s;
+
+    &:hover {
+      box-shadow: ${c('shadows.medium')};
+      transition: box-shadow ease-in-out 0.2s;
+    }
   }
 `;
