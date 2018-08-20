@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Markdown from 'react-markdown';
+import { IoMdCreate, IoMdTrash } from 'react-icons/io';
 
 import { c } from '../../theme';
 import { ActionButtons } from '../me/styles';
@@ -118,20 +119,12 @@ class Project extends Component {
     return (
       <Wrapper>
         <ActionButtons>
-          <Button
-            onClick={this.editProject}
-            type="success"
-            icon="edit"
-            round
-            title="Edit Project"
-          />
-          <Button
-            onClick={this.deleteProject}
-            type="error"
-            icon="delete"
-            round
-            title="Delete Project"
-          />
+          <Button onClick={this.editProject} type="success" round title="Edit Project">
+            <IoMdCreate size="18px" />
+          </Button>
+          <Button onClick={this.deleteProject} type="error" round title="Delete Project">
+            <IoMdTrash size="18px" />
+          </Button>
         </ActionButtons>
         <Header>
           <h2>{name}</h2>

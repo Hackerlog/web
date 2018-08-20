@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import sha1 from 'sha1';
-import { Spin, Icon } from 'antd';
 
+import Loading from '../components/Loading';
 import logger from '../services/logger';
 
-const spinner = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+// const spinner = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
-const Loader = styled(Spin)`
-  max-width: 120px;
-  max-height: 120px;
-`;
+// TODO: Need another spinner here
+// const Loader = styled(Spin)`
+//   max-width: 120px;
+//   max-height: 120px;
+// `;
 
 const ProfileImageWrapper = styled.label.attrs({
   htmlFor: 'profile-upload',
@@ -31,6 +32,8 @@ const FileInput = styled.input.attrs({
 
 const StyledImage = styled.img`
   max-width: 200px;
+  height: 100%;
+  width: 100%;
 
   &:hover {
     cursor: pointer;
@@ -106,9 +109,8 @@ export default class ProfileImage extends React.Component {
   render() {
     return (
       <ProfileImageWrapper>
-        <Loader spinning={this.state.isLoading} indicator={spinner}>
-          <StyledImage src={this.state.url} />
-        </Loader>
+        <StyledImage src={this.state.url} />
+        <Loading isLoading={this.state.isLoading} />
         <FileInput onChange={this.handleOnChange} />
       </ProfileImageWrapper>
     );

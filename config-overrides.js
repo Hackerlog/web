@@ -1,14 +1,16 @@
-const { resolve } = require('path');
+const webpack = require('webpack');
 const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { injectBabelPlugin } = require('react-app-rewired');
-const { updateConfig } = require('react-app-rewire-antd-theme');
-
-const vars = resolve(__dirname, './src/assets/styles/vars.less');
-const options = {
-  varFile: vars,
-};
 
 module.exports = (config, env) => {
+  // Split out the vendor bundle
+  config.plugins.push(
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: ({ resource }) => /node_modules/.test(resource),
+    })
+  );
+
   // Add decorator support
   config = injectBabelPlugin(['transform-decorators-legacy'], config);
 
@@ -17,17 +19,8 @@ module.exports = (config, env) => {
     config.plugins.push(new BundleAnalyzer());
   }
 
-  // Use Ant Design
-  config = injectBabelPlugin(
-    ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }, 'antd-import'],
-    config
-  );
-
   // Remove data-testid properties
   config = injectBabelPlugin(['react-remove-properties', { properties: ['data-testid'] }], config);
-
-  // Use custom Ant Design variables
-  config = updateConfig(config, env, options);
 
   return config;
 };

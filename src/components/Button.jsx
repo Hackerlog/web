@@ -1,17 +1,18 @@
 import React from 'react';
-import { Icon } from 'antd';
 import styled, { keyframes } from 'styled-components';
+
+import { c } from '../theme';
 
 const spin = keyframes`
   0% { transform: rotate(0deg); }  
   100% { transform: rotate(360deg);
 `;
 
-const Loading = styled.div.attrs({
+export const Loading = styled.div.attrs({
   'data-testid': 'loading-indicator',
 })`
-  border: 3px solid ${props => props.theme.grey.default};
-  border-top: 3px solid ${props => props.theme.grey.lightest};
+  border: 3px solid ${c('grey.default')};
+  border-top: 3px solid ${c('grey.lightest')};
   border-radius: 50%;
   width: 28px;
   height: 28px;
@@ -67,13 +68,6 @@ const StyledButton = styled.button`
   }
 `;
 
-const renderChild = (children, round, icon, className) => {
-  if (round) {
-    return <Icon className={className} type={icon} />;
-  }
-  return children;
-};
-
 const Button = ({
   isLoading,
   children,
@@ -96,7 +90,7 @@ const Button = ({
     icon={icon}
     fluid={fluid}
   >
-    {isLoading ? <Loading /> : renderChild(children, round, icon, className)}
+    {isLoading ? <Loading /> : children}
   </StyledButton>
 );
 

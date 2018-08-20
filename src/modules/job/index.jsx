@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Markdown from 'react-markdown';
-import { Modal } from 'antd';
+import { IoMdTrash, IoMdCreate } from 'react-icons/io';
 
 import { ActionButtons } from '../me/styles';
 import Button from '../../components/Button';
@@ -84,26 +84,19 @@ class Job extends Component {
     // TODO - @deric: this...
   };
 
-  deleteJob = () => {
-    Modal.confirm({
-      title: 'Are you sure?',
-      content: 'This action is not reversible.',
-      onOk() {
-        console.log('done');
-      },
-      onCancel() {
-        // todo: here...
-      },
-    });
-  };
+  deleteJob = () => {};
 
   render() {
     const { companyName, position, date, city, state, description } = this.props.job;
     return (
       <Wrapper>
         <ActionButtons>
-          <Button onClick={this.editJob} type="success" icon="edit" round title="Edit Job" />
-          <Button onClick={this.deleteJob} type="error" icon="delete" round title="Delete Job" />
+          <Button onClick={this.editJob} type="success" icon="edit" round title="Edit Job">
+            <IoMdCreate size="18px" />
+          </Button>
+          <Button onClick={this.deleteJob} type="error" icon="delete" round title="Delete Job">
+            <IoMdTrash size="18px" />
+          </Button>
         </ActionButtons>
         <Header>
           <h2>{companyName}</h2>
