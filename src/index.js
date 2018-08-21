@@ -1,11 +1,16 @@
 /* eslint react/jsx-filename-extension: off */
 import React from 'react';
 import { render } from 'react-dom';
+import Modal from 'react-modal';
 
 import App from './components/App';
 
+const rootEl = document.getElementById('root');
+
+Modal.setAppElement(rootEl);
+
 const renderApp = () => {
-  render(<App />, document.getElementById('root'));
+  render(<App />, rootEl);
 };
 
 renderApp();
