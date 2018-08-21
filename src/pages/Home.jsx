@@ -240,7 +240,6 @@ export default class Home extends Component {
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="Share the news!"
-          ariaHideApp={false}
           style={{
             overlay: {
               zIndex: '99',
