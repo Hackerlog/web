@@ -1,4 +1,4 @@
-import { computed, observable } from 'mobx';
+import { computed, observable, action } from 'mobx';
 
 export default class Job {
   /* prettier-ignore */
@@ -17,6 +17,8 @@ export default class Job {
   @observable state;
   /* prettier-ignore */
   @observable description;
+  /* prettier-ignore */
+  @observable newJob = {};
 
   constructor(
     user,
@@ -42,4 +44,10 @@ export default class Job {
 
     return `${this.startDate} - ${this.endDate}`;
   }
+
+  @action
+  updateNewFormValue = e => {
+    const target = e.currentTarget;
+    this.newJob[target.id] = target.value;
+  };
 }

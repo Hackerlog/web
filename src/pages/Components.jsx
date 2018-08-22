@@ -4,6 +4,8 @@ import { IoMdCheckmark as Check } from 'react-icons/io';
 
 // import Button from '../components/Button';
 import ProfileImage from '../components/ProfileImage';
+import CreateJobForm from '../modules/job/create-form';
+import Form from '../modules/job/Form';
 import Button from '../components/Button';
 
 const Wrapper = styled.section`
@@ -18,6 +20,9 @@ const Wrapper = styled.section`
 export default function() {
   return (
     <div>
+      <Wrapper>
+        <Form form={new CreateJobForm()} />
+      </Wrapper>
       <Wrapper>
         <ProfileImage id="1223" />
         <Button type="primary">Testing</Button>
