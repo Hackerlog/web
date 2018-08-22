@@ -4,6 +4,8 @@ import { Icon } from 'antd';
 
 import Button from '../components/Button';
 import ProfileImage from '../components/ProfileImage';
+import CreateJobForm from '../modules/job/create-form';
+import Form from '../modules/job/Form';
 
 const Wrapper = styled.section`
   margin: 12px;
@@ -17,6 +19,9 @@ const W = styled.div`
 export default function() {
   return (
     <div>
+      <Wrapper>
+        <Form form={new CreateJobForm()} />
+      </Wrapper>
       <Wrapper>
         <ProfileImage id="1223" />
       </Wrapper>
