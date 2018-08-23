@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
 import CreateForm from '../form';
-import { isRequired } from '../form/validators';
+import { IsRequired, IsRequiredIf } from '../form/validators';
 import InputGroup from '../form/input-group';
 import SelectGroup from '../form/select-group';
 import MarkdownGroup from '../form/markdown-group';
@@ -18,39 +18,40 @@ export const jobForm = new CreateForm([
     name: 'companyName',
     label: 'Company name?',
     placeholder: 'Microsoft',
-    validators: [isRequired],
+    validators: [new IsRequired()],
     initialValue: '',
   },
   {
     name: 'position',
     label: 'Job title?',
     placeholder: 'Software Engineer',
-    validators: [isRequired],
+    validators: [new IsRequired()],
     initialValue: '',
   },
   {
     name: 'isCurrentJob',
     label: 'Current job?',
     placeholder: '',
-    initialValue: '',
+    initialValue: false,
   },
   {
     name: 'startDate',
     label: 'Start date?',
     placeholder: 'July 2016',
-    validators: [isRequired],
+    validators: [new IsRequired()],
     initialValue: '',
   },
   {
     name: 'endDate',
     label: 'End date?',
     placeholder: 'September 2018',
+    validators: [new IsRequiredIf('isCurrentJob', false)],
     initialValue: '',
   },
   {
     name: 'isRemoteJob',
     label: 'Is this job remote?',
-    initialValue: '',
+    initialValue: false,
     placeHolder: '',
   },
   {
@@ -58,18 +59,20 @@ export const jobForm = new CreateForm([
     label: `Company's city?`,
     placeholder: 'Foster City',
     initialValue: '',
+    validators: [new IsRequiredIf('isRemoteJob', false)],
   },
   {
     name: 'state',
     label: `Company's state`,
     placeholder: 'CA',
-    value: '',
+    initialValue: '',
+    validators: [new IsRequiredIf('isRemoteJob', false)],
   },
   {
     name: 'description',
     label: 'Write about your job just as you would in your resume',
-    validators: [isRequired],
-    value: `# Markdown Support
+    validators: [new IsRequired()],
+    initialValue: `# Markdown Support
     Feel free to user _markdown_ here to really make your job description shine!`,
   },
 ]);
@@ -78,7 +81,10 @@ export const jobForm = new CreateForm([
 class JobForm extends Component {
   handleOnSubmit = e => {
     e.preventDefault();
-    console.log(this.props.form.values);
+    const { form } = this.props;
+    if (!form.isValid) {
+      form.showErrors();
+    }
   };
 
   render() {

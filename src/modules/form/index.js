@@ -17,6 +17,11 @@ export default class Form {
   }
 
   @computed
+  get errors() {
+    return this.fieldNames.map(name => this.fields[name].errors);
+  }
+
+  @computed
   get isDirty() {
     return this.fieldNames.some(name => this.fields[name].isDirty);
   }
@@ -35,10 +40,17 @@ export default class Form {
       this.fields = fields.reduce(
         (dataset, props) => ({
           ...dataset,
-          [props.name]: new Field(props),
+          [props.name]: new Field(this, props),
         }),
         {}
       );
+    });
+  }
+
+  @action('showErrors')
+  showErrors() {
+    this.fieldNames.forEach(name => {
+      this.fields[name].isTouched = true;
     });
   }
 

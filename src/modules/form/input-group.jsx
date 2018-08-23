@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
-import { GroupWrapper, Input, Errors } from './styles';
+import { GroupWrapper, Input, Errors, Label } from './styles';
 
 @observer
 export default class InputGroup extends Component {
@@ -12,9 +12,9 @@ export default class InputGroup extends Component {
   render() {
     const { field, type } = this.props;
 
-    return field ? (
+    return (
       <GroupWrapper>
-        <label htmlFor={field.name}>{field.label}</label>
+        <Label htmlFor={field.name}>{field.label}</Label>
         <Input
           type={type}
           name={field.name}
@@ -23,8 +23,8 @@ export default class InputGroup extends Component {
           onChange={this.handleOnChange}
           value={field.value}
         />
-        {field.hasErrors && field.isDirty ? <Errors>{field.errors[0]}</Errors> : null}
+        {field.hasErrors && field.isTouched ? <Errors>{field.errors[0]}</Errors> : null}
       </GroupWrapper>
-    ) : null;
+    );
   }
 }

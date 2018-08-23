@@ -27,7 +27,7 @@ export default class Field {
   @computed
   get errors() {
     return this.validators
-      .map(validate => validate(this.value))
+      .map(validator => validator.validate(this.value, this.form))
       .filter(result => typeof result === 'string');
   }
 
@@ -36,9 +36,10 @@ export default class Field {
     return this.errors.length > 0;
   }
 
-  constructor(props) {
+  constructor(form, props) {
     runInAction(() => {
       const { name = '', label = '', placeholder = '', validators = [], initialValue = '' } = props;
+      this.form = form;
       this.name = name;
       this.label = label;
       this.placeholder = placeholder;

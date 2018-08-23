@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import Select from 'react-select';
 
-import { GroupWrapper, Errors } from './styles';
+import { GroupWrapper, Errors, Label } from './styles';
 
 @observer
 export default class SelectGroup extends Component {
@@ -14,7 +14,7 @@ export default class SelectGroup extends Component {
     const { field, options } = this.props;
     return (
       <GroupWrapper>
-        <label htmlFor={field.name}>{field.label}</label>
+        <Label htmlFor={field.name}>{field.label}</Label>
         <Select
           onChange={this.handleOnChange}
           name={field.name}
@@ -23,7 +23,7 @@ export default class SelectGroup extends Component {
           options={options}
           isClearable
         />
-        {field.hasErrors && field.isDirty ? <Errors>{field.errors[0]}</Errors> : null}
+        {field.hasErrors && field.isTouched ? <Errors>{field.errors[0]}</Errors> : null}
       </GroupWrapper>
     );
   }
