@@ -1,5 +1,7 @@
 import { Form } from 'mobx-react-form';
 
+import { states } from '../../utils/constants';
+
 export default class CreateJobForm extends Form {
   static isRequired = ({ field }) => {
     const isEmpty = !!field.value;
@@ -64,6 +66,7 @@ export default class CreateJobForm extends Form {
           placeholder: 'CA',
           validators: [CreateJobForm.requiredIf('isRemoteJob', false)],
           type: 'select',
+          options: states,
           value: '',
         },
         description: {

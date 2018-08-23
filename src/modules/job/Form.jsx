@@ -1,10 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import Select from 'react-select';
-import MarkdownInput from '@opuscapita/react-markdown';
 
 import Input from '../../components/Input';
-import { states } from '../../utils/constants';
 
 const InputGroup = observer(({ field, type = 'text', placeholder = null, value }) => (
   <div>
@@ -22,25 +20,23 @@ const CheckboxGroup = observer(({ field, type = 'text', placeholder = null, valu
   </div>
 ));
 
-const SelectGroup = observer(({ field, placeholder = null, value, options }) => (
+const SelectGroup = observer(({ field, placeholder = null, value }) => (
   <div>
     <label htmlFor={field.id}>{field.label}</label>
-    <Select {...field.bind({ placeholder, value })} options={options} />
+    <Select
+      {...field.bind({ placeholder, value })}
+      options={field.options}
+      onChange={field.onChange}
+    />
     <small>{field.error}</small>
   </div>
 ));
 
-const MarkdownGroup = observer(({ field, value }) => (
+const MarkdownGroup = observer(({ field }) => (
   <div>
     <label htmlFor={field.id}>{field.label}</label>
     <small>{field.error}</small>
-    <MarkdownInput
-      value={value}
-      autoFocus={false}
-      readOnly={false}
-      autoCorrect="true"
-      showFullScreenButton
-    />
+    <textarea value={field.value} onChange={field.onChange} />
   </div>
 ));
 
@@ -53,7 +49,7 @@ const JobForm = ({ form }) => (
     <InputGroup field={form.$('endDate')} />
     <CheckboxGroup field={form.$('isRemoteJob')} />
     <InputGroup field={form.$('city')} />
-    <SelectGroup field={form.$('state')} options={states} />
+    <SelectGroup field={form.$('state')} />
     <MarkdownGroup field={form.$('description')} />
     <button type="submit">Submit</button>
   </form>

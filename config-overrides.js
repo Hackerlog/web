@@ -4,12 +4,12 @@ const { injectBabelPlugin } = require('react-app-rewired');
 
 module.exports = (config, env) => {
   // Split out the vendor bundle
-  config.plugins.push(
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: ({ resource }) => /node_modules/.test(resource),
-    })
-  );
+  // config.plugins.push(
+  //   new webpack.optimize.CommonsChunkPlugin({
+  //     name: 'vendor',
+  //     minChunks: ({ resource }) => /node_modules/.test(resource),
+  //   })
+  // );
 
   // Add decorator support
   config = injectBabelPlugin(['transform-decorators-legacy'], config);
