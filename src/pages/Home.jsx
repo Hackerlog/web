@@ -13,7 +13,7 @@ import modalImage from '../assets/img/modal-image.svg';
 import twitter from '../assets/img/twitter.png';
 import facebook from '../assets/img/facebook.png';
 import linkedin from '../assets/img/linkedin.png';
-import { InputWithButton } from '../components/Input';
+import { InputWithButton } from '../components/input';
 import headerImage from '../assets/img/header-image.svg';
 import {
   TopBorder,

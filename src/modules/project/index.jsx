@@ -5,7 +5,7 @@ import { IoMdCreate, IoMdTrash } from 'react-icons/io';
 
 import { c } from '../../theme';
 import { ActionButtons } from '../me/styles';
-import Button from '../../components/Button';
+import Button from '../../components/button';
 import star from '../../assets/img/star.png';
 import commits from '../../assets/img/commits.png';
 import contributors from '../../assets/img/contributors.png';

@@ -1,12 +1,12 @@
 import React from 'react';
-/* eslint-disable-next-line */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from 'react-testing-library';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'mobx-react';
 
-import RootStore from '../RootStore';
+import RootStore from '../store';
 import theme from '../theme';
 
 const renderWithRouter = (

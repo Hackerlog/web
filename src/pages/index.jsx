@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Tracking from '../components/Tracking';
-import protect from '../components/ProtectedRoute';
-import hideFeature from '../components/FeatureRoute';
+import Tracking from '../components/tracking';
+import protect from '../components/protected-route';
+import hideFeature from '../components/feature-route';
 import {
   AsyncHome,
   AsyncLogin,

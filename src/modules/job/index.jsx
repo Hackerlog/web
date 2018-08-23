@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import { IoMdCreate, IoMdTrash } from 'react-icons/io';
 import Markdown from 'react-markdown';
-import { IoMdTrash, IoMdCreate } from 'react-icons/io';
+import styled from 'styled-components';
 
-import { ActionButtons } from '../me/styles';
-import Button from '../../components/Button';
+import Button from '../../components/button';
 import { c } from '../../theme';
+import { ActionButtons } from '../me/styles';
 
 const Wrapper = styled.article`
   display: flex;

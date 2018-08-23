@@ -2,7 +2,7 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 
 import { LoginInput, LoginButton, SignupText, CreateAccountLink } from '../modules/login/styles';
-import { ErrorAlert } from '../components/Alert';
+import { ErrorAlert } from '../components/alert';
 import logo from '../assets/img/logo-white.svg';
 import {
   FormWrapper,

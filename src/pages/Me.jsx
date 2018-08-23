@@ -17,8 +17,8 @@ import {
   Keyword,
   SocialIconWrapper,
 } from '../modules/me/styles';
-import If from '../components/If';
-import ProfileImage from '../components/ProfileImage';
+import If from '../components/if';
+import ProfileImage from '../components/profile-image';
 import twitterIcon from '../assets/img/twitter.svg';
 import linkedinIcon from '../assets/img/linkedin.svg';
 

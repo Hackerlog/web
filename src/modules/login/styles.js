@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Input from '../../components/input';
+import Button from '../../components/button';
 
 export const Background = styled.div`
   background: ${props => props.theme.gradients.login};

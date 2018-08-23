@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import Modal from 'react-modal';
 
-import App from './components/App';
+import App from './components/app';
 
 const rootEl = document.getElementById('root');
 
@@ -16,7 +16,7 @@ const renderApp = () => {
 renderApp();
 
 if (module.hot) {
-  module.hot.accept(['./components/App'], () => {
+  module.hot.accept(['./components/app'], () => {
     renderApp();
   });
 }

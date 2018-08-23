@@ -13,7 +13,7 @@ import {
   WhiteLink,
   SmallText,
 } from '../modules/login/styles';
-import { ErrorAlert } from '../components/Alert';
+import { ErrorAlert } from '../components/alert';
 
 const Login = ({ store }) => (
   <Background>

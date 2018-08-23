@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 import { Background } from '../modules/signup/styles';
 import { AuthApi } from '../services/api';
-import { InputWithButton } from '../components/Input';
+import { InputWithButton } from '../components/input';
 import logger from '../services/logger';
 import { Logo, SmallText, WhiteLink } from '../modules/login/styles';
 import logo from '../assets/img/logo-white.svg';
-import { SuccessAlert, ErrorAlert } from '../components/Alert';
+import { SuccessAlert, ErrorAlert } from '../components/alert';
 
 const Wrapper = styled.div`
   max-width: 540px;
