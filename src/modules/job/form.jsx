@@ -3,10 +3,9 @@ import { observer } from 'mobx-react';
 
 import CreateForm from '../form';
 import { IsRequired, IsRequiredIf } from '../form/validators';
-import InputGroup from '../form/input-group';
-import SelectGroup from '../form/select-group';
-import MarkdownGroup from '../form/markdown-group';
+import { InputGroup, DateGroup, MarkdownGroup, SelectGroup } from '../form/components';
 import { states } from '../../utils/constants';
+import Button from '../../components/button';
 
 const options = states.map(state => ({
   value: state,
@@ -37,16 +36,14 @@ export const jobForm = new CreateForm([
   {
     name: 'startDate',
     label: 'Start date?',
-    placeholder: 'July 2016',
     validators: [new IsRequired()],
-    initialValue: '',
+    initialValue: '02/17',
   },
   {
     name: 'endDate',
     label: 'End date?',
-    placeholder: 'September 2018',
     validators: [new IsRequiredIf('isCurrentJob', false)],
-    initialValue: '',
+    initialValue: '05/18',
   },
   {
     name: 'isRemoteJob',
@@ -70,16 +67,16 @@ export const jobForm = new CreateForm([
   },
   {
     name: 'description',
-    label: 'Write about your job just as you would in your resume',
+    label: 'Write about your job just as you would in your resume (use Markdown)',
     validators: [new IsRequired()],
-    initialValue: `# Markdown Support
-    Feel free to user _markdown_ here to really make your job description shine!`,
+    initialValue: null,
   },
 ]);
 
 @observer
 class JobForm extends Component {
   handleOnSubmit = e => {
+    console.log('Submitted');
     e.preventDefault();
     const { form } = this.props;
     if (!form.isValid) {
@@ -96,14 +93,14 @@ class JobForm extends Component {
         <h2>Fill out the form</h2>
         <InputGroup field={fields.companyName} type="text" />
         <InputGroup field={fields.position} type="text" />
-        <InputGroup field={fields.isCurrentJob} type="checkbox" />
-        <InputGroup field={fields.startDate} type="text" />
-        <InputGroup field={fields.endDate} type="text" />
-        <InputGroup field={fields.isRemoteJob} type="checkbox" />
+        <CheckboxGroup field={fields.isCurrentJob} />
+        <DateGroup field={fields.startDate} type="text" />
+        <DateGroup field={fields.endDate} type="text" />
+        <CheckboxGroup field={fields.isRemoteJob} />
         <InputGroup field={fields.city} type="text" />
         <SelectGroup field={fields.state} options={options} />
         <MarkdownGroup field={fields.description} />
-        <button type="submit">Submit</button>
+        <Button type="primary">Submit</Button>
       </form>
     );
   }

@@ -16,6 +16,7 @@
     "test": "react-app-rewired test --env=jsdom"
   },
   "dependencies": {
+    "draft-js": "^0.10.5",
     "history": "^4.7.2",
     "lodash": "^4.17.10",
     "mobx": "^5.0.3",
@@ -33,6 +34,7 @@
     "react-markdown": "^3.4.1",
     "react-mde": "^5.8.0",
     "react-modal": "^3.5.1",
+    "react-month-picker-input": "^1.1.4",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^1.1.4",
     "react-select": "^2.0.0",

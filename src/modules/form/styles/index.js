@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { c } from '../../theme';
+import { c } from '../../../theme';
 
 export const GroupWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 18px;
+  position: relative;
 `;
 
 export const Input = styled.input`

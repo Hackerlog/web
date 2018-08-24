@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import Showdown from 'showdown';
 import Markdown from 'react-mde';
-import Preview from 'react-markdown';
+import Preview from 'showdown';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 
-import { GroupWrapper, Errors, Label } from './styles';
+import { GroupWrapper, Errors, Label } from '../styles';
 
 @observer
 export default class MarkdownGroup extends Component {
-  converter = new Showdown.Converter();
+  converter = new Preview.Converter();
 
   handleOnChange = e => {
     this.props.field.updateValue(e);
@@ -20,8 +20,12 @@ export default class MarkdownGroup extends Component {
       <GroupWrapper>
         <Label htmlFor={field.id}>{field.label}</Label>
         {field.hasErrors && field.isTouched ? <Errors>{field.errors[0]}</Errors> : null}
-        <Markdown editorState={field.value} onChange={this.handleOnChange} />
-        <Preview>{field.value.markdown}</Preview>
+        <Markdown
+          editorState={field.value}
+          onChange={this.handleOnChange}
+          layout="tabbed"
+          generateMarkdownPreview={markdown => Promise.resolve(this.converter.makeHtml(markdown))}
+        />
       </GroupWrapper>
     );
   }
