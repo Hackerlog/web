@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import { c } from '../theme';
+import { c } from '../../theme';
 
 const spin = keyframes`
   0% { transform: rotate(0deg); }  
@@ -36,13 +36,11 @@ const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
-  color: ${props => (props.outline ? props.theme[props.type || 'default'] : props.theme.white)};
-  background-color: ${props =>
-    !props.outline ? props.theme[props.type || 'default'] : props.theme.white};
+  color: ${props => (props.outline ? c(props.color, 'default') : c('white'))};
+  background-color: ${props => (!props.outline ? c(props.color, 'default') : c('white'))};
   border-radius: 48px;
-  border: 2px solid
-    ${props => (props.outline ? props.theme[props.type || 'default'] : 'transparent')};
-  box-shadow: ${props => props.theme.shadows.small};
+  border: 1px solid ${props => (props.outline ? c(props.color, 'white') : 'transparent')};
+  box-shadow: ${c('shadows.small')};
   font-size: 15px;
 
   &:active,
@@ -75,9 +73,9 @@ const Button = ({
   className,
   disabled,
   type,
+  color,
   outline,
   round,
-  icon,
   fluid,
 }) => (
   <StyledButton
@@ -85,9 +83,9 @@ const Button = ({
     onClick={onClick}
     disabled={disabled || isLoading}
     type={type}
+    color={color}
     outline={outline}
     round={round}
-    icon={icon}
     fluid={fluid}
   >
     {isLoading ? <Loading /> : children}

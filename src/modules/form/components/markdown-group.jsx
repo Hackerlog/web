@@ -5,6 +5,7 @@ import Preview from 'showdown';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 
 import { GroupWrapper, Errors, Label } from '../styles';
+import ToolbarIcon from './toolbar-icons';
 
 @observer
 export default class MarkdownGroup extends Component {
@@ -24,6 +25,9 @@ export default class MarkdownGroup extends Component {
           editorState={field.value}
           onChange={this.handleOnChange}
           layout="tabbed"
+          buttonContentOptions={{
+            iconProvider: name => <ToolbarIcon name={name} />,
+          }}
           generateMarkdownPreview={markdown => Promise.resolve(this.converter.makeHtml(markdown))}
         />
       </GroupWrapper>

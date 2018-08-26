@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
-import CreateForm from '../form';
-import { IsRequired, IsRequiredIf } from '../form/validators';
-import { InputGroup, DateGroup, MarkdownGroup, SelectGroup } from '../form/components';
-import { states } from '../../utils/constants';
-import Button from '../../components/button';
+import CreateForm from 'Modules/form';
+import { IsRequired, IsRequiredIf } from 'Modules/form/validators';
+import {
+  InputGroup,
+  DateGroup,
+  MarkdownGroup,
+  SelectGroup,
+  CheckboxGroup,
+} from 'Modules/form/components';
+import { states } from 'Utils/constants';
+import { Button } from 'Modules/common/components';
 
 const options = states.map(state => ({
   value: state,
@@ -76,7 +82,6 @@ export const jobForm = new CreateForm([
 @observer
 class JobForm extends Component {
   handleOnSubmit = e => {
-    console.log('Submitted');
     e.preventDefault();
     const { form } = this.props;
     if (!form.isValid) {

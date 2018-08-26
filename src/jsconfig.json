@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "moduleResolution": "node",
+    "module": "es6",
+    "target": "es6",
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "paths": {
+      "~/*": ["./*"],
+      "Assets": ["./assets"],
+      "Modules": ["./modules"],
+      "Pages": ["./pages"],
+      "Services": ["./services"],
+      "Utils": ["./utils"],
+      "Src": ["./"],
+      "Theme": ["./modules/theme"]
+    }
+  },
+  "include": ["./**/*"],
+  "exclude": ["../node_modules/**/*"]
+}

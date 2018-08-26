@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Button from './button';
+import { Button } from 'Modules/common/components';
 
 const Input = styled.input`
   height: 48px;

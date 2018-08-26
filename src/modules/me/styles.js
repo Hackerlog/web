@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { c } from '../../theme';
+import { c } from 'Theme';
 
 export const Wrapper = styled.main`
   display: grid;

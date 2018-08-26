@@ -39,4 +39,4 @@ const theme = {
 
 export default theme;
 
-export const c = key => get(theme, key, key.toString());
+export const c = (key, fallback = null) => get(theme, key, fallback);

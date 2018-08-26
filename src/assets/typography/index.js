@@ -1,6 +1,6 @@
 import Typography from 'typography';
 
-import colors from '../../theme/colors';
+import colors from 'Theme/colors';
 
 const typography = new Typography({
   baseFontSize: '18px',

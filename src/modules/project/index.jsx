@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import Markdown from 'react-markdown';
 import { IoMdCreate, IoMdTrash } from 'react-icons/io';
 
-import { c } from '../../theme';
-import { ActionButtons } from '../me/styles';
-import Button from '../../components/button';
-import star from '../../assets/img/star.png';
-import commits from '../../assets/img/commits.png';
-import contributors from '../../assets/img/contributors.png';
-import language from '../../assets/img/language.png';
+import { c } from 'Theme';
+import { ActionButtons } from 'Modules/me/styles';
+import { Button } from 'Modules/common/components';
+import star from 'Assets/img/star.png';
+import commits from 'Assets/img/commits.png';
+import contributors from 'Assets/img/contributors.png';
+import language from 'Assets/img/language.png';
 
 const Wrapper = styled.article`
   display: flex;

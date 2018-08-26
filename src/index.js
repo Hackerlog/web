@@ -1,9 +1,10 @@
 /* eslint react/jsx-filename-extension: off */
 import React from 'react';
 import { render } from 'react-dom';
+/* eslint-disable */
 import Modal from 'react-modal';
 
-import App from './components/app';
+import App from './app';
 
 const rootEl = document.getElementById('root');
 
@@ -16,7 +17,7 @@ const renderApp = () => {
 renderApp();
 
 if (module.hot) {
-  module.hot.accept(['./components/app'], () => {
+  module.hot.accept(['./app'], () => {
     renderApp();
   });
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 
-import logo from '../assets/img/logo-white.svg';
+import logo from 'Assets/img/logo-white.svg';
 import {
   Background,
   Wrapper,
@@ -12,8 +12,8 @@ import {
   CreateAccountLink,
   WhiteLink,
   SmallText,
-} from '../modules/login/styles';
-import { ErrorAlert } from '../components/alert';
+} from 'Modules/login/styles';
+import { ErrorAlert } from 'Modules/common/components';
 
 const Login = ({ store }) => (
   <Background>

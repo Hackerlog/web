@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Offline } from 'react-detect-offline';
 
-import theme from '../../theme';
+import theme from 'Theme';
 
 const Banner = styled.div`
   position: fixed;

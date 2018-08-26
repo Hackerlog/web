@@ -1,6 +1,6 @@
 import * as loadable from 'react-loadable';
 
-import Loading from '../components/loading';
+import { Loading } from '../modules/common/components';
 
 export const AsyncHome = loadable({
   loader: () => import(/* webpackChunkName: "home" */ './home'),

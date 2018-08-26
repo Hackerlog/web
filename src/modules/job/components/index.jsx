@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { IoMdCreate, IoMdTrash } from 'react-icons/io';
 import Markdown from 'react-markdown';
 import styled from 'styled-components';
+import { createConfirmation } from 'react-confirm';
 
-import Button from '../../components/button';
-import { c } from '../../theme';
-import { ActionButtons } from '../me/styles';
+import { Button, Confirm } from 'Modules/common/components';
+import { c } from 'Theme';
+import { ActionButtons } from 'Modules/me/styles';
+
+const confirm = createConfirmation(Confirm);
 
 const Wrapper = styled.article`
   display: flex;
@@ -81,20 +84,32 @@ class Job extends Component {
   };
 
   editJob = () => {
-    // TODO - @deric: this...
+    // TODO: this...
   };
 
-  deleteJob = () => {};
+  deleteJob = () => {
+    confirm({
+      title: 'Are you sure?',
+      confirmation: 'This action cannot be reversed. Do you really want to do this?',
+    }).then(
+      ok => {
+        console.log(ok);
+      },
+      cancel => {
+        console.log(cancel);
+      }
+    );
+  };
 
   render() {
     const { companyName, position, date, city, state, description } = this.props.job;
     return (
       <Wrapper>
         <ActionButtons>
-          <Button onClick={this.editJob} type="success" icon="edit" round title="Edit Job">
+          <Button onClick={this.editJob} color="success" round title="Edit Job">
             <IoMdCreate size="18px" />
           </Button>
-          <Button onClick={this.deleteJob} type="error" icon="delete" round title="Delete Job">
+          <Button onClick={this.deleteJob} color="error" round title="Delete Job">
             <IoMdTrash size="18px" />
           </Button>
         </ActionButtons>

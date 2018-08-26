@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { HIDE_FEATURES } from '../utils/constants';
+import { HIDE_FEATURES } from 'Utils/constants';
 
-const hideFeature = FeatureRoute => props =>
+const featureFlag = FeatureRoute => props =>
   HIDE_FEATURES() ? <Redirect to="/" /> : <FeatureRoute {...props} />;
 
-export default hideFeature;
+export default featureFlag;

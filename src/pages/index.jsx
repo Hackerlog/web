@@ -1,9 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Tracking from '../components/tracking';
-import protect from '../components/protected-route';
-import hideFeature from '../components/feature-route';
+import { Tracking, protectRoute, featureFlag } from 'Modules/common/components';
 import {
   AsyncHome,
   AsyncLogin,
@@ -20,12 +18,12 @@ const Pages = () => (
     <Route path="/" component={Tracking} />
     <Switch>
       <Route exact path="/" component={AsyncHome} />
-      <Route exact path="/login" component={hideFeature(AsyncLogin)} />
-      <Route exact path="/signup" component={hideFeature(AsyncSignup)} />
-      <Route exact path="/password-reset" component={hideFeature(AsyncPasswordReset)} />
-      <Route exact path="/me" component={hideFeature(protect(AsyncMe))} />
-      <Route exact path="/components" component={hideFeature(AsyncComponents)} />
-      <Route exact path="/reset-password/:token" component={hideFeature(AsyncResetPassword)} />
+      <Route exact path="/login" component={featureFlag(AsyncLogin)} />
+      <Route exact path="/signup" component={featureFlag(AsyncSignup)} />
+      <Route exact path="/password-reset" component={featureFlag(AsyncPasswordReset)} />
+      <Route exact path="/me" component={featureFlag(protectRoute(AsyncMe))} />
+      <Route exact path="/components" component={featureFlag(AsyncComponents)} />
+      <Route exact path="/reset-password/:token" component={featureFlag(AsyncResetPassword)} />
       <Route component={AsyncFourOhFour} />
     </Switch>
   </React.Fragment>

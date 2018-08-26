@@ -1,9 +1,9 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 
-import { LoginInput, LoginButton, SignupText, CreateAccountLink } from '../modules/login/styles';
-import { ErrorAlert } from '../components/alert';
-import logo from '../assets/img/logo-white.svg';
+import { LoginInput, LoginButton, SignupText, CreateAccountLink } from 'Modules/login/styles';
+import { ErrorAlert } from 'Modules/common/components';
+import logo from 'Assets/img/logo-white.svg';
 import {
   FormWrapper,
   UsernameWrapper,
@@ -12,7 +12,7 @@ import {
   Background,
   UsernameInputWrapper,
   UsernameInput,
-} from '../modules/signup/styles';
+} from 'Modules/signup/styles';
 
 const usernameMessage = (isAvailable, isValid) => {
   if (!isAvailable) {

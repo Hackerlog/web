@@ -2,7 +2,7 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Redirect } from 'react-router-dom';
 
-const protect = ProtectedRoute => {
+const protectRoute = ProtectedRoute => {
   class ProtectHoc extends React.Component {
     isLoggedIn = () => this.props.store.userStore.isLoggedIn();
 
@@ -18,4 +18,4 @@ const protect = ProtectedRoute => {
   return inject('store')(observer(ProtectHoc));
 };
 
-export default protect;
+export default protectRoute;

@@ -21,5 +21,5 @@ ErrorAlert.displayName = 'ErrorAlert';
 
 export const SuccessAlert = styled(InfoAlert)`
   background: ${props => props.theme.success};
-SuccessAlert.displayName = 'SuccessAlert';
 `;
+SuccessAlert.displayName = 'SuccessAlert';

@@ -1,9 +1,9 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 
-import Job from '../modules/job';
-import Project from '../modules/project';
-import { user as data } from '../modules/me/mock-data';
+import Job from 'Modules/job/components';
+import Project from 'Modules/project';
+import { user as data } from 'Modules/me/mock-data';
 import {
   Wrapper,
   Sidebar,
@@ -16,11 +16,10 @@ import {
   Keywords,
   Keyword,
   SocialIconWrapper,
-} from '../modules/me/styles';
-import If from '../components/if';
-import ProfileImage from '../components/profile-image';
-import twitterIcon from '../assets/img/twitter.svg';
-import linkedinIcon from '../assets/img/linkedin.svg';
+} from 'Modules/me/styles';
+import { If, ProfileImage } from 'Modules/common/components';
+import twitterIcon from 'Assets/img/twitter.svg';
+import linkedinIcon from 'Assets/img/linkedin.svg';
 
 @inject(({ store }) => ({ store: store.userStore }))
 @observer
