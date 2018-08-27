@@ -1,4 +1,4 @@
-import { observable, computed } from 'mobx';
+import { observable, computed, runInAction } from 'mobx';
 
 export default class Project {
   /* prettier-ignore */
@@ -32,16 +32,18 @@ export default class Project {
       numOfStars,
     }
   ) {
-    this.user = user;
-    this.id = id;
-    this.name = name;
-    this.source = source;
-    this.createdOn = createdOn;
-    this.description = description;
-    this.mainLanguage = mainLanguage;
-    this.numOfCommits = numOfCommits;
-    this.numOfContributors = numOfContributors;
-    this.numOfStars = numOfStars;
+    runInAction(() => {
+      this.user = user;
+      this.id = id;
+      this.name = name;
+      this.source = source;
+      this.createdOn = createdOn;
+      this.description = description;
+      this.mainLanguage = mainLanguage;
+      this.numOfCommits = numOfCommits;
+      this.numOfContributors = numOfContributors;
+      this.numOfStars = numOfStars;
+    });
   }
 
   @computed

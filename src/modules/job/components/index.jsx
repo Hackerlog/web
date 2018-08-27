@@ -7,6 +7,7 @@ import { createConfirmation } from 'react-confirm';
 import { Button, Confirm } from 'Modules/common/components';
 import { c } from 'Theme';
 import { ActionButtons } from 'Modules/me/styles';
+import Form from './form';
 
 const confirm = createConfirmation(Confirm);
 
@@ -73,6 +74,7 @@ const Location = styled.p`
 class Job extends Component {
   state = {
     showActions: false,
+    isOpen: false,
   };
 
   showActions = () => {
@@ -84,7 +86,7 @@ class Job extends Component {
   };
 
   editJob = () => {
-    // TODO: this...
+    this.setState({ isOpen: true });
   };
 
   deleteJob = () => {
@@ -124,6 +126,7 @@ class Job extends Component {
         <Body>
           <Markdown>{description}</Markdown>
         </Body>
+        <Form isOpen={this.state.isOpen} job={this.props.job} />
       </Wrapper>
     );
   }

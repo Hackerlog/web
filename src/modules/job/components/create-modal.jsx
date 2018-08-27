@@ -1,11 +1,12 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { observer, inject } from 'mobx-react';
-import CreateJobForm from './form';
+
+import CreateJobForm, { jobForm } from './form';
 
 const CreateModal = ({ isOpen }) => (
   <Modal isOpen={isOpen}>
-    <CreateJobForm />
+    <CreateJobForm form={jobForm} />
   </Modal>
 );
 

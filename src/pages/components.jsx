@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Form, { jobForm } from 'Modules/job/components/form';
 import { Confirm } from 'Modules/common/components';
 
 const Wrapper = styled.section`
@@ -13,7 +12,6 @@ export default function() {
   return (
     <div>
       <Wrapper>
-        <Form form={jobForm} />
         <Confirm />
       </Wrapper>
     </div>

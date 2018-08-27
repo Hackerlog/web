@@ -34,16 +34,17 @@ export default class Form {
     );
   }
 
-  constructor(fields) {
+  constructor(fields, initialValues = {}) {
     runInAction(() => {
       this.fieldNames = fields.map(props => props.name);
-      this.fields = fields.reduce(
-        (dataset, props) => ({
+      this.fields = fields.reduce((dataset, props) => {
+        const initialValue = initialValues[props.name] || props.initialValue;
+        const newProps = { ...props, initialValue };
+        return {
           ...dataset,
-          [props.name]: new Field(this, props),
-        }),
-        {}
-      );
+          [newProps.name]: new Field(this, newProps),
+        };
+      }, {});
     });
   }
 

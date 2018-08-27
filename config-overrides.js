@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const { resolve } = require('path');
 const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { injectBabelPlugin } = require('react-app-rewired');
@@ -15,6 +14,7 @@ const aliases = {
   Theme: resolve(__dirname, 'src/modules/theme/'),
 };
 module.exports = (config, env) => {
+  // Add our aliases to webpack
   config = rewireAlias(config, aliases);
 
   // Split out the vendor bundle

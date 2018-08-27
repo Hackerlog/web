@@ -1,4 +1,4 @@
-import { computed, observable, action } from 'mobx';
+import { computed, observable, action, runInAction } from 'mobx';
 
 export default class Job {
   /* prettier-ignore */
@@ -24,16 +24,18 @@ export default class Job {
     user,
     { id, companyName, position, startDate, endDate, isCurrentJob, city, state, description }
   ) {
-    this.user = user;
-    this.id = id;
-    this.companyName = companyName;
-    this.position = position;
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.isCurrentJob = isCurrentJob;
-    this.city = city;
-    this.state = state;
-    this.description = description;
+    runInAction(() => {
+      this.user = user;
+      this.id = id;
+      this.companyName = companyName;
+      this.position = position;
+      this.startDate = startDate;
+      this.endDate = endDate;
+      this.isCurrentJob = isCurrentJob;
+      this.city = city;
+      this.state = state;
+      this.description = description;
+    });
   }
 
   @computed

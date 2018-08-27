@@ -1,3 +1,5 @@
+const { resolve } = require('path');
+
 module.exports = {
   parser: 'babel-eslint',
   parserOptions: {
@@ -11,15 +13,16 @@ module.exports = {
     jest: true,
   },
   rules: {
-    'prettier/prettier': 'error',
-    'linebreak-style': 'off',
-    'react/prop-types': 'off',
-    strict: 'off',
-    'react/no-unescaped-entities': 'off',
-    'class-methods-use-this': 'off',
-    'no-debugger': 'off',
-    'import/no-unresolved': 'off',
-    'import/extensions': 'off',
+    complexity: [1, 4],
+    'prettier/prettier': 2,
+    'linebreak-style': 0,
+    'react/prop-types': 0,
+    strict: 0,
+    'react/no-unescaped-entities': 0,
+    'class-methods-use-this': 0,
+    'no-debugger': 0,
+    'import/no-unresolved': 0,
+    'import/extensions': 0,
   },
   plugins: ['react', 'jsx-a11y', 'prettier'],
 };

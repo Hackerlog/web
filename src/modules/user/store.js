@@ -1,4 +1,4 @@
-import { observable, computed, action } from 'mobx';
+import { observable, computed, action, runInAction } from 'mobx';
 
 import { SESSION_KEY } from '../../utils/constants';
 import Job from '../job/store';
@@ -55,19 +55,21 @@ class User {
       projects,
     }
   ) {
-    this.store = store;
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.token = token;
-    this.title = title;
-    this.website = website;
-    this.twitterUrl = twitterUrl;
-    this.linkedInUrl = linkedInUrl;
-    this.keywords = keywords;
-    this.createJobs(jobs);
-    this.createProjects(projects);
+    runInAction(() => {
+      this.store = store;
+      this.id = id;
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.email = email;
+      this.token = token;
+      this.title = title;
+      this.website = website;
+      this.twitterUrl = twitterUrl;
+      this.linkedInUrl = linkedInUrl;
+      this.keywords = keywords;
+      this.createJobs(jobs);
+      this.createProjects(projects);
+    });
   }
 
   @computed
