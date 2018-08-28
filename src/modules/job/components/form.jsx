@@ -3,7 +3,6 @@ import { observer, inject } from 'mobx-react';
 import Modal from 'react-modal';
 
 import CreateForm from 'Modules/form';
-import { IsRequired, IsRequiredIf } from 'Modules/form/validators';
 import {
   InputGroup,
   DateGroup,
@@ -13,6 +12,7 @@ import {
 } from 'Modules/form/components';
 import { states } from 'Utils/constants';
 import { Button } from 'Modules/common/components';
+import formSchema from '../form-schema';
 
 const options = states.map(state => ({
   value: state,
@@ -29,69 +29,14 @@ class JobForm extends Component {
 
   createForm() {
     const { companyName, position, date, city, state, description } = this.props.job;
-    this.form = new CreateForm(
-      [
-        {
-          name: 'companyName',
-          label: 'Company name?',
-          placeholder: 'Microsoft',
-          validators: [new IsRequired()],
-          initialValue: '',
-        },
-        {
-          name: 'position',
-          label: 'Job title?',
-          placeholder: 'Software Engineer',
-          validators: [new IsRequired()],
-          initialValue: '',
-        },
-        {
-          name: 'isCurrentJob',
-          label: 'Current job?',
-          placeholder: '',
-          initialValue: false,
-        },
-        {
-          name: 'startDate',
-          label: 'Start date?',
-          validators: [new IsRequired()],
-          initialValue: '02/17',
-        },
-        {
-          name: 'endDate',
-          label: 'End date?',
-          validators: [new IsRequiredIf('isCurrentJob', false)],
-          initialValue: '05/18',
-        },
-        {
-          name: 'isRemoteJob',
-          label: 'Is this job remote?',
-          initialValue: false,
-          placeHolder: '',
-        },
-        {
-          name: 'city',
-          label: `Company's city?`,
-          placeholder: 'Foster City',
-          initialValue: '',
-          validators: [new IsRequiredIf('isRemoteJob', false)],
-        },
-        {
-          name: 'state',
-          label: `Company's state`,
-          placeholder: 'CA',
-          initialValue: '',
-          validators: [new IsRequiredIf('isRemoteJob', false)],
-        },
-        {
-          name: 'description',
-          label: 'Write about your job just as you would in your resume (use Markdown)',
-          validators: [new IsRequired()],
-          initialValue: null,
-        },
-      ],
-      { companyName, position, date, city, state, description }
-    );
+    this.form = new CreateForm(formSchema, {
+      companyName,
+      position,
+      date,
+      city,
+      state,
+      description,
+    });
   }
 
   handleOnSubmit = e => {
@@ -103,11 +48,11 @@ class JobForm extends Component {
   };
 
   render() {
-    const { isOpen } = this.props;
+    const { isOpen, onCloseModal } = this.props;
     const { fields } = this.form;
 
     return (
-      <Modal isOpen={isOpen}>
+      <Modal isOpen={isOpen} onRequestClose={onCloseModal}>
         <form onSubmit={this.handleOnSubmit}>
           <h2>Fill out the form</h2>
           <InputGroup field={fields.companyName} type="text" />

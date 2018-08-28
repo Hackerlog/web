@@ -130,21 +130,20 @@ class UserStore {
 
   @action
   isLoggedIn() {
-    // FIXME: This is hard-coded...
+    if (process.env.NODE_ENV === 'development') return true;
+    if (this.user) {
+      return true;
+    }
+
+    const user = this.retrieveStoredUser();
+
+    if (!user) {
+      return false;
+    }
+
+    this.createUser(user);
+
     return true;
-    // if (this.user) {
-    //   return true;
-    // }
-
-    // const user = this.retrieveStoredUser();
-
-    // if (!user) {
-    //   return false;
-    // }
-
-    // this.createUser(user);
-
-    // return true;
   }
 
   @action

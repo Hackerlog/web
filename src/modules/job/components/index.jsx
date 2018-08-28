@@ -73,20 +73,11 @@ const Location = styled.p`
 
 class Job extends Component {
   state = {
-    showActions: false,
     isOpen: false,
   };
 
-  showActions = () => {
-    this.setState({ showActions: true });
-  };
-
-  hideActions = () => {
-    this.setState({ showActions: false });
-  };
-
-  editJob = () => {
-    this.setState({ isOpen: true });
+  onCloseModal = () => {
+    this.setState({ isOpen: false });
   };
 
   deleteJob = () => {
@@ -101,6 +92,10 @@ class Job extends Component {
         console.log(cancel);
       }
     );
+  };
+
+  editJob = () => {
+    this.setState({ isOpen: true });
   };
 
   render() {
@@ -126,7 +121,7 @@ class Job extends Component {
         <Body>
           <Markdown>{description}</Markdown>
         </Body>
-        <Form isOpen={this.state.isOpen} job={this.props.job} />
+        <Form isOpen={this.state.isOpen} job={this.props.job} onCloseModal={this.onCloseModal} />
       </Wrapper>
     );
   }
