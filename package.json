@@ -12,6 +12,7 @@
     "lint": "eslint src/**/*.{js,jsx}",
     "lint:fix": "eslint src/**/*.{js,jsx} --fix",
     "postinstall": "cd src/services/api/src && npm install",
+    "precommit": "lint-staged",
     "start": "react-app-rewired start",
     "test": "react-app-rewired test --env=jsdom"
   },
@@ -56,7 +57,6 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.10.0",
-    "husky": "^0.14.3",
     "jest-fetch-mock": "^1.6.5",
     "jest-styled-components": "^5.0.1",
     "lint-staged": "^7.2.0",
@@ -68,15 +68,10 @@
     "react-testing-library": "^4.1.9",
     "webpack-bundle-analyzer": "^2.13.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run lint"
-    }
-  },
   "lint-staged": {
-    "src/**/*.{ts,tsx,js,json,css,md}": [
-      "prettier --write, git add"
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
     ]
   }
 }

@@ -6,7 +6,7 @@ import { GroupWrapper, Errors, Label } from '../styles';
 import '../styles/date-picker.css';
 
 @observer
-export default class InputGroup extends Component {
+export default class DateGroup extends Component {
   handleOnChange = date => {
     this.props.field.updateValue(date);
   };
@@ -20,7 +20,9 @@ export default class InputGroup extends Component {
         <MonthPicker
           placeholderText={field.placeholder}
           onChange={this.handleOnChange}
-          value={field.value}
+          // TODO: Need to get the dates here
+          // month={this.dateSplit.month}
+          // year={this.dateSplit.year}
           closeOnSelect
           inputProps={{
             name: field.name,

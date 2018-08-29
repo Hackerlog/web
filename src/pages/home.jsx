@@ -3,6 +3,7 @@ import noop from 'lodash/noop';
 import ReactModal from 'react-modal';
 import ReactGA from 'react-ga';
 import LazyLoad from 'react-lazyload';
+import { inject, observer } from 'mobx-react';
 
 import logo from '../assets/img/logo.svg';
 import liveResults from '../assets/img/live-results.svg';
@@ -34,8 +35,9 @@ import {
   Footer,
 } from '../modules/home/styles';
 import { MailingListApi } from '../services/api';
-import Logger from '../services/logger';
 
+@inject('store')
+@observer
 export default class Home extends Component {
   state = {
     email: '',
@@ -50,6 +52,7 @@ export default class Home extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { logger } = this.props.store;
 
     this.setState({ isLoading: true });
 
@@ -58,7 +61,7 @@ export default class Home extends Component {
       action: 'Signup',
     });
 
-    Logger.setUserContext(this.state.email);
+    logger.setUserContext(this.state.email);
 
     const send = new MailingListApi();
     send
@@ -68,7 +71,7 @@ export default class Home extends Component {
       })
       .catch(err => {
         this.setState({ showModal: true, email: '', isLoading: false });
-        Logger.error('Adding email to mailing list failed: ', err);
+        logger.error('Adding email to mailing list failed: ', err);
       });
   };
 

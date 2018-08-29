@@ -1,5 +1,3 @@
-const { resolve } = require('path');
-
 module.exports = {
   parser: 'babel-eslint',
   parserOptions: {

@@ -119,10 +119,10 @@ class Project extends Component {
     return (
       <Wrapper>
         <ActionButtons>
-          <Button onClick={this.editProject} type="success" round title="Edit Project">
+          <Button onClick={this.editProject} color="success" round title="Edit Project">
             <IoMdCreate size="18px" />
           </Button>
-          <Button onClick={this.deleteProject} type="error" round title="Delete Project">
+          <Button onClick={this.deleteProject} color="error" round title="Delete Project">
             <IoMdTrash size="18px" />
           </Button>
         </ActionButtons>

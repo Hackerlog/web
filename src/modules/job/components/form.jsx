@@ -28,15 +28,29 @@ class JobForm extends Component {
   }
 
   createForm() {
-    const { companyName, position, date, city, state, description } = this.props.job;
+    const {
+      companyName,
+      position,
+      city,
+      state,
+      description,
+      startDate,
+      endDate,
+      isCurrentJob,
+      isRemoteJob,
+    } = this.props.job;
     this.form = new CreateForm(formSchema, {
       companyName,
       position,
-      date,
+      startDate,
+      endDate,
+      isCurrentJob,
+      isRemoteJob,
       city,
       state,
       description,
     });
+    console.log(this.form);
   }
 
   handleOnSubmit = e => {

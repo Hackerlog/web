@@ -33,10 +33,10 @@ class User {
   @observable keywords
 
   /* prettier-ignore */
-  @observable jobs = [];
+  @observable.shallow jobs = [];
 
   /* prettier-ignore */
-  @observable projects = [];
+  @observable.shallow projects = [];
 
   constructor(
     store,

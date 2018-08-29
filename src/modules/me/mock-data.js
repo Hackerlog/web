@@ -2,7 +2,7 @@ export const job = {
   id: 1,
   companyName: 'Guidewire Inc.',
   position: 'Software Engineer',
-  startDate: 'July 2017',
+  startDate: '07/2017',
   endDate: null,
   isCurrentJob: true,
   city: 'Birmingham',
