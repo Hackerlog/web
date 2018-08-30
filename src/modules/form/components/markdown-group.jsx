@@ -9,6 +9,14 @@ import ToolbarIcon from './toolbar-icons';
 
 @observer
 export default class MarkdownGroup extends Component {
+  get value() {
+    if (typeof this.props.field.value === 'string') {
+      return { markdown: this.props.field.value };
+    }
+
+    return this.props.field.value;
+  }
+
   converter = new Preview.Converter();
 
   handleOnChange = e => {
@@ -17,12 +25,13 @@ export default class MarkdownGroup extends Component {
 
   render() {
     const { field } = this.props;
+
     return (
       <GroupWrapper>
         <Label htmlFor={field.id}>{field.label}</Label>
         {field.hasErrors && field.isTouched ? <Errors>{field.errors[0]}</Errors> : null}
         <Markdown
-          editorState={field.value}
+          editorState={this.value}
           onChange={this.handleOnChange}
           layout="tabbed"
           buttonContentOptions={{

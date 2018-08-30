@@ -38,12 +38,7 @@ export default class Form {
     runInAction(() => {
       this.fieldNames = fields.map(props => props.name);
       this.fields = fields.reduce((dataset, props) => {
-        let initialValue = props.initialValue;
-        if (props.name === 'description') {
-          initialValue = { markdown: initialValues[props.name] || initialValue };
-        } else {
-          initialValue = initialValues[props.name] || initialValue;
-        }
+        const initialValue = initialValues[props.name] || props.initialValue;
         const newProps = { ...props, initialValue };
         return {
           ...dataset,

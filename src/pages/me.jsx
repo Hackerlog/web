@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
 import Job from 'Modules/job/components';
-import Project from 'Modules/project';
+import Project from 'Modules/project/components';
 import { user as data } from 'Modules/me/mock-data';
 import {
   Wrapper,
@@ -23,7 +23,7 @@ import linkedinIcon from 'Assets/img/linkedin.svg';
 
 @inject(({ store }) => ({ store: store.userStore }))
 @observer
-class Me extends React.Component {
+export default class Me extends Component {
   static NOT_RELEASED = true;
 
   constructor(props) {
@@ -80,5 +80,3 @@ class Me extends React.Component {
     );
   }
 }
-
-export default Me;

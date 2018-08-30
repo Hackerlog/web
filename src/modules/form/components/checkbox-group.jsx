@@ -31,7 +31,7 @@ export default class InputGroup extends Component {
             id={field.name}
             placeholder={field.placeholder}
             onChange={this.handleOnChange}
-            value={field.value}
+            checked={field.value}
           />
           {field.label}
         </Label>

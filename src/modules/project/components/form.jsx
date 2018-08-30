@@ -8,20 +8,35 @@ import {
   DateGroup,
   MarkdownGroup,
   SelectGroup,
-  CheckboxGroup,
+  CreatableGroup,
 } from 'Modules/form/components';
-import { states } from 'Utils/constants';
 import { Button } from 'Modules/common/components';
+import { languages } from 'Modules/me/mock-data';
 import formSchema from '../form-schema';
 
-const options = states.map(state => ({
-  value: state,
-  label: state,
+const languageOptions = languages.map(l => ({
+  label: l,
+  value: l,
 }));
+
+const options = [
+  {
+    label: 'Github',
+    value: 'Github',
+  },
+  {
+    label: 'Bitbucket',
+    value: 'Bitbucket',
+  },
+  {
+    label: 'Gitlab',
+    value: 'Gitlab',
+  },
+];
 
 @inject('store')
 @observer
-class JobForm extends Component {
+export default class ProjectForm extends Component {
   constructor(props) {
     super(props);
     this.createForm();
@@ -29,26 +44,24 @@ class JobForm extends Component {
 
   createForm() {
     const {
-      companyName,
-      position,
-      city,
-      state,
+      name,
+      source,
+      createdOn,
+      mainLanguage,
       description,
-      startDate,
-      endDate,
-      isCurrentJob,
-      isRemoteJob,
-    } = this.props.job;
+      numOfCommits,
+      numOfContributors,
+      numOfStars,
+    } = this.props.project;
     this.form = new CreateForm(formSchema, {
-      companyName,
-      position,
-      startDate,
-      endDate,
-      isCurrentJob,
-      isRemoteJob,
-      city,
-      state,
+      name,
+      source,
+      createdOn,
+      mainLanguage,
       description,
+      numOfCommits,
+      numOfContributors,
+      numOfStars,
     });
   }
 
@@ -68,14 +81,13 @@ class JobForm extends Component {
       <Modal isOpen={isOpen} onRequestClose={onCloseModal}>
         <form onSubmit={this.handleOnSubmit}>
           <h2>Fill out the form</h2>
-          <InputGroup field={fields.companyName} type="text" />
-          <InputGroup field={fields.position} type="text" />
-          <CheckboxGroup field={fields.isCurrentJob} />
-          <DateGroup field={fields.startDate} type="text" />
-          <DateGroup field={fields.endDate} type="text" />
-          <CheckboxGroup field={fields.isRemoteJob} />
-          <InputGroup field={fields.city} type="text" />
-          <SelectGroup field={fields.state} options={options} />
+          <InputGroup field={fields.name} />
+          <SelectGroup field={fields.source} options={options} />
+          <DateGroup field={fields.createdOn} />
+          <CreatableGroup field={fields.mainLanguage} options={languageOptions} />
+          <InputGroup field={fields.numOfCommits} type="number" />
+          <InputGroup field={fields.numOfContributors} type="number" />
+          <InputGroup field={fields.numOfStars} type="number" />
           <MarkdownGroup field={fields.description} />
           <Button color="primary">Submit</Button>
         </form>
@@ -83,4 +95,3 @@ class JobForm extends Component {
     );
   }
 }
-export default JobForm;
