@@ -3,7 +3,6 @@ import { observer, inject } from 'mobx-react';
 
 import Job from 'Modules/job/components';
 import Project from 'Modules/project/components';
-import { user as data } from 'Modules/me/mock-data';
 import {
   Wrapper,
   Sidebar,
@@ -20,6 +19,7 @@ import {
 import { If, ProfileImage } from 'Modules/common/components';
 import twitterIcon from 'Assets/img/twitter.svg';
 import linkedinIcon from 'Assets/img/linkedin.svg';
+import mock, { job, project } from 'Utils/mocks';
 
 @inject(({ store }) => ({ store: store.userStore }))
 @observer
@@ -28,7 +28,7 @@ export default class Me extends Component {
 
   constructor(props) {
     super(props);
-    props.store.createUser(data);
+    props.store.createUser(mock('user', { jobs: job(4), projects: project(6) }));
   }
 
   renderKeywords = keywords => keywords.map(k => <Keyword key={k}>{k}</Keyword>);
@@ -69,11 +69,11 @@ export default class Me extends Component {
           />
         </Sidebar>
         <Main>
-          {user.jobs.map(job => (
-            <Job job={job} key={job.id} />
+          {user.jobs.map(j => (
+            <Job job={j} key={j.id} />
           ))}
-          {user.projects.map(project => (
-            <Project project={project} key={project.id} />
+          {user.projects.map(p => (
+            <Project project={p} key={p.id} />
           ))}
         </Main>
       </Wrapper>

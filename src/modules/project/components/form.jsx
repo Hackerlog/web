@@ -11,7 +11,7 @@ import {
   CreatableGroup,
 } from 'Modules/form/components';
 import { Button } from 'Modules/common/components';
-import { languages } from 'Modules/me/mock-data';
+import languages from 'Utils/mocks/languages';
 import formSchema from '../form-schema';
 
 const languageOptions = languages.map(l => ({
