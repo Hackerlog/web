@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Confirm } from 'Modules/common/components';
+import { Confirm } from '../../modules/common/components';
 
 const Wrapper = styled.section`
   margin: 12px;

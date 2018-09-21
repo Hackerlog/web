@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import sha1 from 'sha1';
 
-import logger from 'Services/logger';
+import logger from '../../../services/logger';
 import { Loading } from '.';
 
 // const spinner = <Icon type="loading" style={{ fontSize: 24 }} spin />;

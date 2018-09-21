@@ -3,8 +3,8 @@ import { confirmable } from 'react-confirm';
 import styled from 'styled-components';
 import { MdCheck, MdClose } from 'react-icons/md';
 
-import { c } from 'Theme';
-import { Button } from 'Modules/common/components';
+import { c } from '../../theme';
+import Button from './button';
 
 const Wrapper = styled.div`
   display: ${({ isActive }) => (isActive ? 'block' : 'none')};

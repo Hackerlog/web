@@ -1,8 +1,8 @@
 import { observable, computed, action, runInAction } from 'mobx';
 
 import { SESSION_KEY } from '../../utils/constants';
-import Job from '../job/store';
-import Project from '../project/store';
+import Job from '../../pages/me/job/store';
+import Project from '../../pages/me/project/store';
 
 class User {
   /* prettier-ignore */

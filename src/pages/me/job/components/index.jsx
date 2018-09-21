@@ -3,8 +3,8 @@ import { IoMdCreate, IoMdTrash } from 'react-icons/io';
 import Markdown from 'react-markdown';
 import { createConfirmation } from 'react-confirm';
 
-import { Button, Confirm } from 'Modules/common/components';
-import { ActionButtons } from 'Modules/me/styles';
+import { Button, Confirm } from '../../../../modules/common/components/index';
+import { ActionButtons } from '../../styles';
 import Form from './form';
 import { Body, Header, Location, Wrapper } from './styles';
 

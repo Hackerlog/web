@@ -6,4 +6,5 @@ const If = ({ condition, then, else: renamedElse = null }) => {
   }
   return null;
 };
+
 export default If;

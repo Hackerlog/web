@@ -1,8 +1,8 @@
 import React from 'react';
 import { fireEvent } from 'react-testing-library';
 
-import renderWithRouter from '../utils/test-utils';
-import Login from './login';
+import renderWithRouter from '../../utils/test-utils';
+import Login from './index';
 
 describe('<Login />', () => {
   beforeEach(() => {

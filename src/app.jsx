@@ -6,11 +6,11 @@ import { ThemeProvider } from 'styled-components';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { syncHistoryWithStore } from 'mobx-react-router';
 
-import OfflineBanner from 'Modules/offline';
-import Logger from 'Services/logger';
-import { AuthApi, UsersApi } from 'Services/api';
-import theme from 'Theme';
-import typography from 'Assets/typography';
+import OfflineBanner from './modules/offline';
+import Logger from './services/logger';
+import { AuthApi, UsersApi } from './services/api';
+import theme from './modules/theme';
+import typography from './assets/typography';
 import Pages from './pages';
 import RootStore from './store';
 

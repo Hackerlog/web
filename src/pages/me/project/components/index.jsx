@@ -3,12 +3,12 @@ import Markdown from 'react-markdown';
 import { IoMdCreate, IoMdTrash } from 'react-icons/io';
 import { createConfirmation } from 'react-confirm';
 
-import { ActionButtons } from 'Modules/me/styles';
-import { Button, Confirm } from 'Modules/common/components/index';
-import star from 'Assets/img/star.png';
-import commits from 'Assets/img/commits.png';
-import contributors from 'Assets/img/contributors.png';
-import language from 'Assets/img/language.png';
+import { ActionButtons } from '../../styles';
+import { Button, Confirm } from '../../../../modules/common/components/index';
+import star from '../../../../assets/img/star.png';
+import commits from '../../../../assets/img/commits.png';
+import contributors from '../../../../assets/img/contributors.png';
+import language from '../../../../assets/img/language.png';
 import { Body, Header, Stat, StatWrapper, Wrapper } from './styles';
 import Form from './form';
 

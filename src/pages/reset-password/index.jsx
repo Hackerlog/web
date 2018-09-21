@@ -2,13 +2,13 @@ import React from 'react';
 import noop from 'lodash/noop';
 import styled from 'styled-components';
 
-import { Background } from 'Modules/signup/styles';
-import { AuthApi } from 'Services/api';
-import { SuccessAlert, ErrorAlert } from 'Modules/common/components';
-import { InputWithButton } from 'Modules/form/components';
-import logger from 'Services/logger';
-import { Logo, SmallText, WhiteLink } from 'Modules/login/styles';
-import logo from 'Assets/img/logo-white.svg';
+import { Background } from '../signup/styles';
+import { Logo, SmallText, WhiteLink } from '../login/styles';
+import { SuccessAlert, ErrorAlert } from '../../modules/common/components';
+import { InputWithButton } from '../../modules/form/components';
+import { AuthApi } from '../../services/api';
+import logger from '../../services/logger';
+import logo from '../../assets/img/logo-white.svg';
 
 const Wrapper = styled.div`
   max-width: 540px;

@@ -1,7 +1,7 @@
 /* eslint react/jsx-filename-extension: off */
 import React from 'react';
 import { render } from 'react-dom';
-/* eslint-disable */
+
 import Modal from 'react-modal';
 
 import App from './app';

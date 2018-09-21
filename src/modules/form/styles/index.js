@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { c } from 'Theme';
+import { c } from '../../theme';
 
 export const GroupWrapper = styled.div`
   display: flex;

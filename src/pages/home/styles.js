@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import rocket from 'Assets/img/rocket.svg';
+import rocket from '../../assets/img/rocket.svg';
 
 export const HomeWrapper = styled.main`
   background: ${props => props.theme.white};

@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 
-import logo from 'Assets/img/logo-white.svg';
+import logo from '../../assets/img/logo-white.svg';
 import {
   Background,
   Wrapper,
@@ -12,10 +12,10 @@ import {
   CreateAccountLink,
   WhiteLink,
   SmallText,
-} from 'Modules/login/styles';
-import { ErrorAlert } from 'Modules/common/components';
+} from './styles';
+import { ErrorAlert } from '../../modules/common/components';
 
-const Login = ({ store }) => (
+const Index = ({ store }) => (
   <Background>
     <Wrapper>
       <Logo src={logo} alt="Login to Hackerlog!" />
@@ -36,7 +36,7 @@ const Login = ({ store }) => (
           data-testid="login-password-input"
           onChange={store.handleInputChange}
         />
-        <LoginButton type="primary" isLoading={store.isLoading} data-testid="login-submit-button">
+        <LoginButton color="primary" isLoading={store.isLoading} data-testid="login-submit-button">
           Login
         </LoginButton>
       </form>
@@ -52,6 +52,6 @@ const Login = ({ store }) => (
   </Background>
 );
 
-Login.NOT_RELEASED = true;
+Index.NOT_RELEASED = true;
 
-export default inject(({ store }) => ({ store: store.loginStore }))(observer(Login));
+export default inject(({ store }) => ({ store: store.loginStore }))(observer(Index));

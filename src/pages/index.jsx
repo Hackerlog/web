@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { Tracking, protectRoute, featureFlag } from 'Modules/common/components';
+import { Tracking, protectRoute, featureFlag } from '../modules/common/components';
 import {
   AsyncHome,
   AsyncLogin,

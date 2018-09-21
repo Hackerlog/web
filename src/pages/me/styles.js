@@ -1,22 +1,18 @@
 import styled from 'styled-components';
 
-import { c } from 'Theme';
+import { c } from '../../modules/theme/index';
 
 export const Wrapper = styled.main`
   display: grid;
-  grid-template-areas: 'sidebar main';
   grid-template-columns: 260px auto;
   height: 100vh;
-  overflow-x: hidden;
 `;
 
 export const Main = styled.div`
-  grid-template: main;
   padding: 18px;
 `;
 
 export const Sidebar = styled.aside`
-  grid-template: sidebar;
   background: ${c('gradients.login')};
   display: flex;
   flex-direction: column;
@@ -86,18 +82,19 @@ export const ActionButtons = styled.div.attrs({
   top: 50%;
   right: 0;
   height: auto;
-  display: 'flex';
+  display: flex;
   flex-direction: column;
-  transition: transform ease-in-out 0.3s;
-  transform: translate(160px, -50%);
+  overflow-x: hidden;
+  transform: translateY(-50%);
 
   button {
+    transform: translate(100px, 0);
     margin: 6px;
-    transition: box-shadow ease-in-out 0.2s;
+    transition: all ease-in-out 0.2s;
 
     &:hover {
       box-shadow: ${c('shadows.medium')};
-      transition: box-shadow ease-in-out 0.2s;
+      transition: all ease-in-out 0.2s;
     }
   }
 `;

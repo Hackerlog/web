@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
-import Job from 'Modules/job/components';
-import Project from 'Modules/project/components';
+import Job from './job/components';
+import Project from './project/components';
 import {
   Wrapper,
   Sidebar,
@@ -15,11 +15,11 @@ import {
   Keywords,
   Keyword,
   SocialIconWrapper,
-} from 'Modules/me/styles';
-import { If, ProfileImage } from 'Modules/common/components';
-import twitterIcon from 'Assets/img/twitter.svg';
-import linkedinIcon from 'Assets/img/linkedin.svg';
-import mock, { job, project } from 'Utils/mocks';
+} from '../me/styles';
+import { If, ProfileImage } from '../../modules/common/components';
+import twitterIcon from '../../assets/img/twitter.svg';
+import linkedinIcon from '../../assets/img/linkedin.svg';
+import mock, { job, project } from '../../utils/mocks';
 
 @inject(({ store }) => ({ store: store.userStore }))
 @observer

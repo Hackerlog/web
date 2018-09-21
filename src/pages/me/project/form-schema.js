@@ -1,4 +1,4 @@
-import { IsRequired } from '../form/validators';
+import { IsRequired } from '../../../modules/form/validators/index';
 
 const formSchema = [
   {

@@ -5,17 +5,17 @@ import ReactGA from 'react-ga';
 import LazyLoad from 'react-lazyload';
 import { inject, observer } from 'mobx-react';
 
-import logo from '../assets/img/logo.svg';
-import liveResults from '../assets/img/live-results.svg';
-import gitMetrics from '../assets/img/git-metrics.svg';
-import resume from '../assets/img/resume.svg';
-import experience from '../assets/img/experience.svg';
-import modalImage from '../assets/img/modal-image.svg';
-import twitter from '../assets/img/twitter.png';
-import facebook from '../assets/img/facebook.png';
-import linkedin from '../assets/img/linkedin.png';
-import { InputWithButton } from '../modules/form/components';
-import headerImage from '../assets/img/header-image.svg';
+import logo from '../../assets/img/logo.svg';
+import liveResults from '../../assets/img/live-results.svg';
+import gitMetrics from '../../assets/img/git-metrics.svg';
+import resume from '../../assets/img/resume.svg';
+import experience from '../../assets/img/experience.svg';
+import modalImage from '../../assets/img/modal-image.svg';
+import twitter from '../../assets/img/twitter.png';
+import facebook from '../../assets/img/facebook.png';
+import linkedin from '../../assets/img/linkedin.png';
+import { InputWithButton } from '../../modules/form/components/index';
+import headerImage from '../../assets/img/header-image.svg';
 import {
   TopBorder,
   HomeWrapper,
@@ -33,8 +33,8 @@ import {
   ShareButton,
   Closer,
   Footer,
-} from '../modules/home/styles';
-import { MailingListApi } from '../services/api';
+} from './styles';
+import { MailingListApi } from '../../services/api/index';
 
 @inject('store')
 @observer

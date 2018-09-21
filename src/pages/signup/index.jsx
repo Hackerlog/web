@@ -1,9 +1,9 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 
-import { LoginInput, LoginButton, SignupText, CreateAccountLink } from 'Modules/login/styles';
-import { ErrorAlert } from 'Modules/common/components';
-import logo from 'Assets/img/logo-white.svg';
+import { LoginInput, LoginButton, SignupText, CreateAccountLink } from '../login/styles';
+import { ErrorAlert } from '../../modules/common/components';
+import logo from '../../assets/img/logo-white.svg';
 import {
   FormWrapper,
   UsernameWrapper,
@@ -12,7 +12,7 @@ import {
   Background,
   UsernameInputWrapper,
   UsernameInput,
-} from 'Modules/signup/styles';
+} from '../signup/styles';
 
 const usernameMessage = (isAvailable, isValid) => {
   if (!isAvailable) {
@@ -26,7 +26,7 @@ const usernameMessage = (isAvailable, isValid) => {
   return 'Choose a username';
 };
 
-const Signup = ({ store }) => (
+const Index = ({ store }) => (
   <Background>
     <LogoWrapper>
       <Logo src={logo} alt="Login to Hackerlog!" />
@@ -61,7 +61,7 @@ const Signup = ({ store }) => (
         onChange={store.handleInputChange}
       />
       <LoginButton
-        type="primary"
+        color="primary"
         isLoading={store.isLoading}
         onClick={store.transitionToUsername}
         disabled={!store.signupFormIsValid}
@@ -107,4 +107,4 @@ const Signup = ({ store }) => (
 
 export default inject(({ store }) => ({
   store: store.signupStore,
-}))(observer(Signup));
+}))(observer(Index));

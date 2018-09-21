@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Button } from 'Modules/common/components';
+import { Button } from '../../../modules/common/components';
 
 const Input = styled.input`
   height: 48px;
@@ -51,7 +51,7 @@ export const InputWithButton = ({
       data-testid={inputTestId}
     />
     <Button
-      type="primary"
+      color="primary"
       onClick={onClick}
       data-testid={buttonTestId}
       isLoading={isLoading}

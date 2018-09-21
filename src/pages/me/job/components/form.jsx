@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import Modal from 'react-modal';
 
-import CreateForm from 'Modules/form';
+import CreateForm from '../../../../modules/form/index';
 import {
   InputGroup,
   DateGroup,
   MarkdownGroup,
   SelectGroup,
   CheckboxGroup,
-} from 'Modules/form/components';
-import { states } from 'Utils/constants';
-import { Button } from 'Modules/common/components';
+} from '../../../../modules/form/components/index';
+import { states } from '../../../../utils/constants';
+import { Button } from '../../../../modules/common/components/index';
 import formSchema from '../form-schema';
 
 const options = states.map(state => ({

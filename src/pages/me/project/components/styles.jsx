@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 import { c } from 'Theme';
@@ -11,8 +12,8 @@ export const Wrapper = styled.article`
   margin-bottom: 24px;
 
   &:hover {
-    .hackerlog-action-buttons {
-      transform: translate(0, -50%);
+    .hackerlog-action-buttons button {
+      transform: translate(0, 0);
     }
   }
 `;
@@ -55,9 +56,34 @@ export const Header = styled.div`
 
 export const Body = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
-export const Location = styled.p`
-  margin-bottom: 24px;
-  font-size: 14px;
+export const StatWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  column-gap: 12px;
 `;
+
+export const StyledStat = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: ${c('grey.lightest')};
+  padding: 12px;
+  background-image: url(${props => props.background});
+  background-repeat: no-repeat;
+  background-position: 103% 112%;
+  box-shadow: ${c('shadows.medium')};
+  text-align: center;
+
+  p {
+    font-weight: 600;
+  }
+`;
+
+export const Stat = ({ stat, icon, title }) => (
+  <StyledStat background={icon}>
+    <p>{title}</p>
+    <h2>{stat}</h2>
+  </StyledStat>
+);

@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import Modal from 'react-modal';
 
-import CreateForm from 'Modules/form';
+import CreateForm from '../../../../modules/form';
 import {
   InputGroup,
   DateGroup,
   MarkdownGroup,
   SelectGroup,
   CreatableGroup,
-} from 'Modules/form/components';
-import { Button } from 'Modules/common/components';
-import languages from 'Utils/mocks/languages';
+} from '../../../../modules/form/components';
+import { Button } from '../../../../modules/common/components';
+import languages from '../../../../utils/mocks/languages';
 import formSchema from '../form-schema';
 
 const languageOptions = languages.map(l => ({

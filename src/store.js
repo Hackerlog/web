@@ -1,9 +1,9 @@
 import { configure, runInAction } from 'mobx';
 import { RouterStore } from 'mobx-react-router';
 
-import LoginStore from './modules/login/store';
+import LoginStore from './pages/login/store';
 import UserStore from './modules/user/store';
-import SignupStore from './modules/signup/store';
+import SignupStore from './pages/signup/store';
 
 configure({ enforceActions: true });
 
